@@ -26,8 +26,8 @@ android {
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        versionCode = 1
+        versionName = "0.1.0"
     }
 
     buildTypes {
@@ -35,6 +35,29 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
+        }
+
+        flavorDimensions += "default"
+
+        productFlavors {
+            create("staging") {
+                dimension = "default"
+                resValue(
+                    type = "string",
+                    name = "app_name",
+                    value = "KelasQNA Beta"
+                )
+                applicationIdSuffix = ".staging"
+            }
+            create("production") {
+                dimension = "default"
+                resValue(
+                    type = "string",
+                    name = "app_name",
+                    value = "KelasQNA"
+                )
+                applicationIdSuffix = ".production"
+            }
         }
     }
 }
