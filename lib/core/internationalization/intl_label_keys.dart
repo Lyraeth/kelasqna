@@ -1,0 +1,11 @@
+// Dio error label keys.
+const String dioNetworkErrorKey = "dioNetworkError";
+const String dioServerErrorKey = "dioServerError";
+const String dioUnauthorizedErrorKey = "dioUnauthorizedError";
+const String dioForbiddenErrorKey = "dioForbiddenError";
+const String dioBadRequestErrorKey = "dioBadRequestError";
+const String dioSerializationErrorKey = "dioSerializationError";
+const String dioCancelledErrorKey = "dioCancelledError";
+const String dioRateLimitedErrorKey = "dioRateLimitedError";
+const String dioTimeoutErrorKey = "dioTimeoutError";
+const String dioUnexpectedErrorKey = "dioUnexpectedError";

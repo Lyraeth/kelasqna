@@ -1,0 +1,29 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
+
+import 'intl_languages.dart';
+
+abstract class IntlTranslation {
+  static Map<String, Map<String, String>> translationsKeys = Map.fromEntries(
+    appLanguages
+        .map((appLanguage) => appLanguage.languageCode)
+        .toList()
+        .map(
+          (languageCode) =>
+              MapEntry(languageCode, Map<String, String>.from({})),
+        ),
+  );
+
+  static Future loadJsons() async {
+    for (var languageCode in translationsKeys.keys) {
+      final String jsonStringValues = await rootBundle.loadString(
+        'assets/languages/$languageCode.json',
+      );
+
+      Map<String, dynamic> mappedJson = json.decode(jsonStringValues);
+
+      translationsKeys[languageCode] = mappedJson.cast<String, String>();
+    }
+  }
+}
