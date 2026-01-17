@@ -8,5 +8,21 @@
   "dioCancelledError": "Request nya dibatalin, tenang aja ya.",
   "dioRateLimitedError": "Kamu udah kebanyakan permintaan nih, santai dulu ga sih.",
   "dioTimeoutError": "Response dari servernya kelamaan, coba ulang lagi ya.",
-  "dioUnexpectedError": "Ada yang aneh, coba ulang lagi ya."
+  "dioUnexpectedError": "Ada yang aneh, coba ulang lagi ya.",
+  "register": "Daftar",
+  "registerSuccess": "Yey!, pendaftaran berhasil",
+  "registerSuccessDesc": "Daftar akunnya berhasil nih, kamu udah bisa login sekarang.",
+  "login": "Masuk",
+  "Logout": "Keluar",
+  "goToLoginScreen": "Langsung ke login screen",
+  "name": "Name",
+  "nameRequired": "Field name tidak boleh kosong.",
+  "username": "Username",
+  "usernameRequired": "Field username tidak boleh kosong.",
+  "password": "Password",
+  "passwordRequired": "Field password tidak boleh kosong.",
+  "passwordRequiredLength": "Password harus lebih dari 6 karakter.",
+  "confirmPassword": "Ulangi password",
+  "confirmPasswordNotSame": "Password tidak sama",
+  "rememberMe": "Ingat saya?"
 }

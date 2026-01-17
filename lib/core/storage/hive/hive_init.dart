@@ -1,0 +1,20 @@
+import 'package:flutter/foundation.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:kelasqna/core/storage/hive/hive_storage_label.dart';
+
+Future<void> initHiveOpenBox() async {
+  /// Initialize Hive.
+  try {
+    await Hive.initFlutter();
+  } catch (e) {
+    debugPrint("failed to initialize Hive");
+  }
+
+  /// Open Box
+
+  // Open KelasQNA Box
+  await Hive.openBox(kelasQNABoxKey);
+  await Hive.openBox(intlBoxKey);
+  await Hive.openBox(themeBoxKey);
+  await Hive.openBox(authBoxKey);
+}

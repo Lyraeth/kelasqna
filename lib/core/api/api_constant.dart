@@ -9,7 +9,7 @@ final String baseUrl =
 
 final String baseLocalUrl =
     dotenv.env['DATABASE_URL_LOCAL'] ??
-        (throw Exception("DATABASE_URL_LOCAL not found in .env"));
+    (throw Exception("DATABASE_URL_LOCAL not found in .env"));
 
 // Change baseUrl to baseLocalUrl when debugging.
 final String databaseUrl = "${normalize(baseLocalUrl)}/api";
@@ -17,3 +17,5 @@ final String databaseUrl = "${normalize(baseLocalUrl)}/api";
 final String loginUrl = "$databaseUrl/login";
 
 final String registerUrl = "$databaseUrl/users";
+
+final String meUrl = "$databaseUrl/me";

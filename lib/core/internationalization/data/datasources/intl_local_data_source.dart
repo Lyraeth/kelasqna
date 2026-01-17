@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:kelasqna/core/internationalization/intl_languages.dart';
 import 'package:kelasqna/core/storage/hive/hive_storage_label.dart';
 
 abstract class IntlLocalDataSource {
@@ -10,7 +11,8 @@ abstract class IntlLocalDataSource {
 class IntlLocalDataSourceImpl implements IntlLocalDataSource {
   @override
   String getCurrentLanguageCode() =>
-      Hive.box(intlBoxKey).get(intlCurrentLanguageCodeKey);
+      Hive.box(intlBoxKey).get(intlCurrentLanguageCodeKey) ??
+      defaultLanguageCode;
 
   @override
   Future<void> setCurrentLanguageCode(String value) async =>
