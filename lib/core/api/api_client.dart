@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:kelasqna/core/api/failures/failure.dart';
-import 'package:kelasqna/core/type/types.dart';
+import 'package:kelasqna/core/shared/types.dart';
 
 class ApiClient {
   final Dio _dio;
@@ -30,10 +31,15 @@ class ApiClient {
 
   Future<Result<Map<String, dynamic>>> post<T>(
     String apiUrl, {
+    required Map<String, dynamic> data,
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
-      final response = await _dio.get(apiUrl, queryParameters: queryParameters);
+      final response = await _dio.post(
+        apiUrl,
+        data: data,
+        queryParameters: queryParameters,
+      );
 
       final result = response.data;
 
@@ -65,6 +71,25 @@ mixin ApiHelper {
       return left(Failure.serialization(cause: decoded));
     } catch (e, st) {
       return left(Failure.serialization(cause: e, stackTrace: st));
+    }
+  }
+
+  static Result<T> parseResponse<T>(
+    Map<String, dynamic> rawJson,
+    FromJson<T> fromJson,
+  ) {
+    final error = rawJson['error'] as bool? ?? true;
+
+    if (error) {
+      return Left(Failure.serialization());
+    }
+
+    try {
+      return Right(fromJson(rawJson));
+    } catch (e, st) {
+      debugPrint("Parse error: $e");
+      debugPrintStack(stackTrace: st);
+      return Left(Failure.serialization());
     }
   }
 }
