@@ -23,10 +23,12 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       password: event.password,
     );
 
-    result.match((failure) => emit(_Failure(failure.safeMessage)), (
-      registerResponse,
-    ) {
-      emit(RegisterState.success(registerResponse: registerResponse));
-    });
+    result.match(
+      (failure) =>
+          emit(_Failure(failure.safeMessage, failure.safeDetailedMessage)),
+      (registerResponse) {
+        emit(RegisterState.success(registerResponse: registerResponse));
+      },
+    );
   }
 }

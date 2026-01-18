@@ -11,7 +11,7 @@ class NeoKelasBottomSheet extends StatelessWidget {
   final CrossAxisAlignment? contentCrossAxisAlignment;
   final String lottieAsset;
   final String title;
-  final String desc;
+  final String? desc;
   final void Function() onPressed;
   final Color? buttonColor;
   final String buttonText;
@@ -26,7 +26,7 @@ class NeoKelasBottomSheet extends StatelessWidget {
     this.contentCrossAxisAlignment,
     required this.lottieAsset,
     required this.title,
-    required this.desc,
+    this.desc,
     required this.onPressed,
     this.buttonColor,
     required this.buttonText,
@@ -38,7 +38,7 @@ class NeoKelasBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? MediaQuery.of(context).size.width,
-      height: height ?? MediaQuery.of(context).size.height * (0.5),
+      height: height ?? MediaQuery.of(context).size.height * 0.5,
       child: Padding(
         padding:
             contentPadding ??
@@ -47,65 +47,56 @@ class NeoKelasBottomSheet extends StatelessWidget {
           crossAxisAlignment:
               contentCrossAxisAlignment ?? CrossAxisAlignment.center,
           children: [
-            SizedBox(width: 200, height: 200, child: Lottie.asset(lottieAsset)),
+            SizedBox(width: 150, height: 150, child: Lottie.asset(lottieAsset)),
+
+            const SizedBox(height: 16),
 
             Text(
               Utils.getTranslatedLabel(title),
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface,
-                fontWeight: FontWeight.w700,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
               textAlign: TextAlign.center,
             ),
 
-            SizedBox(height: 24),
-
-            Text(
-              Utils.getTranslatedLabel(desc),
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-              textAlign: TextAlign.center,
-            ),
-
-            SizedBox(height: 56),
-
-            Expanded(
-              child: NeoKelasButton(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                onPressed: onPressed,
-                buttonColor: buttonColor ?? secondaryBlue,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: useIcon
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              Utils.getTranslatedLabel(buttonText),
-                              style: Theme.of(context).textTheme.bodyLarge
-                                  ?.copyWith(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.onSurface,
-                                  ),
-                            ),
-
-                            Icon(icon),
-                          ],
-                        )
-                      : Text(
-                          Utils.getTranslatedLabel(buttonText),
-                          style: Theme.of(context).textTheme.bodyLarge
-                              ?.copyWith(
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
-                        ),
+            if (desc != null && desc!.isNotEmpty) ...[
+              const SizedBox(height: 16),
+              Text(
+                Utils.getTranslatedLabel(desc!),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+
+            const Spacer(),
+
+            NeoKelasButton(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              onPressed: onPressed,
+              buttonColor: buttonColor ?? secondaryBlue,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: useIcon
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            Utils.getTranslatedLabel(buttonText),
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          Icon(icon),
+                        ],
+                      )
+                    : Text(
+                        Utils.getTranslatedLabel(buttonText),
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
               ),
             ),
 
-            SizedBox(height: 24),
+            const SizedBox(height: 16),
           ],
         ),
       ),

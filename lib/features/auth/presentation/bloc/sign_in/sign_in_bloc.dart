@@ -64,8 +64,14 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     );
 
     await result.match(
-      (failure) async {
-        emit(SignInState.failure(failure.safeMessage));
+      (failure) {
+        emit(
+          SignInState.failure(
+            errorMessage: failure.safeMessage,
+            detailedErrorMessage: failure.safeDetailedMessage,
+          ),
+        );
+        emit(SignInState.initial());
       },
       (authResponse) async {
         if (currentState.isRemembered) {

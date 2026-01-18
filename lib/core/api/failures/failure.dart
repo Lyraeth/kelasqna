@@ -13,12 +13,14 @@ sealed class Failure with _$Failure {
 
   const factory Failure.network({
     String? errorMessage,
+    String? detailedMessage,
     Object? cause,
     StackTrace? stackTrace,
   }) = _Network;
 
   const factory Failure.server({
     String? errorMessage,
+    String? detailedMessage,
     int? statusCode,
     String? code,
     Map<String, dynamic>? data,
@@ -28,18 +30,21 @@ sealed class Failure with _$Failure {
 
   const factory Failure.unauthorized({
     String? errorMessage,
+    String? detailedMessage,
     Object? cause,
     StackTrace? stackTrace,
   }) = _Unauthorized;
 
   const factory Failure.forbidden({
     String? errorMessage,
+    String? detailedMessage,
     Object? cause,
     StackTrace? stackTrace,
   }) = _Forbidden;
 
   const factory Failure.badRequest({
     String? errorMessage,
+    String? detailedMessage,
     Map<String, dynamic>? fieldErrors,
     Object? cause,
     StackTrace? stackTrace,
@@ -47,18 +52,21 @@ sealed class Failure with _$Failure {
 
   const factory Failure.serialization({
     String? errorMessage,
+    String? detailedMessage,
     Object? cause,
     StackTrace? stackTrace,
   }) = _Serialization;
 
   const factory Failure.cancelled({
     String? errorMessage,
+    String? detailedMessage,
     Object? cause,
     StackTrace? stackTrace,
   }) = _Cancelled;
 
   const factory Failure.rateLimited({
     String? errorMessage,
+    String? detailedMessage,
     Duration? retryAfter,
     Object? cause,
     StackTrace? stackTrace,
@@ -66,37 +74,82 @@ sealed class Failure with _$Failure {
 
   const factory Failure.timeout({
     String? errorMessage,
+    String? detailedMessage,
     Object? cause,
     StackTrace? stackTrace,
   }) = _Timeout;
 
   const factory Failure.unexpected({
     String? errorMessage,
+    String? detailedMessage,
     Object? cause,
     StackTrace? stackTrace,
   }) = _Unexpected;
 
   String get safeMessage => when(
-    network: (errorMessage, cause, stackTrace) =>
+    network: (errorMessage, detailedMessage, cause, stackTrace) =>
         errorMessage ?? Utils.getTranslatedLabel(dioNetworkErrorKey),
-    server: (errorMessage, statusCode, code, data, cause, stackTrace) =>
-        errorMessage ?? Utils.getTranslatedLabel(dioServerErrorKey),
-    unauthorized: (errorMessage, cause, stackTrace) =>
+    server:
+        (
+          errorMessage,
+          detailedMessage,
+          statusCode,
+          code,
+          data,
+          cause,
+          stackTrace,
+        ) => errorMessage ?? Utils.getTranslatedLabel(dioServerErrorKey),
+    unauthorized: (errorMessage, detailedMessage, cause, stackTrace) =>
         errorMessage ?? Utils.getTranslatedLabel(dioUnauthorizedErrorKey),
-    forbidden: (errorMessage, cause, stackTrace) =>
+    forbidden: (errorMessage, detailedMessage, cause, stackTrace) =>
         errorMessage ?? Utils.getTranslatedLabel(dioForbiddenErrorKey),
-    badRequest: (errorMessage, fieldErrors, cause, stackTrace) =>
-        errorMessage ?? Utils.getTranslatedLabel(dioBadRequestErrorKey),
-    serialization: (errorMessage, cause, stackTrace) =>
+    badRequest:
+        (errorMessage, detailedMessage, fieldErrors, cause, stackTrace) =>
+            errorMessage ?? Utils.getTranslatedLabel(dioBadRequestErrorKey),
+    serialization: (errorMessage, detailedMessage, cause, stackTrace) =>
         errorMessage ?? Utils.getTranslatedLabel(dioSerializationErrorKey),
-    cancelled: (errorMessage, cause, stackTrace) =>
+    cancelled: (errorMessage, detailedMessage, cause, stackTrace) =>
         errorMessage ?? Utils.getTranslatedLabel(dioCancelledErrorKey),
-    rateLimited: (errorMessage, retryAfter, cause, stackTrace) =>
-        errorMessage ?? Utils.getTranslatedLabel(dioRateLimitedErrorKey),
-    timeout: (errorMessage, cause, stackTrace) =>
+    rateLimited:
+        (errorMessage, detailedMessage, retryAfter, cause, stackTrace) =>
+            errorMessage ?? Utils.getTranslatedLabel(dioRateLimitedErrorKey),
+    timeout: (errorMessage, detailedMessage, cause, stackTrace) =>
         errorMessage ?? Utils.getTranslatedLabel(dioTimeoutErrorKey),
-    unexpected: (errorMessage, cause, stackTrace) =>
+    unexpected: (errorMessage, detailedMessage, cause, stackTrace) =>
         errorMessage ?? Utils.getTranslatedLabel(dioUnexpectedErrorKey),
+  );
+
+  String get safeDetailedMessage => when(
+    network: (errorMessage, detailedMessage, cause, stackTrace) =>
+        detailedMessage ?? Utils.getTranslatedLabel(dioNetworkErrorKey),
+    server:
+        (
+          errorMessage,
+          detailedMessage,
+          statusCode,
+          code,
+          data,
+          cause,
+          stackTrace,
+        ) => detailedMessage ?? Utils.getTranslatedLabel(dioServerErrorKey),
+    unauthorized: (errorMessage, detailedMessage, cause, stackTrace) =>
+        detailedMessage ?? Utils.getTranslatedLabel(dioUnauthorizedErrorKey),
+    forbidden: (errorMessage, detailedMessage, cause, stackTrace) =>
+        detailedMessage ?? Utils.getTranslatedLabel(dioForbiddenErrorKey),
+    badRequest:
+        (errorMessage, detailedMessage, fieldErrors, cause, stackTrace) =>
+            detailedMessage ?? Utils.getTranslatedLabel(dioBadRequestErrorKey),
+    serialization: (errorMessage, detailedMessage, cause, stackTrace) =>
+        detailedMessage ?? Utils.getTranslatedLabel(dioSerializationErrorKey),
+    cancelled: (errorMessage, detailedMessage, cause, stackTrace) =>
+        detailedMessage ?? Utils.getTranslatedLabel(dioCancelledErrorKey),
+    rateLimited:
+        (errorMessage, detailedMessage, retryAfter, cause, stackTrace) =>
+            detailedMessage ?? Utils.getTranslatedLabel(dioRateLimitedErrorKey),
+    timeout: (errorMessage, detailedMessage, cause, stackTrace) =>
+        detailedMessage ?? Utils.getTranslatedLabel(dioTimeoutErrorKey),
+    unexpected: (errorMessage, detailedMessage, cause, stackTrace) =>
+        detailedMessage ?? Utils.getTranslatedLabel(dioUnexpectedErrorKey),
   );
 
   String get labelError => map(
@@ -198,68 +251,62 @@ sealed class Failure with _$Failure {
     final status = e.response?.statusCode;
     final data = e.response?.data;
 
-    // Try to derive API-specific code & message from common shapes
+    String? message;
+    String? detailedMessage;
     String? apiCode;
     Map<String, dynamic>? payload;
-    try {
-      if (data is Map<String, dynamic>) {
-        payload = data;
-        apiCode = _extractString(payload, ['code', 'error_code', 'errorCode']);
-      }
-    } catch (_) {
-      // swallow parsing issues; we don’t want mapping to throw
+
+    if (data is Map<String, dynamic>) {
+      payload = data;
+      message = data['message'] as String?;
+      detailedMessage = data['detailed_message'] as String?;
+      apiCode = _extractString(data, ['code', 'error_code', 'errorCode']);
     }
 
     switch (status) {
       case 400:
         return Failure.badRequest(
+          errorMessage: message,
+          detailedMessage: detailedMessage,
           fieldErrors: payload?['errors'] is Map<String, dynamic>
-              ? (payload!['errors'] as Map<String, dynamic>)
+              ? payload!['errors']
               : null,
           cause: e,
           stackTrace: st ?? e.stackTrace,
         );
+
       case 401:
-        return Failure.unauthorized(cause: e, stackTrace: st ?? e.stackTrace);
-      case 403:
-        return Failure.forbidden(cause: e, stackTrace: st ?? e.stackTrace);
-      case 404:
-        return Failure.server(
-          statusCode: status,
-          code: apiCode,
-          data: payload,
+        return Failure.unauthorized(
+          errorMessage: message,
+          detailedMessage: detailedMessage,
           cause: e,
           stackTrace: st ?? e.stackTrace,
         );
-      case 408:
-        return Failure.timeout(cause: e, stackTrace: st ?? e.stackTrace);
+
+      case 403:
+        return Failure.forbidden(
+          errorMessage: message,
+          detailedMessage: detailedMessage,
+          cause: e,
+          stackTrace: st ?? e.stackTrace,
+        );
+
       case 409:
         return Failure.server(
+          errorMessage: message,
+          detailedMessage: detailedMessage,
           statusCode: status,
           code: apiCode,
           data: payload,
           cause: e,
           stackTrace: st ?? e.stackTrace,
         );
-      case 413:
-        return Failure.badRequest(cause: e, stackTrace: st ?? e.stackTrace);
-      case 422:
-        return Failure.badRequest(
-          fieldErrors: payload?['errors'] is Map<String, dynamic>
-              ? (payload!['errors'] as Map<String, dynamic>)
-              : null,
-          cause: e,
-          stackTrace: st ?? e.stackTrace,
-        );
-      case 429:
-        return Failure.rateLimited(
-          retryAfter: _parseRetryAfter(e.response),
-          cause: e,
-          stackTrace: st ?? e.stackTrace,
-        );
+
       default:
         if (status != null && status >= 500) {
           return Failure.server(
+            errorMessage: message,
+            detailedMessage: detailedMessage,
             statusCode: status,
             code: apiCode,
             data: payload,
@@ -267,7 +314,13 @@ sealed class Failure with _$Failure {
             stackTrace: st ?? e.stackTrace,
           );
         }
-        return Failure.unexpected(cause: e, stackTrace: st ?? e.stackTrace);
+
+        return Failure.unexpected(
+          errorMessage: message,
+          detailedMessage: detailedMessage,
+          cause: e,
+          stackTrace: st ?? e.stackTrace,
+        );
     }
   }
 
@@ -276,15 +329,6 @@ sealed class Failure with _$Failure {
       final v = map[k];
       if (v is String && v.trim().isNotEmpty) return v.trim();
     }
-    return null;
-  }
-
-  static Duration? _parseRetryAfter(Response? r) {
-    final header = r?.headers['retry-after']?.firstOrNull;
-    if (header == null) return null;
-    final seconds = int.tryParse(header);
-    if (seconds != null) return Duration(seconds: seconds);
-    // Fallback: HTTP-date format is allowed, but we keep it simple here.
     return null;
   }
 }

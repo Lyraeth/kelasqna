@@ -113,10 +113,6 @@ class _LoginFormState extends State<LoginForm> {
                 return Utils.getTranslatedLabel(passwordRequiredKey);
               }
 
-              if (value.length < 6) {
-                return Utils.getTranslatedLabel(passwordRequiredLengthKey);
-              }
-
               return null;
             },
             trailing: [

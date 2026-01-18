@@ -19,10 +19,17 @@
   "nameRequired": "Field name is required.",
   "username": "Username",
   "usernameRequired": "Field username is required.",
+  "usernameExist": "Oops, username already exist",
+  "usernameExistDesc": "You can try again with different username.",
+  "wrongUsername": "Wrong username",
+  "wrongUsernameDesc": "Maybe you misspelling or typo your username. Check again",
   "password": "Password",
   "passwordRequired": "Field password is required.",
   "passwordRequiredLength": "Password must be at least 6 characters.",
   "confirmPassword": "Confirm password",
   "confirmPasswordNotSame": "Passwords do not match",
-  "rememberMe": "Remember me?"
+  "wrongPassword": "Wrong password",
+  "wrongPasswordDesc": "Maybe you misspelling or typo your password. Check again",
+  "rememberMe": "Remember me?",
+  "tryAgain": "Try again"
 }

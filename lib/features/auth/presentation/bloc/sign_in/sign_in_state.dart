@@ -14,5 +14,8 @@ abstract class SignInState with _$SignInState {
 
   const factory SignInState.success() = _Success;
 
-  const factory SignInState.failure(String errorMessage) = _Failure;
+  const factory SignInState.failure({
+    required String errorMessage,
+    String? detailedErrorMessage,
+  }) = _Failure;
 }

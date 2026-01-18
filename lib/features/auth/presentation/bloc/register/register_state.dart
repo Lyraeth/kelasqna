@@ -10,5 +10,8 @@ abstract class RegisterState with _$RegisterState {
     required RegisterResponse registerResponse,
   }) = _Success;
 
-  const factory RegisterState.failure(String errorMessage) = _Failure;
+  const factory RegisterState.failure(
+    String errorMessage,
+    String detailedErrorMessage,
+  ) = _Failure;
 }

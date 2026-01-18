@@ -19,10 +19,13 @@
   "nameRequired": "Field name tidak boleh kosong.",
   "username": "Username",
   "usernameRequired": "Field username tidak boleh kosong.",
+  "usernameExist": "Oops, username sudah digunakan",
+  "usernameExistDesc": "Kamu bisa coba lagi dengan username yang beda ya.",
   "password": "Password",
   "passwordRequired": "Field password tidak boleh kosong.",
   "passwordRequiredLength": "Password harus lebih dari 6 karakter.",
   "confirmPassword": "Ulangi password",
   "confirmPasswordNotSame": "Password tidak sama",
-  "rememberMe": "Ingat saya?"
+  "rememberMe": "Ingat saya?",
+  "tryAgain": "Coba lagi"
 }

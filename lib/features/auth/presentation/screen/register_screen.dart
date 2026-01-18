@@ -54,6 +54,27 @@ class RegisterScreen extends StatelessWidget {
               );
             }
           },
+
+          failure: (errorMessage, detailedErrorMessage) {
+            final isUsernameExist = errorMessage.contains("username");
+
+            Get.bottomSheet(
+              NeoKelasBottomSheet(
+                onPressed: Get.back,
+                buttonText: tryAgainKey,
+                title: isUsernameExist
+                    ? usernameExistKey
+                    : errorMessage,
+                desc: isUsernameExist
+                    ? usernameExistDescKey
+                    : null,
+                lottieAsset: "assets/animations/failed.json",
+              ),
+              backgroundColor: primaryBackground,
+              enableDrag: true,
+              isDismissible: true,
+            );
+          },
         );
       },
       child: Scaffold(
