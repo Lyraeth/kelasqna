@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:kelasqna/core/storage/hive/hive_storage_label.dart';
+import 'package:kelasqna/kelasqna.dart';
 
 abstract class ThemeLocalDataSource {
   ThemeMode getThemeMode();

@@ -2,8 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kelasqna/core/internationalization/intl_label_keys.dart';
-import 'package:kelasqna/utils/utils.dart';
+import 'package:kelasqna/kelasqna.dart';
 
 part 'failure.freezed.dart';
 
@@ -86,70 +85,17 @@ sealed class Failure with _$Failure {
     StackTrace? stackTrace,
   }) = _Unexpected;
 
-  String get safeMessage => when(
-    network: (errorMessage, detailedMessage, cause, stackTrace) =>
-        errorMessage ?? Utils.getTranslatedLabel(dioNetworkErrorKey),
-    server:
-        (
-          errorMessage,
-          detailedMessage,
-          statusCode,
-          code,
-          data,
-          cause,
-          stackTrace,
-        ) => errorMessage ?? Utils.getTranslatedLabel(dioServerErrorKey),
-    unauthorized: (errorMessage, detailedMessage, cause, stackTrace) =>
-        errorMessage ?? Utils.getTranslatedLabel(dioUnauthorizedErrorKey),
-    forbidden: (errorMessage, detailedMessage, cause, stackTrace) =>
-        errorMessage ?? Utils.getTranslatedLabel(dioForbiddenErrorKey),
-    badRequest:
-        (errorMessage, detailedMessage, fieldErrors, cause, stackTrace) =>
-            errorMessage ?? Utils.getTranslatedLabel(dioBadRequestErrorKey),
-    serialization: (errorMessage, detailedMessage, cause, stackTrace) =>
-        errorMessage ?? Utils.getTranslatedLabel(dioSerializationErrorKey),
-    cancelled: (errorMessage, detailedMessage, cause, stackTrace) =>
-        errorMessage ?? Utils.getTranslatedLabel(dioCancelledErrorKey),
-    rateLimited:
-        (errorMessage, detailedMessage, retryAfter, cause, stackTrace) =>
-            errorMessage ?? Utils.getTranslatedLabel(dioRateLimitedErrorKey),
-    timeout: (errorMessage, detailedMessage, cause, stackTrace) =>
-        errorMessage ?? Utils.getTranslatedLabel(dioTimeoutErrorKey),
-    unexpected: (errorMessage, detailedMessage, cause, stackTrace) =>
-        errorMessage ?? Utils.getTranslatedLabel(dioUnexpectedErrorKey),
-  );
-
-  String get safeDetailedMessage => when(
-    network: (errorMessage, detailedMessage, cause, stackTrace) =>
-        detailedMessage ?? Utils.getTranslatedLabel(dioNetworkErrorKey),
-    server:
-        (
-          errorMessage,
-          detailedMessage,
-          statusCode,
-          code,
-          data,
-          cause,
-          stackTrace,
-        ) => detailedMessage ?? Utils.getTranslatedLabel(dioServerErrorKey),
-    unauthorized: (errorMessage, detailedMessage, cause, stackTrace) =>
-        detailedMessage ?? Utils.getTranslatedLabel(dioUnauthorizedErrorKey),
-    forbidden: (errorMessage, detailedMessage, cause, stackTrace) =>
-        detailedMessage ?? Utils.getTranslatedLabel(dioForbiddenErrorKey),
-    badRequest:
-        (errorMessage, detailedMessage, fieldErrors, cause, stackTrace) =>
-            detailedMessage ?? Utils.getTranslatedLabel(dioBadRequestErrorKey),
-    serialization: (errorMessage, detailedMessage, cause, stackTrace) =>
-        detailedMessage ?? Utils.getTranslatedLabel(dioSerializationErrorKey),
-    cancelled: (errorMessage, detailedMessage, cause, stackTrace) =>
-        detailedMessage ?? Utils.getTranslatedLabel(dioCancelledErrorKey),
-    rateLimited:
-        (errorMessage, detailedMessage, retryAfter, cause, stackTrace) =>
-            detailedMessage ?? Utils.getTranslatedLabel(dioRateLimitedErrorKey),
-    timeout: (errorMessage, detailedMessage, cause, stackTrace) =>
-        detailedMessage ?? Utils.getTranslatedLabel(dioTimeoutErrorKey),
-    unexpected: (errorMessage, detailedMessage, cause, stackTrace) =>
-        detailedMessage ?? Utils.getTranslatedLabel(dioUnexpectedErrorKey),
+  String get messageKey => map(
+    network: (_) => 'dioNetworkError',
+    server: (_) => 'dioServerError',
+    unauthorized: (_) => 'dioUnauthorizedError',
+    forbidden: (_) => 'dioForbiddenError',
+    badRequest: (_) => 'dioBadRequestError',
+    serialization: (_) => 'dioSerializationError',
+    cancelled: (_) => 'dioCancelledError',
+    rateLimited: (_) => 'dioRateLimitedError',
+    timeout: (_) => 'dioTimeoutError',
+    unexpected: (_) => 'dioUnexpectedError',
   );
 
   String get labelError => map(
