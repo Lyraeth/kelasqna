@@ -39,19 +39,19 @@ class Utils {
     } else if (Platform.isIOS) {
       // Handle iOS platform
       final iosInfo = await deviceInfo.iosInfo;
-      deviceName = iosInfo.name ?? iosInfo.model ?? "iOS Device";
+      deviceName = iosInfo.name;
     } else if (Platform.isLinux) {
       // Handle Linux platform
       final linuxInfo = await deviceInfo.linuxInfo;
-      deviceName = linuxInfo.name ?? "Linux Device";
+      deviceName = linuxInfo.name;
     } else if (Platform.isMacOS) {
       // Handle macOS platform
       final macOsInfo = await deviceInfo.macOsInfo;
-      deviceName = macOsInfo.computerName ?? "macOS Device";
+      deviceName = macOsInfo.computerName;
     } else if (Platform.isWindows) {
       // Handle Windows platform
       final windowsInfo = await deviceInfo.windowsInfo;
-      deviceName = windowsInfo.computerName ?? "Windows Device";
+      deviceName = windowsInfo.computerName;
     }
 
     return deviceName;

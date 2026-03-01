@@ -27,7 +27,7 @@ class SessionsLocalDataSourceImpl implements SessionsLocalDataSource {
     try {
       await secureStorage.write(key: kAccessTokenKey, value: value);
       debugPrint("Success to save accessToken");
-    } catch (e, s) {
+    } catch (e) {
       debugPrint("Failed to save accessToken");
     }
 
