@@ -1,6 +1,6 @@
 import 'package:kelasqna/kelasqna.dart';
 
-void initSessionsDI() {
+Future<void> initSessionsDI() async {
   sI.registerLazySingleton<SessionsRepository>(
     () => SessionsRepositoryImpl(
       sI<SessionsLocalDataSource>(),
@@ -33,7 +33,7 @@ void initSessionsDI() {
     () => ClearSessionUseCase(sI<SessionsRepository>()),
   );
 
-  sI.registerFactory<SessionsBloc>(
+  sI.registerLazySingleton<SessionsBloc>(
     () => SessionsBloc(sI<SessionsRepository>()),
   );
 }

@@ -1,6 +1,6 @@
 part of 'theme.dart';
 
-void initThemeDI() {
+Future<void> initThemeDI() async {
   sI.registerLazySingleton<ThemeRepository>(
     () => ThemeRepositoryImpl(sI<ThemeLocalDataSource>()),
   );

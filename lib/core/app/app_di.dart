@@ -1,6 +1,6 @@
 import 'package:kelasqna/kelasqna.dart';
 
-void initAppDI() {
+Future<void> initAppDI() async {
   sI.registerFactory<AppBloc>(
     () => AppBloc(sI<ThemeUseCase>(), sI<LanguageStorage>()),
   );

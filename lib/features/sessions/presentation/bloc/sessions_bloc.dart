@@ -37,6 +37,11 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
     result.fold(
       (failure) async {
         await _repository.clearSession();
+
+        sI<TokenProvider>().clearToken();
+
+        if (emit.isDone) return;
+
         emit(const SessionsState.unauthenticated());
       },
       (user) {

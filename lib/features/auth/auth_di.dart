@@ -1,6 +1,6 @@
 import 'package:kelasqna/kelasqna.dart';
 
-void initAuthDI() {
+Future<void> initAuthDI() async {
   sI.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(sI<AuthRemoteDataSource>()),
   );

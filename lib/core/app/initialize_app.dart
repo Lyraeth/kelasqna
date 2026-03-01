@@ -48,18 +48,18 @@ Future<void> initializeApp() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   /// Initialize Dependencies Injection.
-  initPrefsDI();
-  initLanguageStorageDI();
-  initThemeDI();
-  initAppDI();
-  initTokenDI();
-  initNetworkDI(
+  await initPrefsDI();
+  await initLanguageStorageDI();
+  await initThemeDI();
+  await initAppDI();
+  await initTokenDI();
+  await initNetworkDI(
     baseUrl: baseUrl,
     tokenProvider: () => sI<TokenProvider>().getToken(),
   );
-  initApiClientDI();
-  initSessionsDI();
-  initAuthDI();
+  await initApiClientDI();
+  await initSessionsDI();
+  await initAuthDI();
 
   // App Bloc Observer
   Bloc.observer = const AppBlocObserver();
