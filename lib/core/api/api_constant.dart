@@ -1,4 +1,4 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+part of 'api_client.dart';
 
 String normalize(String base) =>
     base.endsWith('/') ? base.substring(0, base.length - 1) : base;
@@ -16,6 +16,8 @@ final String databaseUrl = "${normalize(baseLocalUrl)}/api";
 
 final String loginUrl = "$databaseUrl/login";
 
-final String registerUrl = "$databaseUrl/users";
+final String logoutUrl = "$databaseUrl/logout";
+
+final String registerUrl = "$databaseUrl/register";
 
 final String meUrl = "$databaseUrl/me";

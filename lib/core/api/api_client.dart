@@ -2,9 +2,12 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:kelasqna/core/api/failures/failure.dart';
-import 'package:kelasqna/core/shared/types.dart';
+import 'package:kelasqna/kelasqna.dart';
+
+part 'api_client_di.dart';
+part 'api_constant.dart';
 
 class ApiClient {
   final Dio _dio;

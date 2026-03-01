@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kelasqna/core/theme/domain/repository/theme_repository.dart';
+import 'package:kelasqna/kelasqna.dart';
 
 class ThemeUseCase {
   final ThemeRepository _themeRepository;

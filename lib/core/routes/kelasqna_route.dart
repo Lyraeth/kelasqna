@@ -1,30 +1,23 @@
-import 'package:get/get.dart';
-import 'package:kelasqna/features/auth/presentation/screen/auth_screen.dart';
-import 'package:kelasqna/features/auth/presentation/screen/login_screen.dart';
-import 'package:kelasqna/features/auth/presentation/screen/register_screen.dart';
-import 'package:kelasqna/features/home/presentation/screen/admin/admin_home_screen.dart';
-import 'package:kelasqna/features/home/presentation/screen/user/user_home_screen.dart';
-import 'package:kelasqna/features/on_boarding/presentation/screen/on_boarding_screen.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:kelasqna/kelasqna.dart';
 
-class KelasQNARoute {
-  static const String authScreen = "/authScreen";
-  static const String loginScreen = "/loginScreen";
-  static const String registerScreen = "/registerScreen";
-  static const String onBoardingScreen = "/onBoardingScreen";
-  static const String adminHomeScreen = "/adminHomeScreen";
-  static const String userHomeScreen = "/userHomeScreen";
+part 'kelasqna_route.gr.dart';
 
-  static List<GetPage> getPages = [
-    // Auth
-    GetPage(name: authScreen, page: AuthScreen.routeInstance),
-    GetPage(name: loginScreen, page: LoginScreen.routeInstance),
-    GetPage(name: registerScreen, page: RegisterScreen.routeInstance),
+@AutoRouterConfig()
+class KelasQNARouter extends RootStackRouter {
+  final AuthGuard _authGuard;
 
-    // Onboarding
-    GetPage(name: onBoardingScreen, page: OnBoardingScreen.routeInstance),
+  KelasQNARouter(this._authGuard);
 
-    // Home
-    GetPage(name: adminHomeScreen, page: AdminHomeScreen.routeInstance),
-    GetPage(name: userHomeScreen, page: UserHomeScreen.routeInstance),
+  @override
+  RouteType get defaultRouteType => RouteType.cupertino();
+
+  @override
+  List<AutoRoute> get routes => [
+    AutoRoute(page: SplashRoute.page, initial: true),
+    AutoRoute(page: AuthRoute.page),
+    AutoRoute(page: LoginRoute.page),
+
+    AutoRoute(page: HomeRoute.page, guards: [_authGuard]),
   ];
 }

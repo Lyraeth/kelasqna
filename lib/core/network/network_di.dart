@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:kelasqna/core/network/dio_factory.dart';
-import 'package:kelasqna/core/shared/constant.dart';
+import 'package:kelasqna/kelasqna.dart';
 
 void initNetworkDI({
   required String baseUrl,

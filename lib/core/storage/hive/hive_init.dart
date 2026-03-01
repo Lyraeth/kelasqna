@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:kelasqna/core/storage/hive/hive_storage_label.dart';
+import 'package:kelasqna/kelasqna.dart';
 
 Future<void> initHiveOpenBox() async {
   /// Initialize Hive.

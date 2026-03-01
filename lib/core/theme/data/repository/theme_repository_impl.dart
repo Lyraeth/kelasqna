@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kelasqna/core/theme/data/datasources/theme_local_data_source.dart';
-import 'package:kelasqna/core/theme/domain/repository/theme_repository.dart';
+import 'package:kelasqna/kelasqna.dart';
 
 class ThemeRepositoryImpl implements ThemeRepository {
   final ThemeLocalDataSource _localDataSource;

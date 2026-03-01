@@ -1,25 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:kelasqna/core/api/api_client.dart';
-import 'package:kelasqna/core/api/api_constant.dart';
-import 'package:kelasqna/core/api/failures/failure.dart';
-import 'package:kelasqna/core/shared/types.dart';
-import 'package:kelasqna/features/auth/data/model/auth_response.dart';
-import 'package:kelasqna/features/auth/data/model/register_response.dart';
-import 'package:kelasqna/features/auth/data/model/user_response/user_response.dart';
+import 'package:kelasqna/kelasqna.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<Result<AuthResponse>> login({
-    required String username,
-    required String password,
-  });
+  Future<Result<LoginResponse>> login(LoginRequest loginRequest);
 
-  Future<Result<RegisterResponse>> registerUser({
-    required String name,
-    required String username,
-    required String password,
-  });
-
-  Future<Result<UserResponse>> me();
+  Future<Unit> logout();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -28,14 +14,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl(this._apiClient);
 
   @override
-  Future<Result<AuthResponse>> login({
-    required String username,
-    required String password,
-  }) async {
-    final Map<String, dynamic> body = {
-      "username": username,
-      "password": password,
-    };
+  Future<Result<LoginResponse>> login(LoginRequest loginRequest) async {
+    final body = loginRequest.toJson();
+
+    debugPrint(body.toString());
+
     try {
       final response = await _apiClient.post(loginUrl, data: body);
 
@@ -43,7 +26,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         (failure) async => Left(failure),
         (jsonMap) async => ApiHelper.parseResponse(
           jsonMap,
-          (json) => AuthResponse.fromJson(json),
+          (json) => LoginResponse.fromJson(json),
         ),
       );
     } catch (e, st) {
@@ -52,46 +35,53 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<Result<RegisterResponse>> registerUser({
-    required String name,
-    required String username,
-    required String password,
-  }) async {
-    final Map<String, dynamic> body = {
-      "Name": name,
-      "Username": username,
-      "Password": password,
-    };
-
+  Future<Unit> logout() async {
     try {
-      final response = await _apiClient.post(registerUrl, data: body);
+      await _apiClient.post(logoutUrl, data: {});
 
-      return response.fold(
-        (failure) async => Left(failure),
-        (jsonMap) async => ApiHelper.parseResponse(
-          jsonMap,
-          (json) => RegisterResponse.fromJson(json),
-        ),
-      );
-    } catch (e, st) {
-      return Left(Failure.fromDio(e, st));
+      await secureStorage.deleteAll();
+
+      return unit;
+    } catch (e) {
+      return unit;
     }
   }
 
-  @override
-  Future<Result<UserResponse>> me() async {
-    try {
-      final response = await _apiClient.get(meUrl);
+  // @override
+  // Future<Result<RegisterResponse>> register(
+  //   RegisterRequest registerRequest,
+  // ) async {
+  //   final body = registerRequest.toJson();
+  //
+  //   try {
+  //     final response = await _apiClient.post(registerUrl, data: body);
+  //
+  //     return response.fold(
+  //       (failure) async => Left(failure),
+  //       (jsonMap) async => ApiHelper.parseResponse(
+  //         jsonMap,
+  //         (json) => RegisterResponse.fromJson(json),
+  //       ),
+  //     );
+  //   } catch (e, st) {
+  //     return Left(Failure.fromDio(e, st));
+  //   }
+  // }
 
-      return response.fold(
-        (failure) async => Left(failure),
-        (jsonMap) async => ApiHelper.parseResponse(
-          jsonMap,
-          (json) => UserResponse.fromJson(json),
-        ),
-      );
-    } catch (e, st) {
-      return Left(Failure.fromDio(e, st));
-    }
-  }
+  // @override
+  // Future<Result<UserResponse>> fetchAndCacheMe() async {
+  //   try {
+  //     final response = await _apiClient.get(meUrl);
+  //
+  //     return response.fold(
+  //       (failure) async => Left(failure),
+  //       (jsonMap) async => ApiHelper.parseResponse(
+  //         jsonMap,
+  //         (json) => UserResponse.fromJson(json),
+  //       ),
+  //     );
+  //   } catch (e, st) {
+  //     return Left(Failure.fromDio(e, st));
+  //   }
+  // }
 }

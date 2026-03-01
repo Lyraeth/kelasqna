@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kelasqna/kelasqna.dart';
+
+export 'data/datasources/theme_local_data_source.dart';
+export 'data/repository/theme_repository_impl.dart';
+export 'domain/repository/theme_repository.dart';
+export 'domain/usecase/theme_use_case.dart';
+
+part 'theme_di.dart';
 
 /// A class that provides theme data for the KelasQNA application.
 class KelasQNATheme {
