@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:kelasqna/kelasqna.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,7 +24,12 @@ class SessionsLocalDataSourceImpl implements SessionsLocalDataSource {
 
   @override
   Future<Unit> setAccessToken(String value) async {
-    await secureStorage.write(key: kAccessTokenKey, value: value);
+    try {
+      await secureStorage.write(key: kAccessTokenKey, value: value);
+      debugPrint("Success to save accessToken");
+    } catch (e, s) {
+      debugPrint("Failed to save accessToken");
+    }
 
     return unit;
   }

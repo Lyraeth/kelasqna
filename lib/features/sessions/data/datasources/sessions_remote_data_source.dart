@@ -17,10 +17,7 @@ class SessionsRemoteDataSourceImpl implements SessionsRemoteDataSource {
 
       return response.fold(
         (failure) => Left(failure),
-        (jsonMap) => ApiHelper.parseResponse(
-          jsonMap,
-          (json) => UserModel.fromJson(jsonMap),
-        ),
+        (jsonMap) => Right(UserModel.fromJson(jsonMap)),
       );
     } catch (e) {
       return Left(Failure.fromDio(e));

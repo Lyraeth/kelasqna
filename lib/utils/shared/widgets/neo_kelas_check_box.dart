@@ -33,7 +33,7 @@ class _NeoKelasCheckBoxState extends State<NeoKelasCheckBox> {
           width: widget.height,
           height: widget.height,
           child: NeoKelasContainer(
-            containerColor: Theme.of(context).colorScheme.surface,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             child: Checkbox(
               value: widget.value,
               onChanged: widget.onChanged,

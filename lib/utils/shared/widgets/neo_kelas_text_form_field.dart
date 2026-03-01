@@ -38,19 +38,19 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          Utils.getTranslatedLabel(widget.textFieldName),
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
+          widget.textFieldName,
+          style: context.text.titleLarge?.copyWith(
+            color: context.colors.onSurface,
+            fontWeight: FontWeight.w700,
           ),
         ),
 
-        SizedBox(height: 8),
+        16.h,
 
         NeoKelasContainer(
-          padding: const EdgeInsets.only(left: 4),
-          containerColor:
-              widget.textFieldBackgroundColor ??
-              Theme.of(context).colorScheme.surface,
+          padding: 4.onlyLeft,
+          backgroundColor:
+              widget.textFieldBackgroundColor ?? context.colors.surface,
           child: widget.trailing != null
               ? Row(
                   children: [
@@ -59,45 +59,44 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                         controller: widget.controller,
                         obscureText: widget.obscureText ?? false,
                         decoration: InputDecoration(
-                          contentPadding:
-                              widget.contentPadding ?? const EdgeInsets.all(8),
-                          errorStyle: Theme.of(context).textTheme.labelMedium
-                              ?.copyWith(
-                                color: Theme.of(context).colorScheme.error,
-                              ),
+                          border: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          focusedErrorBorder: InputBorder.none,
+                          contentPadding: widget.contentPadding ?? 8.all,
+                          errorStyle: context.text.labelMedium?.copyWith(
+                            color: context.colors.error,
+                          ),
                         ),
                         validator:
                             widget.validator ??
                             (value) {
                               if (value == null || value.isEmpty) {
-                                return Utils.getTranslatedLabel(
-                                  widget.validatorString!,
-                                );
+                                return widget.validatorString!;
                               }
                               return null;
                             },
                       ),
                     ),
 
-                    if (widget.trailing != null) ...[...?widget.trailing],
+                    if (widget.trailing != null) ...[...?widget.trailing, 16.w],
                   ],
                 )
               : TextFormField(
                   controller: widget.controller,
                   obscureText: widget.obscureText ?? false,
                   decoration: InputDecoration(
-                    contentPadding:
-                        widget.contentPadding ?? const EdgeInsets.all(8),
-                    errorStyle: Theme.of(context).textTheme.labelMedium
-                        ?.copyWith(color: Theme.of(context).colorScheme.error),
+                    contentPadding: widget.contentPadding ?? 8.all,
+                    errorStyle: context.text.labelMedium?.copyWith(
+                      color: context.colors.error,
+                    ),
                   ),
                   validator:
                       widget.validator ??
                       (value) {
                         if (value == null || value.isEmpty) {
-                          return Utils.getTranslatedLabel(
-                            widget.validatorString!,
-                          );
+                          return widget.validatorString!;
                         }
                         return null;
                       },

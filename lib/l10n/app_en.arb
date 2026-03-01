@@ -35,5 +35,11 @@
   "wrongPassword": "Wrong password",
   "wrongPasswordDesc": "Maybe you misspelling or typo your password. Check again",
   "rememberMe": "Remember me?",
-  "tryAgain": "Try again"
+  "tryAgain": "Try again",
+  "welcome": "Welcome",
+  "welcomeTo": "Welcome to",
+  "welcomeBack": "Welcome back",
+  "kelasqna": "KelasQNA",
+  "email": "Email",
+  "requiredEmail": "Field email is required"
 }

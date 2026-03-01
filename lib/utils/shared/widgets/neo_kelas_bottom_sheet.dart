@@ -73,7 +73,7 @@ class NeoKelasBottomSheet extends StatelessWidget {
             NeoKelasButton(
               padding: const EdgeInsets.symmetric(vertical: 8),
               onPressed: onPressed,
-              buttonColor: buttonColor ?? secondaryBlue,
+              backgroundColor: buttonColor ?? secondaryBlue,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: useIcon

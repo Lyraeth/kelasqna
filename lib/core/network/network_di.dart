@@ -13,9 +13,15 @@ void initNetworkDI({
       InterceptorsWrapper(
         onRequest: (options, handler) async {
           final token = await tokenProvider?.call();
+          debugPrint("TOKEN USED: $token");
+
           if (token != null && token.isNotEmpty) {
+            options.headers['Content-Type'] = "application/json";
             options.headers['Authorization'] = "Bearer $token";
           }
+
+          debugPrint("HEADERS NOW: ${options.headers}");
+
           handler.next(options);
         },
       ),

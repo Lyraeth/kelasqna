@@ -30,5 +30,11 @@
   "confirmPassword": "Ulangi password",
   "confirmPasswordNotSame": "Password tidak sama",
   "rememberMe": "Ingat saya?",
-  "tryAgain": "Coba lagi"
+  "tryAgain": "Coba lagi",
+  "welcome": "Selamat datang",
+  "welcomeTo": "Selamat datang di",
+  "welcomeBack": "Selamat datang kembali",
+  "kelasqna": "KelasQNA",
+  "email": "Email",
+  "requiredEmail": "Field email tidak boleh kosong"
 }

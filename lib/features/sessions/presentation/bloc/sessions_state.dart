@@ -9,7 +9,7 @@ abstract class SessionsState with _$SessionsState {
   const factory SessionsState.loading() = _Loading;
 
   const factory SessionsState.authenticated({
-    required UserEntity user,
+    UserEntity? user,
     required String accessToken,
   }) = _Authenticated;
 

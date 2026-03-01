@@ -5,4 +5,8 @@ part 'token_provider_impl.dart';
 
 abstract class TokenProvider {
   Future<String?> getToken();
+
+  void setToken(String token);
+
+  void clearToken();
 }

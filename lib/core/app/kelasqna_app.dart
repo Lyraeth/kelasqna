@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -19,20 +20,35 @@ class KelasQNAApp extends StatelessWidget {
       ],
       child: BlocBuilder<AppBloc, AppState>(
         builder: (context, state) {
-          return MaterialApp.router(
-            routerConfig: _appRouter.config(),
-            debugShowCheckedModeBanner: false,
-            theme: KelasQNATheme.lightMode(),
-            darkTheme: KelasQNATheme.darkMode(),
-            themeMode: state.themeMode,
-            locale: state.locale,
-            localizationsDelegates: [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: AppLocalizations.supportedLocales,
+          return BlocListener<SessionsBloc, SessionsState>(
+            listener: (context, state) {
+              state.whenOrNull(
+                firstTime: () {
+                  _appRouter.replaceAll([const AuthRoute()]);
+                },
+                unauthenticated: () {
+                  _appRouter.replaceAll([const LoginRoute()]);
+                },
+                authenticated: (_, _) {
+                  _appRouter.replaceAll([const HomeRoute()]);
+                },
+              );
+            },
+            child: MaterialApp.router(
+              routerConfig: _appRouter.config(),
+              debugShowCheckedModeBanner: false,
+              theme: KelasQNATheme.lightMode(),
+              darkTheme: KelasQNATheme.darkMode(),
+              themeMode: state.themeMode,
+              locale: state.locale,
+              localizationsDelegates: [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: AppLocalizations.supportedLocales,
+            ),
           );
         },
       ),

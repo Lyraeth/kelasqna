@@ -50,6 +50,10 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
 
     await _repository.setAccessToken(event.token);
 
+    sI<TokenProvider>().setToken(event.token);
+
+    await _repository.setFirstTimeUserOpenedApp(false);
+
     final result = await _repository.me();
 
     result.fold(
@@ -67,6 +71,9 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
     Emitter<SessionsState> emit,
   ) async {
     await _repository.clearSession();
+
+    sI<TokenProvider>().clearToken();
+
     emit(const SessionsState.unauthenticated());
   }
 }

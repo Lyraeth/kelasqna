@@ -39,8 +39,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       await _apiClient.post(logoutUrl, data: {});
 
-      await secureStorage.deleteAll();
-
       return unit;
     } catch (e) {
       return unit;
