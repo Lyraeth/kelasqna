@@ -16,6 +16,7 @@ Future<void> initNetworkDI({
           debugPrint("TOKEN USED: $token");
 
           if (token != null && token.isNotEmpty) {
+            options.headers['Accept'] = "application/json";
             options.headers['Content-Type'] = "application/json";
             options.headers['Authorization'] = "Bearer $token";
           }
