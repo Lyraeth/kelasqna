@@ -25,8 +25,8 @@ class SessionsRepositoryImpl implements SessionsRepository {
   }
 
   @override
-  Future<Unit> setAccessToken(String value) =>
-      _sessionsLocalDataSource.setAccessToken(value);
+  Future<Unit> saveAccessToken(String value) =>
+      _sessionsLocalDataSource.saveAccessToken(value);
 
   @override
   Future<Unit> clearSession() => _sessionsLocalDataSource.clearSession();
@@ -37,6 +37,14 @@ class SessionsRepositoryImpl implements SessionsRepository {
 
     return token != null && token.isNotEmpty;
   }
+
+  @override
+  UserEntity? getLoggedUserDetails() =>
+      _sessionsLocalDataSource.getLoggedUserDetails();
+
+  @override
+  Future<Unit> saveLoggedUserDetails(UserEntity userEntity) async =>
+      await _sessionsLocalDataSource.saveLoggedUserDetails(userEntity);
 
   @override
   Future<bool> isFirstTimeUserOpenApp() async =>

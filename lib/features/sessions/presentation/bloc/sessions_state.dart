@@ -4,13 +4,14 @@ part of 'sessions_bloc.dart';
 abstract class SessionsState with _$SessionsState {
   const factory SessionsState.initial() = _Initial;
 
-  const factory SessionsState.firstTime() = _FirstTime;
-
   const factory SessionsState.loading() = _Loading;
+
+  const factory SessionsState.firstTime() = _FirstTime;
 
   const factory SessionsState.authenticated({
     UserEntity? user,
     required String accessToken,
+    @Default(false) bool isRefreshing,
   }) = _Authenticated;
 
   const factory SessionsState.unauthenticated() = _Unauthenticated;

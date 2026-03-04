@@ -72,19 +72,19 @@ void main() {
     });
   });
 
-  group('setAccessToken', () {
+  group('saveAccessToken', () {
     test('should call local data source to save token', () async {
       // arrange
       const tToken = 'new_token';
       when(
-        () => mockLocalDataSource.setAccessToken(any()),
+        () => mockLocalDataSource.saveAccessToken(any()),
       ).thenAnswer((_) async => unit);
 
       // act
-      await repository.setAccessToken(tToken);
+      await repository.saveAccessToken(tToken);
 
       // assert
-      verify(() => mockLocalDataSource.setAccessToken(tToken)).called(1);
+      verify(() => mockLocalDataSource.saveAccessToken(tToken)).called(1);
     });
   });
 

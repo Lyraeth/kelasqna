@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
           child: BlocBuilder<SessionsBloc, SessionsState>(
             builder: (context, state) {
               return state.maybeWhen(
-                authenticated: (user, accessToken) {
+                authenticated: (user, accessToken, _) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

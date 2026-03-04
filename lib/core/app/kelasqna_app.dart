@@ -28,7 +28,7 @@ class KelasQNAApp extends StatelessWidget {
                 unauthenticated: () {
                   _appRouter.replaceAll([const LoginRoute()]);
                 },
-                authenticated: (_, _) {
+                authenticated: (_, _, _) {
                   _appRouter.replaceAll([const HomeRoute()]);
                 },
               );

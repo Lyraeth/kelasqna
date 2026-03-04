@@ -26,14 +26,35 @@ Future<void> initSessionsDI() async {
   sI.registerLazySingleton<GetAccessTokenUseCase>(
     () => GetAccessTokenUseCase(sI<SessionsRepository>()),
   );
-  sI.registerLazySingleton<SetAccessTokenUseCase>(
-    () => SetAccessTokenUseCase(sI<SessionsRepository>()),
+  sI.registerLazySingleton<SaveAccessTokenUseCase>(
+    () => SaveAccessTokenUseCase(sI<SessionsRepository>()),
   );
   sI.registerLazySingleton<ClearSessionUseCase>(
     () => ClearSessionUseCase(sI<SessionsRepository>()),
   );
+  sI.registerLazySingleton<GetLoggedUserDetailsUseCase>(
+    () => GetLoggedUserDetailsUseCase(sI<SessionsRepository>()),
+  );
+  sI.registerLazySingleton<SaveLoggedUserDetailsUseCase>(
+    () => SaveLoggedUserDetailsUseCase(sI<SessionsRepository>()),
+  );
+  sI.registerLazySingleton<IsFirstTimeUserOpenAppUseCase>(
+    () => IsFirstTimeUserOpenAppUseCase(sI<SessionsRepository>()),
+  );
+  sI.registerLazySingleton<SetFirstTimeUserOpenedAppUseCase>(
+    () => SetFirstTimeUserOpenedAppUseCase(sI<SessionsRepository>()),
+  );
 
   sI.registerLazySingleton<SessionsBloc>(
-    () => SessionsBloc(sI<SessionsRepository>()),
+    () => SessionsBloc(
+      sI<SaveAccessTokenUseCase>(),
+      sI<ClearSessionUseCase>(),
+      sI<MeUseCase>(),
+      sI<GetAccessTokenUseCase>(),
+      sI<GetLoggedUserDetailsUseCase>(),
+      sI<SaveLoggedUserDetailsUseCase>(),
+      sI<IsFirstTimeUserOpenAppUseCase>(),
+      sI<SetFirstTimeUserOpenedAppUseCase>(),
+    ),
   );
 }
