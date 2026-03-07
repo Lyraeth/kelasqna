@@ -20,6 +20,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           success: (user) {
             context.router.replaceAll([AuthRoute(), LoginRoute()]);
           },
+          failure: (failure) {
+            NeoKelasAppToast.show(context, message: failure.message(context));
+          },
         );
       },
       child: Scaffold(

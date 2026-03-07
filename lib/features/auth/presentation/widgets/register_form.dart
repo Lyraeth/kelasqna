@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kelasqna/kelasqna.dart';
@@ -44,104 +45,111 @@ class RegisterFormState extends State<RegisterForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<UserBloc, UserState>(
-      listener: (context, state) {
-        state.whenOrNull(
-          failure: (failure) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(failure.message(context))));
+    return Column(
+      children: [
+        NeoKelasTextFormField(
+          controller: _nameController,
+          textFieldName: context.l10n.name,
+          validatorString: context.l10n.nameRequired,
+        ),
+        NeoKelasTextFormField(
+          controller: _emailController,
+          textFieldName: context.l10n.email,
+          validatorString: context.l10n.requiredEmail,
+        ),
+        NeoKelasTextFormField(
+          controller: _passwordController,
+          obscureText: showPassword,
+          textFieldName: context.l10n.password,
+          validatorString: context.l10n.passwordRequired,
+          trailing: [
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  showPassword = !showPassword;
+                });
+              },
+              child: Icon(
+                showPassword ? LucideIcons.eyeClosed : LucideIcons.eye,
+              ),
+            ),
+          ],
+        ),
+        NeoKelasTextFormField(
+          controller: _confirmedPasswordController,
+          obscureText: showConfirmedPassword,
+          textFieldName: context.l10n.confirmPassword,
+          validator: (value) {
+            if (_confirmedPasswordController.text.trim() !=
+                _passwordController.text.trim()) {
+              return context.l10n.confirmPasswordNotSame;
+            }
+
+            return null;
           },
-        );
-      },
-      child: Column(
-        children: [
-          NeoKelasTextFormField(
-            controller: _nameController,
-            textFieldName: context.l10n.name,
-            validatorString: context.l10n.nameRequired,
-          ),
-          NeoKelasTextFormField(
-            controller: _emailController,
-            textFieldName: context.l10n.email,
-            validatorString: context.l10n.requiredEmail,
-          ),
-          NeoKelasTextFormField(
-            controller: _passwordController,
-            obscureText: showPassword,
-            textFieldName: context.l10n.password,
-            validatorString: context.l10n.passwordRequired,
-            trailing: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    showPassword = !showPassword;
-                  });
-                },
-                child: Icon(
-                  showPassword ? LucideIcons.eyeClosed : LucideIcons.eye,
-                ),
+          trailing: [
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  showConfirmedPassword = !showConfirmedPassword;
+                });
+              },
+              child: Icon(
+                showConfirmedPassword ? LucideIcons.eyeClosed : LucideIcons.eye,
               ),
-            ],
-          ),
-          NeoKelasTextFormField(
-            controller: _confirmedPasswordController,
-            obscureText: showConfirmedPassword,
-            textFieldName: context.l10n.confirmPassword,
-            validator: (value) {
-              if (_confirmedPasswordController.text.trim() !=
-                  _passwordController.text.trim()) {
-                return context.l10n.confirmPasswordNotSame;
-              }
+            ),
+          ],
+        ),
+        BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            final isLoading = state.maybeWhen(
+              loading: () => true,
+              orElse: () => false,
+            );
 
-              return null;
-            },
-            trailing: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    showConfirmedPassword = !showConfirmedPassword;
-                  });
-                },
-                child: Icon(
-                  showConfirmedPassword
-                      ? LucideIcons.eyeClosed
-                      : LucideIcons.eye,
-                ),
-              ),
-            ],
-          ),
-          8.h,
-          BlocBuilder<UserBloc, UserState>(
-            builder: (context, state) {
-              final isLoading = state.maybeWhen(
-                loading: () => true,
-                orElse: () => false,
-              );
+            return NeoKelasButton(
+              onPressed: () {
+                if (isLoading) return;
 
-              return NeoKelasButton(
-                onPressed: () {
-                  if (isLoading) return;
+                FocusScope.of(context).unfocus();
 
-                  FocusScope.of(context).unfocus();
-
-                  _register();
-                },
-                backgroundColor: context.colors.primaryContainer,
-                child: isLoading
-                    ? CircularProgressIndicator()
-                    : Text(
-                        context.l10n.register,
-                        style: context.text.titleMedium?.copyWith(
-                          color: context.colors.onPrimaryContainer,
-                          fontWeight: FontWeight.w700,
-                        ),
+                _register();
+              },
+              backgroundColor: context.colors.primaryContainer,
+              child: isLoading
+                  ? CircularProgressIndicator()
+                  : Text(
+                      context.l10n.register,
+                      style: context.text.titleMedium?.copyWith(
+                        color: context.colors.onPrimaryContainer,
+                        fontWeight: FontWeight.w700,
                       ),
-              );
-            },
-          ),
-        ].separatedBy(24.h),
-      ),
+                    ),
+            );
+          },
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              context.l10n.alreadyHaveAnAccount,
+              style: context.text.labelLarge?.copyWith(
+                color: context.colors.onSurfaceVariant,
+              ),
+            ),
+            GestureDetector(
+              onTap: () => context.router.replace(const LoginRoute()),
+              child: Text(
+                context.l10n.login,
+                style: context.text.labelLarge?.copyWith(
+                  color: context.colors.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ].separatedBy(4.w),
+        ),
+      ].separatedBy(24.h),
     );
   }
 }

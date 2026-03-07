@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kelasqna/kelasqna.dart';
@@ -61,7 +62,6 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ],
         ),
-        8.h,
         BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             final isLoading = state.maybeWhen(
@@ -72,17 +72,36 @@ class _LoginFormState extends State<LoginForm> {
             return NeoKelasButton(
               onPressed: () => isLoading ? null : _login(),
               backgroundColor: context.colors.primaryContainer,
-              child: isLoading
-                  ? CircularProgressIndicator()
-                  : Text(
-                      context.l10n.login,
-                      style: context.text.titleMedium?.copyWith(
-                        color: context.colors.onPrimaryContainer,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
+              child: Text(
+                context.l10n.login,
+                style: context.text.titleMedium?.copyWith(
+                  color: context.colors.onPrimaryContainer,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             );
           },
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              context.l10n.dontHaveAnAccount,
+              style: context.text.labelLarge?.copyWith(
+                color: context.colors.onSurfaceVariant,
+              ),
+            ),
+            GestureDetector(
+              onTap: () => context.router.replace(const RegisterRoute()),
+              child: Text(
+                context.l10n.register,
+                style: context.text.labelLarge?.copyWith(
+                  color: context.colors.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ].separatedBy(4.w),
         ),
       ].separatedBy(24.h),
     );

@@ -40,5 +40,8 @@
   "home": "Beranda",
   "profile": "Profil",
   "filter": "Filter",
-  "sort": "Sortir"
+  "sort": "Sortir",
+  "alreadyHaveAnAccount": "Sudah punya akun?",
+  "dontHaveAnAccount": "Belum punya akun?",
+  "loading": "Loading..."
 }

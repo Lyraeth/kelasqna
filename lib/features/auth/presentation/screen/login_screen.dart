@@ -18,9 +18,7 @@ class LoginScreen extends StatelessWidget {
             );
           },
           failure: (failure) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(failure.message(context))));
+            NeoKelasAppToast.show(context, message: failure.message(context));
           },
         );
       },

@@ -45,5 +45,8 @@
   "home": "Home",
   "profile": "Profile",
   "filter": "Filter",
-  "sort": "Sort"
+  "sort": "Sort",
+  "alreadyHaveAnAccount": "Already have an account?",
+  "dontHaveAnAccount": "Don't have an account?",
+  "loading": "Loading..."
 }
