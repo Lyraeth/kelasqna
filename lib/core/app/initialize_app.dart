@@ -4,8 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:kelasqna/app_bloc_observer.dart';
-import 'package:kelasqna/core/storage/language_storage/language_storage_di.dart';
-import 'package:kelasqna/core/storage/prefs_storage/prefs_di.dart';
 import 'package:kelasqna/kelasqna.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -58,6 +56,7 @@ Future<void> initializeApp() async {
     tokenProvider: () => sI<TokenProvider>().getToken(),
   );
   await initApiClientDI();
+  await initUserDI();
   await initSessionsDI();
   await initAuthDI();
 

@@ -17,6 +17,7 @@ class KelasQNARouter extends RootStackRouter {
     AutoRoute(page: SplashRoute.page, initial: true),
     AutoRoute(page: AuthRoute.page),
     AutoRoute(page: LoginRoute.page),
+    AutoRoute(page: RegisterRoute.page),
     AutoRoute(page: OnBoardingRoute.page),
 
     AutoRoute(

@@ -39,7 +39,7 @@ class AuthScreen extends StatelessWidget {
             Column(
               children: [
                 NeoKelasButton(
-                  onPressed: () {},
+                  onPressed: () => context.router.push(const RegisterRoute()),
                   backgroundColor: context.colors.secondaryContainer,
                   child: Text(
                     context.l10n.register,

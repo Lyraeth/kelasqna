@@ -19,9 +19,9 @@ class UserRepositoryImpl implements UserRepository {
       ),
     );
 
-    return response.fold((failure) => Left(failure), (
+    return response.match((failure) => Left(failure), (
       RegisterResponse registerResponse,
-    ) async {
+    ) {
       return Right(registerResponse);
     });
   }

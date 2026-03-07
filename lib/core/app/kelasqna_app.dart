@@ -16,6 +16,7 @@ class KelasQNAApp extends StatelessWidget {
         BlocProvider<AppBloc>.value(value: sI<AppBloc>()),
         BlocProvider<SessionsBloc>.value(value: sI<SessionsBloc>()),
         BlocProvider<AuthBloc>.value(value: sI<AuthBloc>()),
+        BlocProvider<UserBloc>.value(value: sI<UserBloc>()),
       ],
       child: BlocBuilder<AppBloc, AppState>(
         builder: (context, state) {
