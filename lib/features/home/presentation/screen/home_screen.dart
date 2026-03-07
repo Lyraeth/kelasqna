@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kelasqna/kelasqna.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -9,43 +9,49 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
-        state.whenOrNull(
-          successLogout: () =>
-              context.read<SessionsBloc>().add(SessionsEvent.loggedOut()),
+    return AutoTabsRouter(
+      routes: const [DashboardRoute(), ProfileRoute()],
+      builder: (context, child) {
+        final tabsRouter = AutoTabsRouter.of(context);
+
+        return Scaffold(
+          body: child,
+          bottomNavigationBar: NavigationBar(
+            selectedIndex: tabsRouter.activeIndex,
+            onDestinationSelected: tabsRouter.setActiveIndex,
+            backgroundColor: context.colors.surface,
+            indicatorColor: context.colors.surfaceContainer,
+            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+            labelTextStyle: WidgetStatePropertyAll(
+              TextStyle(
+                color: context.colors.onSurface,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            height: 90,
+            destinations: [
+              NavigationDestination(
+                tooltip: context.l10n.home,
+                icon: Icon(LucideIcons.layoutDashboard),
+                selectedIcon: Icon(
+                  LucideIcons.layoutDashboard,
+                  color: context.colors.onSurface,
+                ),
+                label: context.l10n.home,
+              ),
+              NavigationDestination(
+                icon: Icon(LucideIcons.user),
+                selectedIcon: Icon(
+                  LucideIcons.user,
+                  color: context.colors.onSurface,
+                ),
+                label: context.l10n.profile,
+                tooltip: context.l10n.profile,
+              ),
+            ],
+          ),
         );
       },
-      child: Scaffold(
-        body: Center(
-          child: BlocBuilder<SessionsBloc, SessionsState>(
-            builder: (context, state) {
-              return state.maybeWhen(
-                authenticated: (user, accessToken, _) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("${context.l10n.name} : ${user?.name}"),
-                      Text("${context.l10n.email} : ${user?.email}"),
-                      Text("AccessToken : $accessToken"),
-                      24.h,
-                      NeoKelasButton(
-                        onPressed: () {
-                          context.read<AuthBloc>().add(
-                            AuthEvent.logoutRequested(),
-                          );
-                        },
-                        child: Text(context.l10n.logout),
-                      ),
-                    ].separatedBy(24.h),
-                  );
-                },
-                orElse: () => SizedBox.shrink(),
-              );
-            },
-          ),
-        ),
-      ),
     );
   }
 }

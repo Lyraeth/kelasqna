@@ -9,7 +9,7 @@ abstract class SessionsState with _$SessionsState {
   const factory SessionsState.firstTime() = _FirstTime;
 
   const factory SessionsState.authenticated({
-    UserEntity? user,
+    required UserEntity user,
     required String accessToken,
     @Default(false) bool isRefreshing,
   }) = _Authenticated;

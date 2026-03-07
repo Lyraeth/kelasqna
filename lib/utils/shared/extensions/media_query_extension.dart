@@ -44,6 +44,8 @@ extension MediaQueryExtension on BuildContext {
   /// This is equivalent to `MediaQuery.of(this).viewInsets`.
   EdgeInsets get viewInsets => MediaQuery.of(this).viewInsets;
 
+  EdgeInsets get viewPadding => MediaQuery.of(this).viewPadding;
+
   /// This is equivalent to `MediaQuery.of(this).padding`.
   EdgeInsets get padding => MediaQuery.of(this).padding;
 }

@@ -41,5 +41,9 @@
   "welcomeBack": "Welcome back",
   "kelasqna": "KelasQNA",
   "email": "Email",
-  "requiredEmail": "Field email is required"
+  "requiredEmail": "Field email is required",
+  "home": "Home",
+  "profile": "Profile",
+  "filter": "Filter",
+  "sort": "Sort"
 }

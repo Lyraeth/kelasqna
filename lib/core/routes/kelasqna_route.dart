@@ -19,6 +19,13 @@ class KelasQNARouter extends RootStackRouter {
     AutoRoute(page: LoginRoute.page),
     AutoRoute(page: OnBoardingRoute.page),
 
-    AutoRoute(page: HomeRoute.page, guards: [_authGuard]),
+    AutoRoute(
+      page: HomeRoute.page,
+      guards: [_authGuard],
+      children: [
+        AutoRoute(page: DashboardRoute.page),
+        AutoRoute(page: ProfileRoute.page),
+      ],
+    ),
   ];
 }

@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 "KelasQNA",
                 style: context.text.headlineMedium?.copyWith(
                   color: context.colors.onSurface,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),

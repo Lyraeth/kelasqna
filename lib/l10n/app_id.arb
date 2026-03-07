@@ -36,5 +36,9 @@
   "welcomeBack": "Selamat datang kembali",
   "kelasqna": "KelasQNA",
   "email": "Email",
-  "requiredEmail": "Field email tidak boleh kosong"
+  "requiredEmail": "Field email tidak boleh kosong",
+  "home": "Beranda",
+  "profile": "Profil",
+  "filter": "Filter",
+  "sort": "Sortir"
 }
