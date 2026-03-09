@@ -6,9 +6,20 @@ class NeoKelasTextFormField extends StatefulWidget {
   final Color? textFieldBackgroundColor;
   final TextEditingController controller;
   final EdgeInsetsGeometry? contentPadding;
-  final String? validatorString;
+  final String hintText;
   final bool? obscureText;
+  @Deprecated(
+    "validator and validatorString have been deprecated. "
+    "Validation and error messages are now fully handled by the errorMessage "
+    "returned from the backend, so local validators are no longer required.",
+  )
   final FormFieldValidator<String?>? validator;
+  @Deprecated(
+    "validator and validatorString have been deprecated. "
+    "Validation and error messages are now fully handled by the errorMessage "
+    "returned from the backend, so local validators are no longer required.",
+  )
+  final String? validatorString;
   final List<Widget>? trailing;
 
   const NeoKelasTextFormField({
@@ -21,11 +32,14 @@ class NeoKelasTextFormField extends StatefulWidget {
     this.obscureText,
     this.validator,
     this.trailing,
-  }) : assert(
-         (validator == null && validatorString != null) ||
-             (validator != null && validatorString == null),
-         'Cannot provide both a validator and a validatorString',
-       );
+    required this.hintText,
+  });
+
+  // : assert(
+  //    (validator == null && validatorString != null) ||
+  //        (validator != null && validatorString == null),
+  //    'Cannot provide both a validator and a validatorString',
+  //  );
 
   @override
   State<NeoKelasTextFormField> createState() => _NeoKelasTextFormFieldState();
@@ -39,18 +53,19 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
       children: [
         Text(
           widget.textFieldName,
-          style: context.text.titleLarge?.copyWith(
+          style: context.text.titleMedium?.copyWith(
             color: context.colors.onSurface,
             fontWeight: FontWeight.w700,
           ),
         ),
 
-        16.h,
+        8.h,
 
         NeoKelasContainer(
           padding: 4.onlyLeft,
           backgroundColor:
-              widget.textFieldBackgroundColor ?? context.colors.surface,
+              widget.textFieldBackgroundColor ??
+              context.colors.surfaceContainer,
           child: widget.trailing != null
               ? Row(
                   children: [
@@ -68,15 +83,11 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                           errorStyle: context.text.labelMedium?.copyWith(
                             color: context.colors.error,
                           ),
+                          hint: Text(widget.hintText),
+                          hintStyle: context.text.labelMedium?.copyWith(
+                            color: context.colors.onSurfaceVariant,
+                          ),
                         ),
-                        validator:
-                            widget.validator ??
-                            (value) {
-                              if (value == null || value.isEmpty) {
-                                return widget.validatorString!;
-                              }
-                              return null;
-                            },
                       ),
                     ),
 
@@ -87,19 +98,20 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                   controller: widget.controller,
                   obscureText: widget.obscureText ?? false,
                   decoration: InputDecoration(
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    focusedErrorBorder: InputBorder.none,
                     contentPadding: widget.contentPadding ?? 8.all,
                     errorStyle: context.text.labelMedium?.copyWith(
                       color: context.colors.error,
                     ),
+                    hint: Text(widget.hintText),
+                    hintStyle: context.text.labelMedium?.copyWith(
+                      color: context.colors.onSurfaceVariant,
+                    ),
                   ),
-                  validator:
-                      widget.validator ??
-                      (value) {
-                        if (value == null || value.isEmpty) {
-                          return widget.validatorString!;
-                        }
-                        return null;
-                      },
                 ),
         ),
       ],

@@ -19,6 +19,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       email: event.userRegisterParams.email,
       password: event.userRegisterParams.password,
       passwordConfirmation: event.userRegisterParams.passwordConfirmation,
+      subject: event.userRegisterParams.subject,
+      role: event.userRegisterParams.role,
+      className: event.userRegisterParams.className,
+      classNumber: event.userRegisterParams.classNumber,
     );
 
     emit(const UserState.loading());
@@ -26,6 +30,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     final result = await _registerUseCase.call(params);
 
     final failure = result.match((failure) => failure, (r) => null);
+
     final registerResponse = result.match(
       (f) => null,
       (registerResponse) => registerResponse,

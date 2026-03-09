@@ -2,7 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:kelasqna/kelasqna.dart';
 
 abstract class SessionsRemoteDataSource {
-  Future<Result<UserModel>> me();
+  Future<Result<MeResponse>> me();
 }
 
 class SessionsRemoteDataSourceImpl implements SessionsRemoteDataSource {
@@ -11,13 +11,13 @@ class SessionsRemoteDataSourceImpl implements SessionsRemoteDataSource {
   SessionsRemoteDataSourceImpl(this._apiClient);
 
   @override
-  Future<Result<UserModel>> me() async {
+  Future<Result<MeResponse>> me() async {
     try {
       final response = await _apiClient.get(meUrl);
 
-      return response.fold(
+      return response.match(
         (failure) => Left(failure),
-        (jsonMap) => Right(UserModel.fromJson(jsonMap)),
+        (jsonMap) => Right(MeResponse.fromJson(jsonMap)),
       );
     } catch (e) {
       return Left(Failure.fromDio(e));

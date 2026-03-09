@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kelasqna/kelasqna.dart';
 
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
@@ -9,9 +10,13 @@ abstract class UserModel with _$UserModel {
     required int id,
     required String name,
     required String email,
-    @JsonKey(name: "email_verified_at") DateTime? emailVerifiedAt,
+    required UserRole role,
+    @JsonKey(name: "display_role") String? displayRole,
+    String? avatar,
+    @JsonKey(name: "class_name") String? className,
+    @JsonKey(name: "class_number") String? classNumber,
+    String? subject,
     @JsonKey(name: "created_at") required DateTime createdAt,
-    @JsonKey(name: "updated_at") required DateTime updatedAt,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

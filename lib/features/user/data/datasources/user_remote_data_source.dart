@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:kelasqna/kelasqna.dart';
 
@@ -17,20 +16,18 @@ class UserRemoteDateSourceImpl implements UserRemoteDataSource {
   ) async {
     final body = registerRequest.toJson();
 
-    debugPrint(body.toString());
-
     try {
       final response = await _apiClient.post(registerUrl, data: body);
 
-      return response.fold(
+      return response.match(
         (failure) async => Left(failure),
         (jsonMap) async => ApiHelper.parseResponse(
           jsonMap,
           (json) => RegisterResponse.fromJson(json),
         ),
       );
-    } catch (e) {
-      return Left(Failure.fromDio(e));
+    } catch (e, st) {
+      return Left(Failure.fromDio(e, st));
     }
   }
 }

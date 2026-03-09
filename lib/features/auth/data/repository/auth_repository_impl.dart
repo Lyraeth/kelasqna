@@ -16,7 +16,7 @@ class AuthRepositoryImpl implements AuthRepository {
       ),
     );
 
-    return response.fold((failure) => Left(failure), (
+    return response.match((failure) => Left(failure), (
       LoginResponse authResponse,
     ) async {
       return Right(authResponse);

@@ -10,14 +10,18 @@ class UserRepositoryImpl implements UserRepository {
   Future<Result<RegisterResponse>> register(
     UserRegisterParams registerParams,
   ) async {
-    final response = await _userRemoteDataSource.register(
-      RegisterRequest(
-        name: registerParams.name,
-        email: registerParams.email,
-        password: registerParams.password,
-        passwordConfirmation: registerParams.passwordConfirmation,
-      ),
+    final RegisterRequest registerRequest = RegisterRequest(
+      name: registerParams.name,
+      email: registerParams.email,
+      password: registerParams.password,
+      passwordConfirmation: registerParams.passwordConfirmation,
+      className: registerParams.className,
+      classNumber: registerParams.classNumber,
+      role: registerParams.role,
+      subject: registerParams.subject,
     );
+
+    final response = await _userRemoteDataSource.register(registerRequest);
 
     return response.match((failure) => Left(failure), (
       RegisterResponse registerResponse,

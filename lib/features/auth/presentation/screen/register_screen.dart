@@ -18,7 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       listener: (context, state) {
         state.whenOrNull(
           success: (user) {
-            context.router.replaceAll([AuthRoute(), LoginRoute()]);
+            context.router.replace(LoginRoute());
           },
           failure: (failure) {
             NeoKelasAppToast.show(context, message: failure.message(context));
@@ -33,7 +33,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                24.h,
                 Text(
                   context.l10n.register,
                   style: context.text.headlineLarge?.copyWith(

@@ -73,7 +73,7 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
     final result = await _meUseCase.call();
 
     final failure = result.match((f) => f, (r) => null);
-    final userEntity = result.match((l) => null, (r) => r);
+    final meResponse = result.match((l) => null, (r) => r);
 
     if (failure != null) {
       await _clearSessionUseCase.call();
@@ -88,14 +88,14 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
       return;
     }
 
-    if (userEntity != null) {
-      await _saveLoggedUserDetailsUseCase.call(userEntity);
+    if (meResponse != null) {
+      await _saveLoggedUserDetailsUseCase.call(meResponse.user.toEntity());
       debugPrint(
-        "await _saveLoggedUserDetailsUseCase.call(userEntity) updated",
+        "await _saveLoggedUserDetailsUseCase.call(meResponse) updated",
       );
       emit(
         SessionsState.authenticated(
-          user: userEntity,
+          user: meResponse.user.toEntity(),
           accessToken: storedAccessToken,
           isRefreshing: false,
         ),
@@ -115,7 +115,7 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
     final result = await _meUseCase.call();
 
     final failure = result.match((f) => f, (_) => null);
-    final me = result.match((_) => null, (m) => m);
+    final meResponse = result.match((_) => null, (m) => m);
 
     if (failure != null) {
       await _clearSessionUseCase.call();
@@ -124,9 +124,14 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
       return;
     }
 
-    if (me != null) {
-      await _saveLoggedUserDetailsUseCase.call(me);
-      emit(SessionsState.authenticated(user: me, accessToken: event.token));
+    if (meResponse != null) {
+      await _saveLoggedUserDetailsUseCase.call(meResponse.user.toEntity());
+      emit(
+        SessionsState.authenticated(
+          user: meResponse.user.toEntity(),
+          accessToken: event.token,
+        ),
+      );
     }
   }
 

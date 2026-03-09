@@ -5,7 +5,7 @@ abstract class SessionsRepository {
   /// Fetches the profile information of the currently authenticated user.
   ///
   /// Returns a [Result] containing [UserEntity] on success, or a failure message on error.
-  Future<Result<UserEntity>> me();
+  Future<Result<MeResponse>> me();
 
   /// Retrieves the stored access token from secure storage.
   ///

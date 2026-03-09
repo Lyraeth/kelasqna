@@ -15,11 +15,16 @@ class RegisterFormState extends State<RegisterForm> {
   bool showPassword = true;
   bool showConfirmedPassword = true;
 
+  UserRole? _selectedRole;
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmedPasswordController =
       TextEditingController();
+  final TextEditingController _classNameController = TextEditingController();
+  final TextEditingController _classNumberController = TextEditingController();
+  final TextEditingController _subjectController = TextEditingController();
 
   void _register() {
     final registerParams = UserRegisterParams(
@@ -27,6 +32,10 @@ class RegisterFormState extends State<RegisterForm> {
       email: _emailController.text.trim(),
       password: _passwordController.text.trim(),
       passwordConfirmation: _confirmedPasswordController.text.trim(),
+      classNumber: _classNumberController.text.trim(),
+      className: _classNameController.text.trim(),
+      role: _selectedRole,
+      subject: _subjectController.text.trim(),
     );
 
     context.read<UserBloc>().add(
@@ -40,6 +49,9 @@ class RegisterFormState extends State<RegisterForm> {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmedPasswordController.dispose();
+    _classNameController.dispose();
+    _classNumberController.dispose();
+    _subjectController.dispose();
     super.dispose();
   }
 
@@ -50,18 +62,20 @@ class RegisterFormState extends State<RegisterForm> {
         NeoKelasTextFormField(
           controller: _nameController,
           textFieldName: context.l10n.name,
-          validatorString: context.l10n.nameRequired,
+          hintText: context.l10n.nameHint,
         ),
         NeoKelasTextFormField(
           controller: _emailController,
           textFieldName: context.l10n.email,
-          validatorString: context.l10n.requiredEmail,
+
+          hintText: context.l10n.emailHint,
         ),
         NeoKelasTextFormField(
           controller: _passwordController,
           obscureText: showPassword,
           textFieldName: context.l10n.password,
-          validatorString: context.l10n.passwordRequired,
+
+          hintText: context.l10n.passwordHint,
           trailing: [
             GestureDetector(
               onTap: () {
@@ -79,14 +93,7 @@ class RegisterFormState extends State<RegisterForm> {
           controller: _confirmedPasswordController,
           obscureText: showConfirmedPassword,
           textFieldName: context.l10n.confirmPassword,
-          validator: (value) {
-            if (_confirmedPasswordController.text.trim() !=
-                _passwordController.text.trim()) {
-              return context.l10n.confirmPasswordNotSame;
-            }
-
-            return null;
-          },
+          hintText: context.l10n.passwordHint,
           trailing: [
             GestureDetector(
               onTap: () {
@@ -100,6 +107,104 @@ class RegisterFormState extends State<RegisterForm> {
             ),
           ],
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              context.l10n.role,
+              style: context.text.titleMedium?.copyWith(
+                color: context.colors.onSurface,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  NeoKelasButton(
+                    onPressed: () {
+                      setState(() {
+                        _selectedRole = UserRole.student;
+                      });
+                    },
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 6,
+                      horizontal: 12,
+                    ),
+                    backgroundColor: (_selectedRole == UserRole.student)
+                        ? context.colors.primaryContainer
+                        : null,
+                    child: Text(
+                      UserRole.student.name,
+                      style: TextStyle(
+                        color: (_selectedRole == UserRole.student)
+                            ? context.colors.onPrimaryContainer
+                            : null,
+                      ),
+                    ),
+                  ),
+                  NeoKelasButton(
+                    onPressed: () {
+                      setState(() {
+                        _selectedRole = UserRole.teacher;
+                      });
+                    },
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 6,
+                      horizontal: 12,
+                    ),
+                    backgroundColor: (_selectedRole == UserRole.teacher)
+                        ? context.colors.primaryContainer
+                        : null,
+                    child: Text(
+                      UserRole.teacher.name,
+                      style: TextStyle(
+                        color: (_selectedRole == UserRole.teacher)
+                            ? context.colors.onPrimaryContainer
+                            : null,
+                      ),
+                    ),
+                  ),
+                ].separatedBy(16.w),
+              ),
+            ),
+          ],
+        ),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          transitionBuilder: (child, animation) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+          child: _selectedRole == UserRole.student
+              ? Row(
+                  key: ValueKey(UserRole.student.name),
+                  children: [
+                    Expanded(
+                      child: NeoKelasTextFormField(
+                        controller: _classNameController,
+                        textFieldName: context.l10n.className,
+                        hintText: context.l10n.classNameHint,
+                      ),
+                    ),
+                    Expanded(
+                      child: NeoKelasTextFormField(
+                        controller: _classNumberController,
+                        textFieldName: context.l10n.classNumber,
+                        hintText: context.l10n.classNumberHint,
+                      ),
+                    ),
+                  ].separatedBy(16.w),
+                )
+              : _selectedRole == UserRole.teacher
+              ? NeoKelasTextFormField(
+                  key: ValueKey(UserRole.teacher.name),
+                  controller: _subjectController,
+                  textFieldName: context.l10n.subject,
+                  hintText: context.l10n.subjectHint,
+                )
+              : const SizedBox.shrink(key: ValueKey('empty')),
+        ),
+        8.h,
         BlocBuilder<UserBloc, UserState>(
           builder: (context, state) {
             final isLoading = state.maybeWhen(
@@ -149,7 +254,7 @@ class RegisterFormState extends State<RegisterForm> {
             ),
           ].separatedBy(4.w),
         ),
-      ].separatedBy(24.h),
+      ].separatedBy(16.h),
     );
   }
 }

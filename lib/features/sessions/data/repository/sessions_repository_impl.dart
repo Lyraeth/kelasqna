@@ -15,12 +15,12 @@ class SessionsRepositoryImpl implements SessionsRepository {
       await _sessionsLocalDataSource.getAccessToken();
 
   @override
-  Future<Result<UserEntity>> me() async {
+  Future<Result<MeResponse>> me() async {
     final response = await _sessionsRemoteDataSource.me();
 
     return response.fold(
       (failure) => Left(failure),
-      (UserModel userModel) => Right(userModel.toEntity()),
+      (MeResponse meResponse) => Right(meResponse),
     );
   }
 

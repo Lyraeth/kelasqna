@@ -67,7 +67,7 @@ class _ToastWidgetState extends State<_ToastWidget>
     );
 
     _slideAnim = Tween<Offset>(
-      begin: const Offset(0, -1.5),
+      begin: const Offset(0, 1.5),
       end: Offset.zero,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutBack));
 
@@ -125,7 +125,7 @@ class _ToastWidgetState extends State<_ToastWidget>
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: context.padding.top + 12,
+      bottom: context.padding.bottom + 24,
       left: 16,
       right: 16,
       child: SlideTransition(

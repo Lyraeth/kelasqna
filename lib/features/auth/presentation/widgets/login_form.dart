@@ -43,12 +43,14 @@ class _LoginFormState extends State<LoginForm> {
           controller: _emailController,
           textFieldName: context.l10n.email,
           validatorString: context.l10n.requiredEmail,
+          hintText: context.l10n.emailHint,
         ),
         NeoKelasTextFormField(
           controller: _passwordController,
           obscureText: showPassword,
           textFieldName: context.l10n.password,
           validatorString: context.l10n.passwordRequired,
+          hintText: context.l10n.passwordHint,
           trailing: [
             GestureDetector(
               onTap: () {
