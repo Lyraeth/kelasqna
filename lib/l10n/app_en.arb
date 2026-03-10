@@ -61,5 +61,20 @@
   "sort": "Sort",
   "alreadyHaveAnAccount": "Already have an account?",
   "dontHaveAnAccount": "Don't have an account?",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "emptyQuestions": "No questions yet",
+  "addQuestion": "Add question",
+  "emptyComments": "No comments yet",
+  "createQuestion": "Create question",
+  "titleQuestion": "Question title",
+  "descriptionQuestion": "Question description",
+  "createQuestionSuccess": "Question has successfully created!",
+  "deleteQuestionSuccess": "Question has successfully deleted!",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "deleteQuestion": "Delete question",
+  "deleteQuestionDesc": "Are you sure want to delete this question?",
+  "edit": "Edit",
+  "editQuestion": "Edit question",
+  "editQuestionSuccess": "Question has successfully edited!"
 }

@@ -21,3 +21,5 @@ final String logoutUrl = "$databaseUrl/logout";
 final String registerUrl = "$databaseUrl/register";
 
 final String meUrl = "$databaseUrl/me";
+
+final String questionsUrl = "$databaseUrl/questions";

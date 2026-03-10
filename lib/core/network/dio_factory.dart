@@ -32,7 +32,7 @@ class DioFactory {
           (PrettyDioLogger(
                 requestHeader: true,
                 requestBody: true,
-                responseBody: false,
+                responseBody: true,
                 responseHeader: false,
                 compact: true,
                 maxWidth: 90,

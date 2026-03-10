@@ -4,23 +4,14 @@ import 'package:kelasqna/kelasqna.dart';
 class QnaCardFooter extends StatelessWidget {
   const QnaCardFooter({
     super.key,
-    required this.totalLike,
-    required this.totalComment,
-    required this.totalBookmark,
+    required this.engagementTotal,
     required this.createdAt,
   });
 
-  /// User post total like.
-  final int totalLike;
-
-  /// User post total comment.
-  final int totalComment;
-
-  /// User post total bookmark.
-  final int totalBookmark;
+  final EngagementTotal engagementTotal;
 
   /// User post time created.
-  final DateTime createdAt;
+  final String createdAt;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +21,9 @@ class QnaCardFooter extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           NeoKelasEngagementButton(
-            totalLike: totalLike,
-            totalComment: totalComment,
-            totalBookmark: totalBookmark,
+            totalLike: engagementTotal.totalLikes,
+            totalComment: engagementTotal.totalComments,
+            totalBookmark: engagementTotal.totalBookmarks,
           ),
           NeoKelasTimeago(time: createdAt),
         ],

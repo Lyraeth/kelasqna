@@ -21,6 +21,10 @@ class NeoKelasTextFormField extends StatefulWidget {
   )
   final String? validatorString;
   final List<Widget>? trailing;
+  final double? height;
+  final int? maxLines;
+  final int? minLines;
+  final TextAlignVertical? textAlignVertical;
 
   const NeoKelasTextFormField({
     super.key,
@@ -32,6 +36,10 @@ class NeoKelasTextFormField extends StatefulWidget {
     this.obscureText,
     this.validator,
     this.trailing,
+    this.height,
+    this.maxLines,
+    this.minLines,
+    this.textAlignVertical,
     required this.hintText,
   });
 
@@ -62,6 +70,7 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
         8.h,
 
         NeoKelasContainer(
+          height: widget.height,
           padding: 4.onlyLeft,
           backgroundColor:
               widget.textFieldBackgroundColor ??
@@ -71,6 +80,9 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                   children: [
                     Expanded(
                       child: TextFormField(
+                        textAlignVertical: widget.textAlignVertical,
+                        maxLines: widget.maxLines ?? 1,
+                        minLines: widget.minLines,
                         controller: widget.controller,
                         obscureText: widget.obscureText ?? false,
                         decoration: InputDecoration(
@@ -97,6 +109,9 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
               : TextFormField(
                   controller: widget.controller,
                   obscureText: widget.obscureText ?? false,
+                  textAlignVertical: widget.textAlignVertical,
+                  maxLines: widget.maxLines ?? 1,
+                  minLines: widget.minLines,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     enabledBorder: InputBorder.none,

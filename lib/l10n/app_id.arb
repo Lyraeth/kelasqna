@@ -57,5 +57,20 @@
   "sort": "Sortir",
   "alreadyHaveAnAccount": "Sudah punya akun?",
   "dontHaveAnAccount": "Belum punya akun?",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "emptyQuestions": "Belum ada pertanyaan",
+  "addQuestion": "Tambah pertanyaan",
+  "emptyComments": "Belum ada komentar",
+  "createQuestion": "Buat pertanyaan",
+  "titleQuestion": "Judul pertanyaan",
+  "descriptionQuestion": "Deskripsi pertanyaan",
+  "createQuestionSuccess": "Pertanyaan berhasil dibuat!",
+  "deleteQuestionSuccess": "Pertanyaan berhasil dihapus!",
+  "delete": "Hapus",
+  "cancel": "Batal",
+  "deleteQuestion": "Hapus pertanyaan",
+  "deleteQuestionDesc": "Apa kamu yakin ingin menghapus pertanyaan ini?",
+  "edit": "Edit",
+  "editQuestion": "Edit pertanyaan",
+  "editQuestionSuccess": "Pertanyaan berhasil diedit!"
 }

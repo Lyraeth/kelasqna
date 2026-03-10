@@ -11,6 +11,8 @@ class NeoKelasButton extends StatefulWidget {
     this.padding,
     this.margin,
     this.shape,
+    this.height,
+    this.width,
   });
 
   final GestureTapCallback? onPressed;
@@ -19,6 +21,8 @@ class NeoKelasButton extends StatefulWidget {
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
   final BoxShape? shape;
+  final double? width;
+  final double? height;
 
   @override
   State<NeoKelasButton> createState() => _NeoKelasButtonState();
@@ -65,6 +69,8 @@ class _NeoKelasButtonState extends State<NeoKelasButton>
           return Transform.translate(offset: _animation.value, child: child);
         },
         child: NeoKelasContainer(
+          width: widget.width,
+          height: widget.height,
           margin: widget.margin,
           padding: widget.padding ?? 16.vertical,
           shape: widget.shape,

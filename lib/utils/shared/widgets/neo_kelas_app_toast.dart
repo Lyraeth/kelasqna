@@ -110,15 +110,15 @@ class _ToastWidgetState extends State<_ToastWidget>
 
   Color get _textColor => switch (widget.type) {
     ToastType.error => context.colors.onErrorContainer,
-    ToastType.success => context.colors.surface,
-    ToastType.warning => context.colors.surface,
+    ToastType.success => context.colors.onSurface,
+    ToastType.warning => context.colors.onSurface,
     ToastType.info => context.colors.onSecondaryContainer,
   };
 
   Color get _iconColor => switch (widget.type) {
     ToastType.error => context.colors.onErrorContainer,
-    ToastType.success => context.colors.surface,
-    ToastType.warning => context.colors.surface,
+    ToastType.success => context.colors.onSurface,
+    ToastType.warning => context.colors.onSurface,
     ToastType.info => context.colors.onSecondaryContainer,
   };
 

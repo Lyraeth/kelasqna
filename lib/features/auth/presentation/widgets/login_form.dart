@@ -72,15 +72,23 @@ class _LoginFormState extends State<LoginForm> {
             );
 
             return NeoKelasButton(
-              onPressed: () => isLoading ? null : _login(),
+              onPressed: () {
+                if (isLoading) return;
+
+                FocusScope.of(context).unfocus();
+
+                _login();
+              },
               backgroundColor: context.colors.primaryContainer,
-              child: Text(
-                context.l10n.login,
-                style: context.text.titleMedium?.copyWith(
-                  color: context.colors.onPrimaryContainer,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
+              child: isLoading
+                  ? CircularProgressIndicator()
+                  : Text(
+                      context.l10n.login,
+                      style: context.text.titleMedium?.copyWith(
+                        color: context.colors.onPrimaryContainer,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
             );
           },
         ),

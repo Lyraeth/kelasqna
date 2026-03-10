@@ -145,4 +145,8 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
 
     emit(const SessionsState.unauthenticated());
   }
+
+  int? get getUserId => state.whenOrNull(
+    authenticated: (user, accessToken, isRefreshing) => user.id,
+  );
 }

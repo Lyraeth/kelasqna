@@ -17,6 +17,11 @@ class KelasQNAApp extends StatelessWidget {
         BlocProvider<SessionsBloc>.value(value: sI<SessionsBloc>()),
         BlocProvider<AuthBloc>.value(value: sI<AuthBloc>()),
         BlocProvider<UserBloc>.value(value: sI<UserBloc>()),
+        BlocProvider<QuestionsBloc>.value(value: sI<QuestionsBloc>()),
+        BlocProvider<QuestionBloc>.value(value: sI<QuestionBloc>()),
+        BlocProvider<CreateQuestionBloc>.value(value: sI<CreateQuestionBloc>()),
+        BlocProvider<DeleteQuestionBloc>.value(value: sI<DeleteQuestionBloc>()),
+        BlocProvider<EditQuestionBloc>.value(value: sI<EditQuestionBloc>()),
       ],
       child: BlocBuilder<AppBloc, AppState>(
         builder: (context, state) {
@@ -30,6 +35,8 @@ class KelasQNAApp extends StatelessWidget {
                   _appRouter.replaceAll([const LoginRoute()]);
                 },
                 authenticated: (_, _, _) {
+                  context.read<QuestionsBloc>().add(QuestionsEvent.started());
+
                   _appRouter.replaceAll([const HomeRoute()]);
                 },
               );

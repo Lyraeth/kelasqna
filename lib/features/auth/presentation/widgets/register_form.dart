@@ -74,7 +74,6 @@ class RegisterFormState extends State<RegisterForm> {
           controller: _passwordController,
           obscureText: showPassword,
           textFieldName: context.l10n.password,
-
           hintText: context.l10n.passwordHint,
           trailing: [
             GestureDetector(
