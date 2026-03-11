@@ -64,7 +64,6 @@
   "loading": "Loading...",
   "emptyQuestions": "No questions yet",
   "addQuestion": "Add question",
-  "emptyComments": "No comments yet",
   "createQuestion": "Create question",
   "titleQuestion": "Question title",
   "descriptionQuestion": "Question description",
@@ -76,5 +75,15 @@
   "deleteQuestionDesc": "Are you sure want to delete this question?",
   "edit": "Edit",
   "editQuestion": "Edit question",
-  "editQuestionSuccess": "Question has successfully edited!"
+  "editQuestionSuccess": "Question has successfully edited!",
+  "comments": "Comments",
+  "createCommentSuccess": "Comment has successfully created!",
+  "emptyComments": "No comments yet",
+  "editComment": "Edit comment",
+  "editCommentSuccess": "Comment has successfully edited!",
+  "deleteComment": "Delete comment",
+  "deleteCommentDesc": "Are you sure want to delete this comment?",
+  "deleteCommentSuccess": "Comment has successfully deleted!",
+  "beTheFirstToComment": "Be the first to comment",
+  "writeComment": "Write your comment..."
 }

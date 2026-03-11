@@ -1,4 +1,5 @@
 export 'auth/auth.dart';
+export 'comments/comments.dart';
 export 'dashboard/dashboard.dart';
 export 'home/home.dart';
 export 'on_boarding/on_boarding.dart';

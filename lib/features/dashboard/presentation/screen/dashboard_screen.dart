@@ -29,9 +29,7 @@ class DashboardScreen extends StatelessWidget {
 
                   // Content
                   state.maybeWhen(
-                    loading: () => const SliverFillRemaining(
-                      child: Center(child: CircularProgressIndicator()),
-                    ),
+                    loading: () => DashboardShimmer(),
                     emptyData: () => SliverFillRemaining(
                       child: Center(
                         child: Text(

@@ -1,4 +1,3 @@
-export 'entity/comments_entity/comments_entity.dart';
 export 'entity/edit_question_params/edit_question_params.dart';
 export 'entity/question_entity/question_entity.dart';
 export 'entity/question_params/question_params.dart';

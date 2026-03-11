@@ -7,25 +7,40 @@ class QnaCommentContainer extends StatelessWidget {
     super.key,
     required this.userName,
     required this.userComment,
+    required this.userTimeComment,
   });
 
   final String userName;
   final String userComment;
+  final String userTimeComment;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      visualDensity: VisualDensity.compact,
+      contentPadding: 8.horizontal,
       leading: CircleAvatar(
         backgroundColor: context.colors.onSurface,
         foregroundColor: context.colors.surface,
         child: Icon(LucideIcons.user),
       ),
-      title: Text(
-        userName,
-        style: context.text.titleMedium?.copyWith(
-          color: context.colors.onSurface,
-          fontWeight: FontWeight.bold,
-        ),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            userName,
+            style: context.text.titleMedium?.copyWith(
+              color: context.colors.onSurface,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            userTimeComment,
+            style: context.text.labelSmall?.copyWith(
+              color: context.colors.onSurfaceVariant,
+            ),
+          ),
+        ],
       ),
       subtitle: NeoKelasBackgroundContainer(
         margin: 8.onlyTop,

@@ -20,6 +20,8 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
   ) async {
     if (!event.forceRefresh && state is _Success) return;
 
+    emit(const QuestionState.loading());
+
     final result = await _fetchQuestionUseCase.call(id: event.id);
 
     return result.match(

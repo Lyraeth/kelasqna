@@ -1,7 +1,5 @@
 export 'datasources/questions_remote_data_source.dart';
-export 'mapper/comments_mapper.dart';
 export 'mapper/questions_mapper.dart';
-export 'model/comments_model/comments_model.dart';
 export 'model/edit_question_request/edit_question_request.dart';
 export 'model/one_questions_response/one_questions_response.dart';
 export 'model/question_model/question_model.dart';

@@ -60,7 +60,6 @@
   "loading": "Loading...",
   "emptyQuestions": "Belum ada pertanyaan",
   "addQuestion": "Tambah pertanyaan",
-  "emptyComments": "Belum ada komentar",
   "createQuestion": "Buat pertanyaan",
   "titleQuestion": "Judul pertanyaan",
   "descriptionQuestion": "Deskripsi pertanyaan",
@@ -72,5 +71,15 @@
   "deleteQuestionDesc": "Apa kamu yakin ingin menghapus pertanyaan ini?",
   "edit": "Edit",
   "editQuestion": "Edit pertanyaan",
-  "editQuestionSuccess": "Pertanyaan berhasil diedit!"
+  "editQuestionSuccess": "Pertanyaan berhasil diedit!",
+  "comments": "Komentar",
+  "createCommentSuccess": "Komentar berhasil dibuat!",
+  "emptyComments": "Belum ada komentar",
+  "editComment": "Edit komentar",
+  "editCommentSuccess": "Komentar berhasil diedit!",
+  "deleteComment": "Hpus komentar",
+  "deleteCommentDesc": "Apa kamu yakin ingin menghapus komentar ini?",
+  "deleteCommentSuccess": "Komentar berhasil dihapus!",
+  "beTheFirstToComment": "Jadilah yang pertama berkomentar",
+  "writeComment": "Tulis komentarmu..."
 }

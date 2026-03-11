@@ -67,6 +67,13 @@ class QuestionsBlocListener extends StatelessWidget {
                   type: ToastType.success,
                 );
               },
+              failure: (failure) {
+                NeoKelasAppToast.show(
+                  context,
+                  message: failure.message(context),
+                  type: ToastType.error,
+                );
+              },
             );
           },
         ),
@@ -82,6 +89,13 @@ class QuestionsBlocListener extends StatelessWidget {
                   context,
                   message: context.l10n.deleteQuestionSuccess,
                   type: ToastType.success,
+                );
+              },
+              failure: (failure) {
+                NeoKelasAppToast.show(
+                  context,
+                  message: failure.message(context),
+                  type: ToastType.error,
                 );
               },
             );

@@ -26,7 +26,7 @@ class NeoKelasBackgroundContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundTransparent
             ? Colors.transparent
-            : context.colors.surfaceContainer,
+            : context.colors.surfaceContainerLow,
         borderRadius: rounded ? 16.circular : null,
       ),
       child: child,
