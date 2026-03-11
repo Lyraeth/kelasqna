@@ -85,6 +85,9 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                         minLines: widget.minLines,
                         controller: widget.controller,
                         obscureText: widget.obscureText ?? false,
+                        style: context.text.bodyMedium?.copyWith(
+                          color: context.colors.onSurface,
+                        ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           enabledBorder: InputBorder.none,
@@ -112,6 +115,9 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                   textAlignVertical: widget.textAlignVertical,
                   maxLines: widget.maxLines ?? 1,
                   minLines: widget.minLines,
+                  style: context.text.bodyMedium?.copyWith(
+                    color: context.colors.onSurface,
+                  ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     enabledBorder: InputBorder.none,

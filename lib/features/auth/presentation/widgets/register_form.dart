@@ -132,13 +132,13 @@ class RegisterFormState extends State<RegisterForm> {
                     ),
                     backgroundColor: (_selectedRole == UserRole.student)
                         ? context.colors.primaryContainer
-                        : null,
+                        : context.colors.surfaceContainer,
                     child: Text(
                       UserRole.student.name,
                       style: TextStyle(
                         color: (_selectedRole == UserRole.student)
                             ? context.colors.onPrimaryContainer
-                            : null,
+                            : context.colors.onSurface,
                       ),
                     ),
                   ),
@@ -154,13 +154,13 @@ class RegisterFormState extends State<RegisterForm> {
                     ),
                     backgroundColor: (_selectedRole == UserRole.teacher)
                         ? context.colors.primaryContainer
-                        : null,
+                        : context.colors.surfaceContainer,
                     child: Text(
                       UserRole.teacher.name,
                       style: TextStyle(
                         color: (_selectedRole == UserRole.teacher)
                             ? context.colors.onPrimaryContainer
-                            : null,
+                            : context.colors.onSurface,
                       ),
                     ),
                   ),
