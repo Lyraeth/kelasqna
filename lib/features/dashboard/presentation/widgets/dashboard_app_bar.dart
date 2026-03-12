@@ -48,7 +48,13 @@ class DashboardAppBar extends StatelessWidget {
           margin: 16.onlyRight,
           padding: EdgeInsets.zero,
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              NeoKelasAppToast.show(
+                context,
+                message: context.l10n.featureNotYetAvailable,
+                type: ToastType.info,
+              );
+            },
             icon: Icon(
               LucideIcons.bell,
               color: context.colors.onSurface,

@@ -5,13 +5,13 @@ class NeoKelasEngagementButton extends StatelessWidget {
   const NeoKelasEngagementButton({
     super.key,
     required this.questionEntity,
-    required this.onLikeTap,
-    required this.onBookmarkTap,
+    this.onLikeTap,
+    this.onBookmarkTap,
   });
 
   final QuestionEntity questionEntity;
-  final VoidCallback onLikeTap;
-  final VoidCallback onBookmarkTap;
+  final VoidCallback? onLikeTap;
+  final VoidCallback? onBookmarkTap;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +19,10 @@ class NeoKelasEngagementButton extends StatelessWidget {
       children: [
         _EngagementItem(
           icon: questionEntity.engagementReact.isLiked
-              ? Icons.thumb_up_rounded
-              : Icons.thumb_up_outlined,
+              ? Icons.favorite
+              : Icons.favorite_border,
           isFilled: questionEntity.engagementReact.isLiked,
-          activeColor: Colors.blue,
+          activeColor: context.colors.error,
           count: questionEntity.engagementTotal.totalLikes,
           onTap: onLikeTap,
         ),

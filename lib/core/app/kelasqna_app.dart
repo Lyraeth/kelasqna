@@ -25,6 +25,15 @@ class KelasQNAApp extends StatelessWidget {
         BlocProvider<CreateCommentBloc>.value(value: sI<CreateCommentBloc>()),
         BlocProvider<EditCommentBloc>.value(value: sI<EditCommentBloc>()),
         BlocProvider<DeleteCommentBloc>.value(value: sI<DeleteCommentBloc>()),
+        BlocProvider<ProfileBookmarksBloc>.value(
+          value: sI<ProfileBookmarksBloc>(),
+        ),
+        BlocProvider<ProfileQuestionsBloc>.value(
+          value: sI<ProfileQuestionsBloc>(),
+        ),
+        BlocProvider<ProfileCommentsBloc>.value(
+          value: sI<ProfileCommentsBloc>(),
+        ),
       ],
       child: BlocBuilder<AppBloc, AppState>(
         builder: (context, state) {

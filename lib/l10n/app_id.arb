@@ -59,6 +59,8 @@
   "alreadyHaveAnAccount": "Sudah punya akun?",
   "dontHaveAnAccount": "Belum punya akun?",
   "loading": "Loading...",
+  "questions": "Pertanyaan",
+  "bookmarks": "Tersemat",
   "emptyQuestions": "Belum ada pertanyaan",
   "addQuestion": "Tambah pertanyaan",
   "createQuestion": "Buat pertanyaan",
@@ -83,5 +85,9 @@
   "deleteCommentSuccess": "Komentar berhasil dihapus!",
   "beTheFirstToComment": "Jadilah yang pertama berkomentar",
   "writeComment": "Tulis komentarmu...",
-  "writeQuestions": "Ada pertanyaan? tulis disini..."
+  "writeQuestions": "Ada pertanyaan? tulis disini...",
+  "emptyBookmarks": "Belum ada pertanyaan yang di sematkan",
+  "whoIsThis": "Siapa ini?",
+  "noRoleDetected": "Role tidak diketahui",
+  "featureNotYetAvailable": "Fitur belum tersedia, nantikan ya!"
 }

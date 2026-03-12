@@ -14,6 +14,6 @@ abstract class QuestionEntity with _$QuestionEntity {
     required Author author,
     List<CommentsEntity>? listComments,
     required String createdAt,
-    required DateTime updatedAt,
+    DateTime? updatedAt,
   }) = _QuestionEntity;
 }

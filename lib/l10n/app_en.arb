@@ -63,6 +63,8 @@
   "alreadyHaveAnAccount": "Already have an account?",
   "dontHaveAnAccount": "Don't have an account?",
   "loading": "Loading...",
+  "questions": "Questions",
+  "bookmarks": "Bookmarks",
   "emptyQuestions": "No questions yet",
   "addQuestion": "Add question",
   "createQuestion": "Create question",
@@ -87,5 +89,9 @@
   "deleteCommentSuccess": "Comment has successfully deleted!",
   "beTheFirstToComment": "Be the first to comment",
   "writeComment": "Write your comment...",
-  "writeQuestions": "Any question? write here..."
+  "writeQuestions": "Any question? write here...",
+  "emptyBookmarks": "No bookmarked question yet",
+  "whoIsThis": "Who's this?",
+  "noRoleDetected": "No role detected",
+  "featureNotYetAvailable": "This feature is not available yet, stay tuned!"
 }

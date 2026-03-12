@@ -18,7 +18,7 @@ abstract class QuestionModel with _$QuestionModel {
     required Author author,
     @JsonKey(name: "comments") List<CommentsModel>? listComments,
     @JsonKey(name: "created_at") required String createdAt,
-    @JsonKey(name: "updated_at") required DateTime updatedAt,
+    @JsonKey(name: "updated_at") DateTime? updatedAt,
   }) = _QuestionModel;
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) =>

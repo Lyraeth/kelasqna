@@ -7,12 +7,14 @@ class QnaCardFooter extends StatelessWidget {
     super.key,
     required this.questionEntity,
     required this.createdAt,
+    this.activeActions = true,
   });
 
   final QuestionEntity questionEntity;
 
-  /// User post time created.
   final String createdAt;
+
+  final bool activeActions;
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +25,20 @@ class QnaCardFooter extends StatelessWidget {
         children: [
           NeoKelasEngagementButton(
             questionEntity: questionEntity,
-            onLikeTap: () {
-              context.read<QuestionsBloc>().add(
-                QuestionsEvent.toggleLike(id: questionEntity.id),
-              );
-            },
-            onBookmarkTap: () {
-              context.read<QuestionsBloc>().add(
-                QuestionsEvent.toggleBookmark(id: questionEntity.id),
-              );
-            },
+            onLikeTap: activeActions
+                ? () {
+                    context.read<QuestionsBloc>().add(
+                      QuestionsEvent.toggleLike(id: questionEntity.id),
+                    );
+                  }
+                : null,
+            onBookmarkTap: activeActions
+                ? () {
+                    context.read<QuestionsBloc>().add(
+                      QuestionsEvent.toggleBookmark(id: questionEntity.id),
+                    );
+                  }
+                : null,
           ),
           NeoKelasTimeago(time: createdAt),
         ],

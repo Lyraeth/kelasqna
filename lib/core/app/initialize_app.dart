@@ -61,6 +61,7 @@ Future<void> initializeApp() async {
   await initAuthDI();
   await initQuestionsDI();
   await initCommentsDI();
+  await initProfileDI();
 
   // App Bloc Observer
   Bloc.observer = const AppBlocObserver();

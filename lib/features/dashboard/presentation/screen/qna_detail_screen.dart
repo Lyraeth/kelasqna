@@ -82,6 +82,7 @@ class _QnaDetailScreenState extends State<QnaDetailScreen> {
                     Padding(
                       padding: 8.horizontal,
                       child: QnaCardFooter(
+                        activeActions: false,
                         questionEntity: widget.questionEntity,
                         createdAt: widget.questionEntity.createdAt,
                       ),
@@ -95,7 +96,7 @@ class _QnaDetailScreenState extends State<QnaDetailScreen> {
                           Icon(
                             LucideIcons.messageCircle,
                             size: 16,
-                            color: context.colors.primary,
+                            color: context.colors.onSurface,
                           ),
                           Text(
                             context.l10n.comments,
@@ -116,7 +117,10 @@ class _QnaDetailScreenState extends State<QnaDetailScreen> {
                             final comments = question.listComments ?? [];
 
                             if (comments.isEmpty) {
-                              return _EmptyCommentWidget();
+                              return NeoKelasEmptyScreen(
+                                icon: LucideIcons.messageCircle,
+                                message: context.l10n.emptyComments,
+                              );
                             }
 
                             return ListView.separated(
@@ -147,7 +151,10 @@ class _QnaDetailScreenState extends State<QnaDetailScreen> {
                               },
                             );
                           },
-                          emptyComment: () => _EmptyCommentWidget(),
+                          emptyComment: () => NeoKelasEmptyScreen(
+                            icon: LucideIcons.messageCircle,
+                            message: context.l10n.emptyComments,
+                          ),
                           loading: () => CommentListShimmer(),
                           orElse: () => const SizedBox.shrink(),
                         );
@@ -167,44 +174,6 @@ class _QnaDetailScreenState extends State<QnaDetailScreen> {
             ),
 
             4.h,
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// ── Empty Comment Widget ────────────────────────────────────────────────────
-
-class _EmptyCommentWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 16),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              LucideIcons.messageCircleDashed,
-              size: 40,
-              color: context.colors.onSurface.withValues(alpha: 0.3),
-            ),
-            12.h,
-            Text(
-              context.l10n.emptyComments,
-              style: context.text.bodyMedium?.copyWith(
-                color: context.colors.onSurface.withValues(alpha: 0.4),
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            8.h,
-            Text(
-              context.l10n.beTheFirstToComment,
-              style: context.text.bodySmall?.copyWith(
-                color: context.colors.onSurface.withValues(alpha: 0.3),
-              ),
-            ),
           ],
         ),
       ),

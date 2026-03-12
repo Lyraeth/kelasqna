@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kelasqna/kelasqna.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 @RoutePage()
 class DashboardScreen extends StatefulWidget {
@@ -45,7 +46,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               previous.maybeWhen(loading: (_) => true, orElse: () => false)),
           listener: (context, state) => _scrollToTop(),
           builder: (context, state) {
-            return RefreshIndicator(
+            return NeoKelasRefreshWrapper(
               onRefresh: () async {
                 context.read<QuestionsBloc>().add(
                   QuestionsEvent.started(forceRefresh: true),
@@ -61,14 +62,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   state.maybeWhen(
                     loading: (_) => DashboardShimmer(),
                     emptyData: () => SliverFillRemaining(
-                      child: Center(
-                        child: Text(
-                          context.l10n.emptyQuestions,
-                          style: context.text.titleMedium?.copyWith(
-                            color: context.colors.onSurface,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                      child: NeoKelasEmptyScreen(
+                        icon: LucideIcons.messageSquare,
+                        message: context.l10n.emptyQuestions,
                       ),
                     ),
                     hasData: (listQuestions, _, _) => SliverPadding(
