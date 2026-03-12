@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kelasqna/kelasqna.dart';
 
 class NeoKelasTextFormField extends StatefulWidget {
-  final String textFieldName;
+  final String? textFieldName;
   final Color? textFieldBackgroundColor;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final EdgeInsetsGeometry? contentPadding;
   final String hintText;
   final bool? obscureText;
@@ -25,11 +25,13 @@ class NeoKelasTextFormField extends StatefulWidget {
   final int? maxLines;
   final int? minLines;
   final TextAlignVertical? textAlignVertical;
+  final bool? readOnly;
+  final Color? foregroundTextColor;
 
   const NeoKelasTextFormField({
     super.key,
-    required this.controller,
-    required this.textFieldName,
+    this.controller,
+    this.textFieldName,
     this.validatorString,
     this.textFieldBackgroundColor,
     this.contentPadding,
@@ -39,8 +41,10 @@ class NeoKelasTextFormField extends StatefulWidget {
     this.height,
     this.maxLines,
     this.minLines,
+    this.foregroundTextColor,
     this.textAlignVertical,
     required this.hintText,
+    this.readOnly,
   });
 
   // : assert(
@@ -59,13 +63,15 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.textFieldName,
-          style: context.text.titleMedium?.copyWith(
-            color: context.colors.onSurface,
-            fontWeight: FontWeight.w700,
+        if (widget.textFieldName != null) ...[
+          Text(
+            widget.textFieldName!,
+            style: context.text.titleMedium?.copyWith(
+              color: context.colors.onSurface,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-        ),
+        ],
 
         8.h,
 
@@ -86,7 +92,9 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                         controller: widget.controller,
                         obscureText: widget.obscureText ?? false,
                         style: context.text.bodyMedium?.copyWith(
-                          color: context.colors.onSurface,
+                          color:
+                              widget.foregroundTextColor ??
+                              context.colors.onSurface,
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -100,9 +108,12 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                           ),
                           hint: Text(widget.hintText),
                           hintStyle: context.text.labelMedium?.copyWith(
-                            color: context.colors.onSurfaceVariant,
+                            color:
+                                widget.foregroundTextColor ??
+                                context.colors.onSurfaceVariant,
                           ),
                         ),
+                        readOnly: widget.readOnly ?? false,
                       ),
                     ),
 
@@ -116,7 +127,8 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                   maxLines: widget.maxLines ?? 1,
                   minLines: widget.minLines,
                   style: context.text.bodyMedium?.copyWith(
-                    color: context.colors.onSurface,
+                    color:
+                        widget.foregroundTextColor ?? context.colors.onSurface,
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -130,9 +142,12 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                     ),
                     hint: Text(widget.hintText),
                     hintStyle: context.text.labelMedium?.copyWith(
-                      color: context.colors.onSurfaceVariant,
+                      color:
+                          widget.foregroundTextColor ??
+                          context.colors.onSurfaceVariant,
                     ),
                   ),
+                  readOnly: widget.readOnly ?? false,
                 ),
         ),
       ],

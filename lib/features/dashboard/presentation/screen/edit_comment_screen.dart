@@ -59,7 +59,10 @@ class EditCommentScreenState extends State<EditCommentScreen> {
             controller: _contentController,
             textFieldName: context.l10n.comments,
             hintText: " ",
-            maxLines: null,
+            height: 104,
+            maxLines: 8,
+            minLines: 4,
+            textAlignVertical: TextAlignVertical.top,
           ),
           16.h,
 

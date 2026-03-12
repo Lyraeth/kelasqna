@@ -11,6 +11,7 @@ export 'shared/models/engagement_react/engagement_react.dart';
 export 'shared/models/engagement_total/engagement_total.dart';
 export 'shared/models/links/links.dart';
 export 'shared/models/meta/meta.dart';
+export 'shared/models/pagination_result/pagination_result.dart';
 export 'shared/types.dart';
 export 'shared/widgets/shared_widgets.dart';
 

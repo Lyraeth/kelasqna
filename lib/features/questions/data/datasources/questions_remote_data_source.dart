@@ -2,7 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:kelasqna/kelasqna.dart';
 
 abstract class QuestionsRemoteDataSource {
-  Future<Result<QuestionsResponse>> fetchAllQuestion();
+  Future<Result<QuestionsResponse>> fetchAllQuestion({int page = 1});
 
   Future<Result<OneQuestionsResponse>> fetchQuestion({required int id});
 
@@ -16,6 +16,10 @@ abstract class QuestionsRemoteDataSource {
   });
 
   Future<Unit> deleteQuestion({required int id});
+
+  Future<Result<Unit>> likeQuestion({required int id});
+
+  Future<Result<Unit>> bookmarkQuestion({required int id});
 }
 
 class QuestionsRemoteDataSourceImpl implements QuestionsRemoteDataSource {
@@ -24,9 +28,12 @@ class QuestionsRemoteDataSourceImpl implements QuestionsRemoteDataSource {
   QuestionsRemoteDataSourceImpl(this._apiClient);
 
   @override
-  Future<Result<QuestionsResponse>> fetchAllQuestion() async {
+  Future<Result<QuestionsResponse>> fetchAllQuestion({int page = 1}) async {
     try {
-      final response = await _apiClient.get(questionsUrl);
+      final response = await _apiClient.get(
+        questionsUrl,
+        queryParameters: {'page': page},
+      );
 
       return response.match(
         (failure) => Left(failure),
@@ -94,6 +101,40 @@ class QuestionsRemoteDataSourceImpl implements QuestionsRemoteDataSource {
       return response.match(
         (failure) => Left(failure),
         (jsonMap) => Right(OneQuestionsResponse.fromJson(jsonMap)),
+      );
+    } catch (e, st) {
+      return Left(Failure.fromDio(e, st));
+    }
+  }
+
+  @override
+  Future<Result<Unit>> bookmarkQuestion({required int id}) async {
+    try {
+      final response = await _apiClient.post(
+        "$questionsUrl/$id/bookmark",
+        data: {},
+      );
+
+      return response.match(
+        (failure) => Left(failure),
+        (response) => Right(unit),
+      );
+    } catch (e, st) {
+      return Left(Failure.fromDio(e, st));
+    }
+  }
+
+  @override
+  Future<Result<Unit>> likeQuestion({required int id}) async {
+    try {
+      final response = await _apiClient.post(
+        "$questionsUrl/$id/like",
+        data: {},
+      );
+
+      return response.match(
+        (failure) => Left(failure),
+        (response) => Right(unit),
       );
     } catch (e, st) {
       return Left(Failure.fromDio(e, st));

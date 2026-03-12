@@ -19,6 +19,7 @@
   "login": "Login",
   "logout": "Logout",
   "goToLoginScreen": "Go to login screen",
+  "author": "Author",
   "name": "Name",
   "nameRequired": "Field name is required.",
   "nameHint": "Jhon Doe",
@@ -85,5 +86,6 @@
   "deleteCommentDesc": "Are you sure want to delete this comment?",
   "deleteCommentSuccess": "Comment has successfully deleted!",
   "beTheFirstToComment": "Be the first to comment",
-  "writeComment": "Write your comment..."
+  "writeComment": "Write your comment...",
+  "writeQuestions": "Any question? write here..."
 }

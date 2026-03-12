@@ -8,11 +8,15 @@ class QnaCommentContainer extends StatelessWidget {
     required this.userName,
     required this.userComment,
     required this.userTimeComment,
+    required this.questionAuthorId,
+    required this.commentAuthorId,
   });
 
   final String userName;
   final String userComment;
   final String userTimeComment;
+  final int questionAuthorId;
+  final int commentAuthorId;
 
   @override
   Widget build(BuildContext context) {
@@ -24,22 +28,36 @@ class QnaCommentContainer extends StatelessWidget {
         foregroundColor: context.colors.surface,
         child: Icon(LucideIcons.user),
       ),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            userName,
-            style: context.text.titleMedium?.copyWith(
-              color: context.colors.onSurface,
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                userName,
+                style: context.text.titleMedium?.copyWith(
+                  color: context.colors.onSurface,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                userTimeComment,
+                style: context.text.labelSmall?.copyWith(
+                  color: context.colors.onSurfaceVariant,
+                ),
+              ),
+            ],
           ),
-          Text(
-            userTimeComment,
-            style: context.text.labelSmall?.copyWith(
-              color: context.colors.onSurfaceVariant,
+          if (questionAuthorId == commentAuthorId) ...[
+            4.h,
+            Text(
+              context.l10n.author,
+              style: context.text.labelSmall?.copyWith(
+                color: context.colors.primary,
+              ),
             ),
-          ),
+          ],
         ],
       ),
       subtitle: NeoKelasBackgroundContainer(

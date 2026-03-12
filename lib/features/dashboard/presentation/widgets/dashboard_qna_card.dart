@@ -29,7 +29,7 @@ class DashboardQnaCard extends StatelessWidget {
 
             // Footer
             QnaCardFooter(
-              engagementTotal: questionEntity.engagementTotal,
+              questionEntity: questionEntity,
               createdAt: questionEntity.createdAt,
             ),
           ],

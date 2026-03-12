@@ -18,6 +18,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
       listener: (context, state) {
         state.whenOrNull(
           success: (user) {
+            NeoKelasAppToast.show(
+              context,
+              message: context.l10n.registerSuccess,
+              type: ToastType.success,
+            );
+
             context.router.replace(LoginRoute());
           },
           failure: (failure) {

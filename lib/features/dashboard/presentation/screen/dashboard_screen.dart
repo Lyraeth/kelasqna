@@ -3,18 +3,47 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kelasqna/kelasqna.dart';
-import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 @RoutePage()
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToTop() {
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        0,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.colors.surfaceContainer,
       body: QuestionsBlocListener(
-        child: BlocBuilder<QuestionsBloc, QuestionsState>(
+        child: BlocConsumer<QuestionsBloc, QuestionsState>(
+          listenWhen: (previous, current) =>
+              (current.maybeWhen(
+                hasData: (_, _, _) => true,
+                orElse: () => false,
+              ) &&
+              previous.maybeWhen(loading: (_) => true, orElse: () => false)),
+          listener: (context, state) => _scrollToTop(),
           builder: (context, state) {
             return RefreshIndicator(
               onRefresh: () async {
@@ -23,13 +52,14 @@ class DashboardScreen extends StatelessWidget {
                 );
               },
               child: CustomScrollView(
+                controller: _scrollController,
                 slivers: [
                   // App bar
                   DashboardAppBar(),
 
                   // Content
                   state.maybeWhen(
-                    loading: () => DashboardShimmer(),
+                    loading: (_) => DashboardShimmer(),
                     emptyData: () => SliverFillRemaining(
                       child: Center(
                         child: Text(
@@ -41,15 +71,40 @@ class DashboardScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    hasData: (listQuestions) => SliverPadding(
+                    hasData: (listQuestions, _, _) => SliverPadding(
                       padding: const EdgeInsets.fromLTRB(16, 8, 16, 100),
                       sliver: SliverList.separated(
-                        itemCount: listQuestions.length + 1,
+                        itemCount: listQuestions.length + 3,
                         separatorBuilder: (_, _) => 16.h,
                         itemBuilder: (context, index) {
                           if (index == 0) return DashboardFilterSortButton();
 
-                          final question = listQuestions[index - 1];
+                          if (index == 1) {
+                            return GestureDetector(
+                              onTap: () => showCupertinoSheet(
+                                context: context,
+                                builder: (context) => Material(
+                                  child: SafeArea(
+                                    child: CreateQuestionScreen(),
+                                  ),
+                                ),
+                              ),
+                              child: AbsorbPointer(
+                                child: NeoKelasTextFormField(
+                                  textFieldBackgroundColor:
+                                      context.colors.surface,
+                                  hintText: context.l10n.writeQuestions,
+                                  readOnly: true,
+                                ),
+                              ),
+                            );
+                          }
+
+                          if (index == listQuestions.length + 2) {
+                            return DashboardPaginationButton();
+                          }
+
+                          final question = listQuestions[index - 2];
 
                           return QuestionDismissible(
                             questionEntity: question,
@@ -79,20 +134,6 @@ class DashboardScreen extends StatelessWidget {
             );
           },
         ),
-      ),
-      floatingActionButton: NeoKelasButton(
-        width: 50,
-        height: 50,
-        backgroundColor: context.colors.primaryContainer,
-        padding: EdgeInsets.zero,
-        onPressed: () async {
-          showCupertinoSheet(
-            context: context,
-            builder: (context) =>
-                Material(child: SafeArea(child: CreateQuestionScreen())),
-          );
-        },
-        child: Icon(LucideIcons.plus, color: context.colors.onPrimaryContainer),
       ),
     );
   }

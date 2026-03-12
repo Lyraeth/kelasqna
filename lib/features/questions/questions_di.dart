@@ -24,9 +24,19 @@ Future<void> initQuestionsDI() async {
   sI.registerLazySingleton<EditQuestionUseCase>(
     () => EditQuestionUseCase(sI<QuestionsRepository>()),
   );
+  sI.registerLazySingleton<LikeQuestionUseCase>(
+    () => LikeQuestionUseCase(sI<QuestionsRepository>()),
+  );
+  sI.registerLazySingleton<BookmarkQuestionUseCase>(
+    () => BookmarkQuestionUseCase(sI<QuestionsRepository>()),
+  );
 
   sI.registerFactory<QuestionsBloc>(
-    () => QuestionsBloc(sI<FetchAllQuestionsUseCase>()),
+    () => QuestionsBloc(
+      sI<FetchAllQuestionsUseCase>(),
+      sI<LikeQuestionUseCase>(),
+      sI<BookmarkQuestionUseCase>(),
+    ),
   );
 
   sI.registerFactory<QuestionBloc>(

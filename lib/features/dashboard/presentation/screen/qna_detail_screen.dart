@@ -79,9 +79,17 @@ class _QnaDetailScreenState extends State<QnaDetailScreen> {
                       rounded: true,
                     ),
 
+                    Padding(
+                      padding: 8.horizontal,
+                      child: QnaCardFooter(
+                        questionEntity: widget.questionEntity,
+                        createdAt: widget.questionEntity.createdAt,
+                      ),
+                    ),
+
                     // Comment Section Header
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
                       child: Row(
                         children: [
                           Icon(
@@ -128,6 +136,9 @@ class _QnaDetailScreenState extends State<QnaDetailScreen> {
                                   questionEntity: widget.questionEntity,
                                   commentEntity: comment,
                                   child: QnaCommentContainer(
+                                    questionAuthorId:
+                                        widget.questionEntity.author.id,
+                                    commentAuthorId: comment.author.id,
                                     userName: comment.author.name,
                                     userComment: comment.content,
                                     userTimeComment: comment.createdAt,
@@ -154,6 +165,8 @@ class _QnaDetailScreenState extends State<QnaDetailScreen> {
               isFocused: _isFocused,
               onSubmit: _submitComment,
             ),
+
+            4.h,
           ],
         ),
       ),
@@ -243,14 +256,14 @@ class _CommentInputBarState extends State<_CommentInputBar> {
         border: Border(
           top: BorderSide(
             color: widget.isFocused
-                ? context.colors.primary.withValues(alpha: 0.3)
+                ? context.colors.shadow.withValues(alpha: 0.3)
                 : context.colors.outline.withValues(alpha: 0.15),
             width: widget.isFocused ? 1.5 : 1,
           ),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
+            color: context.colors.shadow.withValues(alpha: 0.06),
             blurRadius: 12,
             offset: const Offset(0, -4),
           ),

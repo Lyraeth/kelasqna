@@ -8,6 +8,7 @@ export 'widgets/comments_card_swipe_background.dart';
 export 'widgets/comments_dismissible.dart';
 export 'widgets/dashboard_app_bar.dart';
 export 'widgets/dashboard_filter_sort_button.dart';
+export 'widgets/dashboard_pagination_button.dart';
 export 'widgets/dashboard_qna_card.dart';
 export 'widgets/qna_card_body.dart';
 export 'widgets/qna_card_footer.dart';

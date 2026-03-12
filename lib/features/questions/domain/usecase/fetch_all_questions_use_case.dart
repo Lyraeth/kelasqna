@@ -5,6 +5,6 @@ class FetchAllQuestionsUseCase {
 
   FetchAllQuestionsUseCase(this._questionsRepository);
 
-  Future<Result<List<QuestionEntity>>> call() async =>
-      await _questionsRepository.fetchAllQuestion();
+  Future<Result<PaginatedResult<QuestionEntity>>> call({int page = 1}) async =>
+      await _questionsRepository.fetchAllQuestion(page: page);
 }

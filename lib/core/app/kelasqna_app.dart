@@ -38,7 +38,9 @@ class KelasQNAApp extends StatelessWidget {
                   _appRouter.replaceAll([const LoginRoute()]);
                 },
                 authenticated: (_, _, _) {
-                  context.read<QuestionsBloc>().add(QuestionsEvent.started());
+                  context.read<QuestionsBloc>().add(
+                    QuestionsEvent.started(forceRefresh: true),
+                  );
 
                   _appRouter.replaceAll([const HomeRoute()]);
                 },

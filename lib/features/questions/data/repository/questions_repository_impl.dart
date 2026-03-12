@@ -7,15 +7,28 @@ class QuestionsRepositoryImpl implements QuestionsRepository {
   QuestionsRepositoryImpl(this._remoteDataSource);
 
   @override
-  Future<Result<List<QuestionEntity>>> fetchAllQuestion() async {
-    final response = await _remoteDataSource.fetchAllQuestion();
+  Future<Result<PaginatedResult<QuestionEntity>>> fetchAllQuestion({
+    int page = 1,
+  }) async {
+    final response = await _remoteDataSource.fetchAllQuestion(page: page);
 
-    return response.match(
-      (failure) => Left(failure),
-      (QuestionsResponse questionsResponse) => Right(
-        questionsResponse.listQuestion.map((m) => m.toEntity()).toList(),
-      ),
-    );
+    return response.match((failure) => Left(failure), (
+      QuestionsResponse questionsResponse,
+    ) {
+      final meta = questionsResponse.meta;
+
+      final totalPages = (meta.total / meta.perPage).ceil();
+
+      return Right(
+        PaginatedResult(
+          data: questionsResponse.listQuestion
+              .map((m) => m.toEntity())
+              .toList(),
+          currentPage: meta.currentPage,
+          totalPages: totalPages,
+        ),
+      );
+    });
   }
 
   @override
@@ -66,5 +79,19 @@ class QuestionsRepositoryImpl implements QuestionsRepository {
       (OneQuestionsResponse oneQuestionsResponse) =>
           Right(oneQuestionsResponse.question.toEntity()),
     );
+  }
+
+  @override
+  Future<Result<Unit>> bookmarkQuestion({required int id}) async {
+    final response = await _remoteDataSource.bookmarkQuestion(id: id);
+
+    return response.match((failure) => Left(failure), (unit) => Right(unit));
+  }
+
+  @override
+  Future<Result<Unit>> likeQuestion({required int id}) async {
+    final response = await _remoteDataSource.likeQuestion(id: id);
+
+    return response.match((failure) => Left(failure), (unit) => Right(unit));
   }
 }

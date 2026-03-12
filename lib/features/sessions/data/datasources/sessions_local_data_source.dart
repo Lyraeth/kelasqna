@@ -44,10 +44,8 @@ class SessionsLocalDataSourceImpl implements SessionsLocalDataSource {
     await secureStorage.delete(key: kAccessTokenKey);
     debugPrint("await secureStorage.delete(key: kAccessTokenKey) success");
 
-    await Hive.box(sessionsBoxKey).delete(sessionsUserDetailsKey);
-    debugPrint(
-      "await Hive.box(sessionsBoxKey).delete(sessionsUserDetailsKey) success",
-    );
+    await Hive.box(sessionsBoxKey).clear();
+    debugPrint("await Hive.box(sessionsBoxKey).clear() success");
 
     await prefs.remove(kSessionIsFirstTimeUserOpenAppKey);
     debugPrint("await prefs.remove(kSessionIsFirstTimeUserOpenAppKey) success");
