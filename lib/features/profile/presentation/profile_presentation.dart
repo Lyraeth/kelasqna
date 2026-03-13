@@ -4,6 +4,7 @@ export 'bloc/profile_questions_bloc/profile_questions_bloc.dart';
 export 'screen/bookmarks_tab.dart';
 export 'screen/comments_tab.dart';
 export 'screen/profile_screen.dart';
+export 'screen/profile_sheet.dart';
 export 'screen/question_tab.dart';
 export 'widgets/profile_app_bar.dart';
 export 'widgets/profile_header.dart';

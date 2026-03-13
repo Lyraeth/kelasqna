@@ -89,20 +89,18 @@ void main() {
   });
 
   group('clearSession', () {
-    test(
-      'should call local data source to clear session',
-      () async {
-        // arrange
-        when(() => mockLocalDataSource.clearSession())
-            .thenAnswer((_) async => unit);
+    test('should call local data source to clear session', () async {
+      // arrange
+      when(
+        () => mockLocalDataSource.clearSession(),
+      ).thenAnswer((_) async => unit);
 
-        // act
-        await repository.clearSession();
+      // act
+      await repository.clearSession();
 
-        // assert
-        verify(() => mockLocalDataSource.clearSession()).called(1);
-      },
-    );
+      // assert
+      verify(() => mockLocalDataSource.clearSession()).called(1);
+    });
   });
 
   group('isFirstTimeUserOpenApp', () {
@@ -110,8 +108,9 @@ void main() {
       'should call local data source to check if it is first time user',
       () async {
         // arrange
-        when(() => mockLocalDataSource.isFirstTimeUserOpenApp())
-            .thenAnswer((_) async => true);
+        when(
+          () => mockLocalDataSource.isFirstTimeUserOpenApp(),
+        ).thenAnswer((_) async => true);
 
         // act
         final result = await repository.isFirstTimeUserOpenApp();
@@ -128,29 +127,34 @@ void main() {
       'should call local data source to set first time user opened app',
       () async {
         // arrange
-        when(() => mockLocalDataSource.setIsFirstTimeUserOpenedApp(any()))
-            .thenAnswer((_) async => unit);
+        when(
+          () => mockLocalDataSource.setIsFirstTimeUserOpenedApp(any()),
+        ).thenAnswer((_) async => unit);
 
         // act
         await repository.setFirstTimeUserOpenedApp(false);
 
         // assert
-        verify(() => mockLocalDataSource.setIsFirstTimeUserOpenedApp(false))
-            .called(1);
+        verify(
+          () => mockLocalDataSource.setIsFirstTimeUserOpenedApp(false),
+        ).called(1);
       },
     );
   });
 
   group('me', () {
-    final tUserModel = UserModel(
-      id: 1,
-      name: 'Test User',
-      email: 'test@example.com',
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
+    final tUserModel = MeResponse(
+      error: false,
+      user: UserModel(
+        id: 1,
+        name: 'Test User',
+        email: 'test@example.com',
+        createdAt: DateTime.now(),
+        role: UserRole.student,
+      ),
     );
 
-    final tUserEntity = tUserModel.toEntity();
+    final tUserEntity = tUserModel.user.toEntity();
 
     test(
       'should return Right(UserEntity) when remote data source is successful',

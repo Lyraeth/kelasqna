@@ -29,4 +29,14 @@ class UserRepositoryImpl implements UserRepository {
       return Right(registerResponse);
     });
   }
+
+  @override
+  Future<Result<UserEntity>> fetchAnotherUser({required int id}) async {
+    final response = await _userRemoteDataSource.fetchAnotherUser(id: id);
+
+    return response.match(
+      (failure) => Left(failure),
+      (UserResponse userResponse) => Right(userResponse.user.toEntity()),
+    );
+  }
 }

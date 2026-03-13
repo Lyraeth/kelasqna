@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kelasqna/kelasqna.dart';
+import 'package:kelasqna/utils/shared/widgets/neo_kelas_photo_profile.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class QnaCardHeader extends StatelessWidget {
@@ -30,13 +30,7 @@ class QnaCardHeader extends StatelessWidget {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
       visualDensity: VisualDensity.compact,
-      leading: CircleAvatar(
-        backgroundColor: context.colors.onSurface,
-        foregroundColor: context.colors.surface,
-        child: (questionEntity.author.avatar != null)
-            ? CachedNetworkImage(imageUrl: questionEntity.author.avatar!)
-            : Icon(LucideIcons.user),
-      ),
+      leading: NeoKelasPhotoProfile(questionEntity: questionEntity),
       title: Text(
         displayName,
         style: context.text.titleMedium?.copyWith(

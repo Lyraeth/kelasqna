@@ -12,7 +12,7 @@ final String baseLocalUrl =
     (throw Exception("DATABASE_URL_LOCAL not found in .env"));
 
 // Change baseUrl to baseLocalUrl when debugging.
-final String databaseUrl = "${normalize(baseLocalUrl)}/api";
+final String databaseUrl = "${normalize(baseUrl)}/api";
 
 final String loginUrl = "$databaseUrl/login";
 
@@ -25,3 +25,5 @@ final String meUrl = "$databaseUrl/me";
 final String questionsUrl = "$databaseUrl/questions";
 
 final String sessionsUrl = "$databaseUrl/sessions";
+
+final String userUrl = "$databaseUrl/users";

@@ -21,8 +21,8 @@ class _ProfileScreenState extends State<ProfileScreen>
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_onTabChanged);
-    context.read<ProfileQuestionsBloc>().add(
-      const ProfileQuestionsEvent.started(),
+    context.read<ProfileBookmarksBloc>().add(
+      const ProfileBookmarksEvent.started(forceRefresh: true),
     );
   }
 
@@ -30,16 +30,16 @@ class _ProfileScreenState extends State<ProfileScreen>
     if (_tabController.indexIsChanging) return;
     switch (_tabController.index) {
       case 0:
-        context.read<ProfileQuestionsBloc>().add(
-          const ProfileQuestionsEvent.started(),
-        );
-      case 1:
-        context.read<ProfileCommentsBloc>().add(
-          const ProfileCommentsEvent.started(),
-        );
-      case 2:
         context.read<ProfileBookmarksBloc>().add(
           const ProfileBookmarksEvent.started(),
+        );
+      case 1:
+        context.read<ProfileQuestionsBloc>().add(
+          const ProfileQuestionsEvent.started(forceRefresh: true),
+        );
+      case 2:
+        context.read<ProfileCommentsBloc>().add(
+          const ProfileCommentsEvent.started(),
         );
     }
   }
@@ -93,12 +93,12 @@ class _ProfileScreenState extends State<ProfileScreen>
                     fontWeight: FontWeight.bold,
                   ),
                   tabs: [
+                    _buildTab(LucideIcons.bookmark, context.l10n.bookmarks),
                     _buildTab(
                       LucideIcons.messageSquare,
                       context.l10n.questions,
                     ),
                     _buildTab(LucideIcons.messageCircle, context.l10n.comments),
-                    _buildTab(LucideIcons.bookmark, context.l10n.bookmarks),
                   ],
                 ),
               ),
@@ -107,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             Expanded(
               child: TabBarView(
                 controller: _tabController,
-                children: const [QuestionsTab(), CommentsTab(), BookmarksTab()],
+                children: const [BookmarksTab(), QuestionsTab(), CommentsTab()],
               ),
             ),
           ],

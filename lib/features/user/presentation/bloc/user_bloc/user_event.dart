@@ -4,7 +4,5 @@ part of 'user_bloc.dart';
 abstract class UserEvent with _$UserEvent {
   const factory UserEvent.started() = _Started;
 
-  const factory UserEvent.register({
-    required UserRegisterParams userRegisterParams,
-  }) = _Register;
+  const factory UserEvent.fetchAnotherUser({required int id}) = _FetchAnotherUser;
 }

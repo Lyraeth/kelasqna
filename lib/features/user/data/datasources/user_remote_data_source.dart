@@ -3,6 +3,8 @@ import 'package:kelasqna/kelasqna.dart';
 
 abstract class UserRemoteDataSource {
   Future<Result<RegisterResponse>> register(RegisterRequest registerRequest);
+
+  Future<Result<UserResponse>> fetchAnotherUser({required int id});
 }
 
 class UserRemoteDateSourceImpl implements UserRemoteDataSource {
@@ -25,6 +27,20 @@ class UserRemoteDateSourceImpl implements UserRemoteDataSource {
           jsonMap,
           (json) => RegisterResponse.fromJson(json),
         ),
+      );
+    } catch (e, st) {
+      return Left(Failure.fromDio(e, st));
+    }
+  }
+
+  @override
+  Future<Result<UserResponse>> fetchAnotherUser({required int id}) async {
+    try {
+      final response = await _apiClient.get("$userUrl/$id");
+
+      return response.match(
+        (failure) => Left(failure),
+        (json) => Right(UserResponse.fromJson(json)),
       );
     } catch (e, st) {
       return Left(Failure.fromDio(e, st));

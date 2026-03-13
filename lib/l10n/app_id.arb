@@ -97,5 +97,6 @@
   "lastActive": "Terakhir aktif",
   "endsOn": "Berakhir pada",
   "deleteSession": "Hapus session",
-  "deleteSessionDesc": "Apa Kamu yakin ingin menghapus session pada perangkat ini? Kamu akan diminta untuk login kembali di perangkat yang dipilih."
+  "deleteSessionDesc": "Apa Kamu yakin ingin menghapus session pada perangkat ini? Kamu akan diminta untuk login kembali di perangkat yang dipilih.",
+  "deleteSessionSuccess": "Session berhasil dihapus!"
 }

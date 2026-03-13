@@ -34,6 +34,12 @@ class _SessionsDeviceScreenState extends State<SessionsDeviceScreen> {
             context.read<SessionsDeviceBloc>().add(
               SessionsDeviceEvent.started(forceRefresh: true),
             );
+
+            NeoKelasAppToast.show(
+              context,
+              message: context.l10n.deleteSessionSuccess,
+              type: ToastType.success,
+            );
           },
           failure: (failure) {
             NeoKelasAppToast.show(

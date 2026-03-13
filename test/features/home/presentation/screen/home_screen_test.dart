@@ -21,7 +21,7 @@ void main() {
     name: 'John Doe',
     email: 'john@example.com',
     createdAt: DateTime.now(),
-    updatedAt: DateTime.now(),
+    role: UserRole.student,
   );
 
   setUp(() {

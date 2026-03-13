@@ -62,9 +62,11 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
   @override
   Future<Result<PaginatedResult<QuestionEntity>>> fetchCreatedUserQuestion({
+    int? userId,
     int page = 1,
   }) async {
     final response = await _remoteDataSource.fetchCreatedUserQuestion(
+      userId: userId,
       page: page,
     );
 

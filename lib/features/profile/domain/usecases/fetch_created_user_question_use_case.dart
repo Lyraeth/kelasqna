@@ -5,6 +5,11 @@ class FetchCreatedUserQuestionUseCase {
 
   FetchCreatedUserQuestionUseCase(this._profileRepository);
 
-  Future<Result<PaginatedResult<QuestionEntity>>> call({int page = 1}) async =>
-      await _profileRepository.fetchCreatedUserQuestion(page: page);
+  Future<Result<PaginatedResult<QuestionEntity>>> call({
+    int? userId,
+    int page = 1,
+  }) async => await _profileRepository.fetchCreatedUserQuestion(
+    userId: userId,
+    page: page,
+  );
 }

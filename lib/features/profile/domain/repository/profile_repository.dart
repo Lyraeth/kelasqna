@@ -10,6 +10,7 @@ abstract class ProfileRepository {
   });
 
   Future<Result<PaginatedResult<QuestionEntity>>> fetchCreatedUserQuestion({
+    int? userId,
     int page = 1,
   });
 }

@@ -14,7 +14,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<UserBloc, UserState>(
+    return BlocListener<RegisterBloc, RegisterState>(
       listener: (context, state) {
         state.whenOrNull(
           success: (user) {

@@ -81,7 +81,7 @@ void main() {
           name: 'Test',
           email: 'test@example.com',
           createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
+          role: UserRole.student,
         );
 
         streamController.add(

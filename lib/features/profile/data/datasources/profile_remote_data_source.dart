@@ -7,6 +7,7 @@ abstract class ProfileRemoteDataSource {
   });
 
   Future<Result<ProfileQuestionsResponse>> fetchCreatedUserQuestion({
+    int? userId,
     int page = 1,
   });
 
@@ -62,12 +63,13 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
   @override
   Future<Result<ProfileQuestionsResponse>> fetchCreatedUserQuestion({
+    int? userId,
     int page = 1,
   }) async {
     try {
       final response = await _apiClient.get(
-        "$meUrl/questions",
-        queryParameters: {'page': page},
+        (userId != null) ? "$userUrl/$userId/questions" : "$meUrl/questions",
+        queryParameters: (userId != null) ? null : {'page': page},
       );
 
       return response.match(

@@ -38,8 +38,8 @@ class RegisterFormState extends State<RegisterForm> {
       subject: _subjectController.text.trim(),
     );
 
-    context.read<UserBloc>().add(
-      UserEvent.register(userRegisterParams: registerParams),
+    context.read<RegisterBloc>().add(
+      RegisterEvent.register(userRegisterParams: registerParams),
     );
   }
 
@@ -204,7 +204,7 @@ class RegisterFormState extends State<RegisterForm> {
               : const SizedBox.shrink(key: ValueKey('empty')),
         ),
         8.h,
-        BlocBuilder<UserBloc, UserState>(
+        BlocBuilder<RegisterBloc, RegisterState>(
           builder: (context, state) {
             final isLoading = state.maybeWhen(
               loading: () => true,

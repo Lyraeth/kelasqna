@@ -4,11 +4,13 @@ import 'package:kelasqna/kelasqna.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class QuestionsTab extends StatelessWidget {
-  const QuestionsTab({super.key});
+  const QuestionsTab({super.key, this.userId});
+
+  final int? userId;
 
   Future<void> _onRefresh(BuildContext context) async {
     context.read<ProfileQuestionsBloc>().add(
-      const ProfileQuestionsEvent.started(forceRefresh: true),
+      ProfileQuestionsEvent.started(forceRefresh: true, userId: userId),
     );
     await context.read<ProfileQuestionsBloc>().stream.firstWhere(
       (s) => s.maybeWhen(loading: (_) => false, orElse: () => true),

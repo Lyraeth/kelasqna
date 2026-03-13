@@ -13,5 +13,11 @@ Future<void> initUserDI() async {
     () => RegisterUseCase(sI<UserRepository>()),
   );
 
-  sI.registerFactory<UserBloc>(() => UserBloc(sI<RegisterUseCase>()));
+  sI.registerLazySingleton<FetchAnotherUserUseCase>(
+    () => FetchAnotherUserUseCase(sI<UserRepository>()),
+  );
+
+  sI.registerFactory<RegisterBloc>(() => RegisterBloc(sI<RegisterUseCase>()));
+
+  sI.registerFactory<UserBloc>(() => UserBloc(sI<FetchAnotherUserUseCase>()));
 }

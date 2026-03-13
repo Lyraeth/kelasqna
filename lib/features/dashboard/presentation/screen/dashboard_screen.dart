@@ -123,7 +123,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         },
                       ),
                     ),
-                    orElse: () => const SliverToBoxAdapter(child: SizedBox()),
+                    orElse: () => const SliverFillRemaining(child: SizedBox()),
                   ),
                 ],
               ),

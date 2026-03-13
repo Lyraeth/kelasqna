@@ -37,7 +37,7 @@ void main() {
         name: 'Test User',
         email: 'test@example.com',
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
+        role: UserRole.student,
       ),
     );
 
@@ -45,8 +45,9 @@ void main() {
       'should return Right(RegisterResponse) when remote data source is successful',
       () async {
         // arrange
-        when(() => mockRemoteDataSource.register(any()))
-            .thenAnswer((_) async => Right(tRegisterResponse));
+        when(
+          () => mockRemoteDataSource.register(any()),
+        ).thenAnswer((_) async => Right(tRegisterResponse));
 
         // act
         final result = await repository.register(tRegisterParams);
@@ -63,8 +64,9 @@ void main() {
       () async {
         // arrange
         const tFailure = Failure.server(errorMessage: 'Registration failed');
-        when(() => mockRemoteDataSource.register(any()))
-            .thenAnswer((_) async => const Left(tFailure));
+        when(
+          () => mockRemoteDataSource.register(any()),
+        ).thenAnswer((_) async => const Left(tFailure));
 
         // act
         final result = await repository.register(tRegisterParams);

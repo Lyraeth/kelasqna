@@ -21,7 +21,7 @@ class ProfileQuestionsBloc
     Emitter<ProfileQuestionsState> emit,
   ) async {
     if (!event.forceRefresh && state is _HasData) return;
-    await _fetchPage(1, emit);
+    await _fetchPage(1, emit, userId: event.userId);
   }
 
   Future<void> _onLoadPage(
@@ -31,10 +31,17 @@ class ProfileQuestionsBloc
     await _fetchPage(event.page, emit);
   }
 
-  Future<void> _fetchPage(int page, Emitter<ProfileQuestionsState> emit) async {
+  Future<void> _fetchPage(
+    int page,
+    Emitter<ProfileQuestionsState> emit, {
+    int? userId,
+  }) async {
     emit(ProfileQuestionsState.loading(currentPage: page));
 
-    final result = await _fetchCreatedUserQuestionUseCase.call(page: page);
+    final result = await _fetchCreatedUserQuestionUseCase.call(
+      userId: userId,
+      page: page,
+    );
 
     return result.match(
       (failure) => emit(ProfileQuestionsState.failure(failure)),
