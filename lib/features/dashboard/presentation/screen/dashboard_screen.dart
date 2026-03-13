@@ -67,6 +67,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               },
               child: CustomScrollView(
                 controller: _scrollController,
+                physics: const AlwaysScrollableScrollPhysics(),
                 slivers: [
                   // App bar
                   DashboardAppBar(),
