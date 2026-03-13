@@ -33,68 +33,70 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: 16.all,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            context.l10n.createQuestion,
-            style: context.text.titleLarge?.copyWith(
-              color: context.colors.onSurface,
-              fontWeight: FontWeight.bold,
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 80,
+        title: Text(
+          context.l10n.createQuestion,
+          style: context.text.titleLarge?.copyWith(
+            color: context.colors.onSurface,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: 16.all,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            NeoKelasTextFormField(
+              controller: _titleController,
+              textFieldName: context.l10n.titleQuestion,
+              hintText: " ",
+              maxLines: null,
             ),
-          ),
+            NeoKelasTextFormField(
+              controller: _descriptionController,
+              textFieldName: context.l10n.descriptionQuestion,
+              hintText: " ",
+              height: 104,
+              maxLines: 8,
+              minLines: 4,
+              textAlignVertical: TextAlignVertical.top,
+            ),
 
-          8.h,
+            const Spacer(),
 
-          NeoKelasTextFormField(
-            controller: _titleController,
-            textFieldName: context.l10n.titleQuestion,
-            hintText: " ",
-            maxLines: null,
-          ),
-          NeoKelasTextFormField(
-            controller: _descriptionController,
-            textFieldName: context.l10n.descriptionQuestion,
-            hintText: " ",
-            height: 104,
-            maxLines: 8,
-            minLines: 4,
-            textAlignVertical: TextAlignVertical.top,
-          ),
+            BlocBuilder<CreateQuestionBloc, CreateQuestionState>(
+              builder: (context, state) {
+                final isLoading = state.maybeWhen(
+                  loading: () => true,
+                  orElse: () => false,
+                );
 
-          16.h,
+                return NeoKelasButton(
+                  backgroundColor: context.colors.primaryContainer,
+                  onPressed: () {
+                    if (isLoading) return;
 
-          BlocBuilder<CreateQuestionBloc, CreateQuestionState>(
-            builder: (context, state) {
-              final isLoading = state.maybeWhen(
-                loading: () => true,
-                orElse: () => false,
-              );
+                    FocusScope.of(context).unfocus();
 
-              return NeoKelasButton(
-                backgroundColor: context.colors.primaryContainer,
-                onPressed: () {
-                  if (isLoading) return;
-
-                  FocusScope.of(context).unfocus();
-
-                  _createQuestion();
-                },
-                child: isLoading
-                    ? CircularProgressIndicator()
-                    : Text(
-                        context.l10n.createQuestion,
-                        style: context.text.bodyMedium?.copyWith(
-                          color: context.colors.onPrimaryContainer,
-                          fontWeight: FontWeight.bold,
+                    _createQuestion();
+                  },
+                  child: isLoading
+                      ? CircularProgressIndicator()
+                      : Text(
+                          context.l10n.createQuestion,
+                          style: context.text.bodyMedium?.copyWith(
+                            color: context.colors.onPrimaryContainer,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-              );
-            },
-          ),
-        ].separatedBy(16.h),
+                );
+              },
+            ),
+          ].separatedBy(24.h),
+        ),
       ),
     );
   }
