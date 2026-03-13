@@ -53,4 +53,30 @@ class SessionsRepositoryImpl implements SessionsRepository {
   @override
   Future<Unit> setFirstTimeUserOpenedApp(bool value) async =>
       _sessionsLocalDataSource.setIsFirstTimeUserOpenedApp(value);
+
+  @override
+  Future<Result<Unit>> deleteSessionDevice(int sessionId) async {
+    final response = await _sessionsRemoteDataSource.deleteSessionDevice(
+      sessionId,
+    );
+
+    return response.match(
+      (failure) => Left(failure),
+      (response) => Right(unit),
+    );
+  }
+
+  @override
+  Future<Result<List<SessionsDeviceEntity>>> fetchSessionsDevice() async {
+    final response = await _sessionsRemoteDataSource.fetchSessionsDevice();
+
+    return response.match(
+      (failure) => Left(failure),
+      (SessionsDeviceResponse sessionsDeviceResponse) => Right(
+        sessionsDeviceResponse.listSessionsDevice
+            .map((m) => m.toEntity())
+            .toList(),
+      ),
+    );
+  }
 }

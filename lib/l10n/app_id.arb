@@ -89,5 +89,13 @@
   "emptyBookmarks": "Belum ada pertanyaan yang di sematkan",
   "whoIsThis": "Siapa ini?",
   "noRoleDetected": "Role tidak diketahui",
-  "featureNotYetAvailable": "Fitur belum tersedia, nantikan ya!"
+  "featureNotYetAvailable": "Fitur belum tersedia, nantikan ya!",
+  "activeSessions": "Session aktif",
+  "emptySessionDevice": "Tidak ada session yang aktif",
+  "thisDevice": "Perangkat ini",
+  "expired": "Kadaluwarsa",
+  "lastActive": "Terakhir aktif",
+  "endsOn": "Berakhir pada",
+  "deleteSession": "Hapus session",
+  "deleteSessionDesc": "Apa Kamu yakin ingin menghapus session pada perangkat ini? Kamu akan diminta untuk login kembali di perangkat yang dipilih."
 }

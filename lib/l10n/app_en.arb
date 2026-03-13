@@ -93,5 +93,13 @@
   "emptyBookmarks": "No bookmarked question yet",
   "whoIsThis": "Who's this?",
   "noRoleDetected": "No role detected",
-  "featureNotYetAvailable": "This feature is not available yet, stay tuned!"
+  "featureNotYetAvailable": "This feature is not available yet, stay tuned!",
+  "activeSessions": "Active session",
+  "emptySessionDevice": "No active session",
+  "thisDevice": "This device",
+  "expired": "Expired",
+  "lastActive": "Last active",
+  "endsOn": "Ends on",
+  "deleteSession": "Delete session",
+  "deleteSessionDesc": "Are you sure you want to delete the session on this device? You will be prompted to log in again on the selected device."
 }

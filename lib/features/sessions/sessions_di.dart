@@ -44,6 +44,12 @@ Future<void> initSessionsDI() async {
   sI.registerLazySingleton<SetFirstTimeUserOpenedAppUseCase>(
     () => SetFirstTimeUserOpenedAppUseCase(sI<SessionsRepository>()),
   );
+  sI.registerLazySingleton<FetchSessionsDeviceUseCase>(
+    () => FetchSessionsDeviceUseCase(sI<SessionsRepository>()),
+  );
+  sI.registerLazySingleton<DeleteSessionDeviceUseCase>(
+    () => DeleteSessionDeviceUseCase(sI<SessionsRepository>()),
+  );
 
   sI.registerLazySingleton<SessionsBloc>(
     () => SessionsBloc(
@@ -56,5 +62,13 @@ Future<void> initSessionsDI() async {
       sI<IsFirstTimeUserOpenAppUseCase>(),
       sI<SetFirstTimeUserOpenedAppUseCase>(),
     ),
+  );
+
+  sI.registerFactory<SessionsDeviceBloc>(
+    () => SessionsDeviceBloc(sI<FetchSessionsDeviceUseCase>()),
+  );
+
+  sI.registerFactory<SessionsRevokeDeviceBloc>(
+    () => SessionsRevokeDeviceBloc(sI<DeleteSessionDeviceUseCase>()),
   );
 }
