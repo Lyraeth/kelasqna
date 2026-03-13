@@ -29,7 +29,6 @@ class NeoKelasEmptyScreen extends StatelessWidget {
                 color: context.colors.onSurfaceVariant,
               ),
             ),
-            16.h,
             Text(
               message,
               style: context.text.bodyMedium?.copyWith(
@@ -37,7 +36,7 @@ class NeoKelasEmptyScreen extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-          ],
+          ].separatedBy(16.h),
         ),
       ),
     );

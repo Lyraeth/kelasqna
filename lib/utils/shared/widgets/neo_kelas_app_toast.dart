@@ -12,6 +12,7 @@ class NeoKelasAppToast {
     required String message,
     ToastType type = ToastType.error,
     Duration duration = const Duration(seconds: 3),
+    bool forShowOnMenuScreen = false,
   }) {
     _currentEntry?.remove();
 
@@ -27,6 +28,7 @@ class NeoKelasAppToast {
           _currentEntry = null;
         },
         duration: duration,
+        forShowOnMenuScreen: forShowOnMenuScreen,
       ),
     );
 
@@ -40,12 +42,14 @@ class _ToastWidget extends StatefulWidget {
   final ToastType type;
   final VoidCallback onDismiss;
   final Duration duration;
+  final bool forShowOnMenuScreen;
 
   const _ToastWidget({
     required this.message,
     required this.type,
     required this.onDismiss,
     required this.duration,
+    this.forShowOnMenuScreen = false,
   });
 
   @override
@@ -125,7 +129,9 @@ class _ToastWidgetState extends State<_ToastWidget>
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: context.padding.bottom + 24,
+      bottom: widget.forShowOnMenuScreen
+          ? context.padding.bottom + 104
+          : context.padding.bottom + 24,
       left: 16,
       right: 16,
       child: SlideTransition(

@@ -42,23 +42,25 @@ class DashboardAppBar extends StatelessWidget {
         ].separatedBy(4.h),
       ),
       actions: [
-        NeoKelasContainer(
-          width: 40,
-          height: 40,
-          margin: 16.onlyRight,
-          padding: EdgeInsets.zero,
-          child: IconButton(
-            onPressed: () {
-              NeoKelasAppToast.show(
-                context,
-                message: context.l10n.featureNotYetAvailable,
-                type: ToastType.info,
-              );
-            },
-            icon: Icon(
-              LucideIcons.bell,
-              color: context.colors.onSurface,
-              size: 20,
+        NeoKelasUnavailableFeature(
+          unavailableWidget: NeoKelasContainer(
+            width: 40,
+            height: 40,
+            margin: 16.onlyRight,
+            padding: EdgeInsets.zero,
+            child: IconButton(
+              onPressed: () {
+                NeoKelasAppToast.show(
+                  context,
+                  message: context.l10n.featureNotYetAvailable,
+                  type: ToastType.info,
+                );
+              },
+              icon: Icon(
+                LucideIcons.bell,
+                color: context.colors.onSurface,
+                size: 20,
+              ),
             ),
           ),
         ),

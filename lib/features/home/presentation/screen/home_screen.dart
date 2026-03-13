@@ -14,41 +14,45 @@ class HomeScreen extends StatelessWidget {
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
 
-        return Scaffold(
-          body: child,
-          bottomNavigationBar: NavigationBar(
-            selectedIndex: tabsRouter.activeIndex,
-            onDestinationSelected: tabsRouter.setActiveIndex,
-            backgroundColor: context.colors.surface,
-            indicatorColor: context.colors.surfaceContainer,
-            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            labelTextStyle: WidgetStatePropertyAll(
-              TextStyle(
-                color: context.colors.onSurface,
-                fontWeight: FontWeight.bold,
+        return NeoKelasPopScopeScreen(
+          autoTabsRouter: tabsRouter,
+          child: Scaffold(
+            body: child,
+            bottomNavigationBar: NavigationBar(
+              selectedIndex: tabsRouter.activeIndex,
+              onDestinationSelected: tabsRouter.setActiveIndex,
+              backgroundColor: context.colors.surface,
+              indicatorColor: context.colors.surfaceContainer,
+              labelBehavior:
+                  NavigationDestinationLabelBehavior.onlyShowSelected,
+              labelTextStyle: WidgetStatePropertyAll(
+                TextStyle(
+                  color: context.colors.onSurface,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
+              height: 90,
+              destinations: [
+                NavigationDestination(
+                  tooltip: context.l10n.home,
+                  icon: Icon(LucideIcons.layoutDashboard),
+                  selectedIcon: Icon(
+                    LucideIcons.layoutDashboard,
+                    color: context.colors.onSurface,
+                  ),
+                  label: context.l10n.home,
+                ),
+                NavigationDestination(
+                  icon: Icon(LucideIcons.user),
+                  selectedIcon: Icon(
+                    LucideIcons.user,
+                    color: context.colors.onSurface,
+                  ),
+                  label: context.l10n.profile,
+                  tooltip: context.l10n.profile,
+                ),
+              ],
             ),
-            height: 90,
-            destinations: [
-              NavigationDestination(
-                tooltip: context.l10n.home,
-                icon: Icon(LucideIcons.layoutDashboard),
-                selectedIcon: Icon(
-                  LucideIcons.layoutDashboard,
-                  color: context.colors.onSurface,
-                ),
-                label: context.l10n.home,
-              ),
-              NavigationDestination(
-                icon: Icon(LucideIcons.user),
-                selectedIcon: Icon(
-                  LucideIcons.user,
-                  color: context.colors.onSurface,
-                ),
-                label: context.l10n.profile,
-                tooltip: context.l10n.profile,
-              ),
-            ],
           ),
         );
       },

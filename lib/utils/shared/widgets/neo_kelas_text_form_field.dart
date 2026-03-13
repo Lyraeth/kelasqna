@@ -27,9 +27,12 @@ class NeoKelasTextFormField extends StatefulWidget {
   final TextAlignVertical? textAlignVertical;
   final bool? readOnly;
   final Color? foregroundTextColor;
+  final EdgeInsetsGeometry? margin;
 
   const NeoKelasTextFormField({
     super.key,
+    required this.hintText,
+    this.margin,
     this.controller,
     this.textFieldName,
     this.validatorString,
@@ -43,7 +46,6 @@ class NeoKelasTextFormField extends StatefulWidget {
     this.minLines,
     this.foregroundTextColor,
     this.textAlignVertical,
-    required this.hintText,
     this.readOnly,
   });
 
@@ -78,6 +80,7 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
         NeoKelasContainer(
           height: widget.height,
           padding: 4.onlyLeft,
+          margin: widget.margin,
           backgroundColor:
               widget.textFieldBackgroundColor ??
               context.colors.surfaceContainer,
