@@ -1,6 +1,6 @@
 part of 'token_provider.dart';
 
-void initTokenDI() {
+Future<void> initTokenDI() async {
   sI.registerLazySingleton<TokenProvider>(
     () => TokenProviderImpl(sI<SessionsLocalDataSource>()),
   );

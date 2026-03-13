@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kelasqna/kelasqna.dart';
 
 part 'user_entity.freezed.dart';
 part 'user_entity.g.dart';
@@ -9,9 +10,13 @@ abstract class UserEntity with _$UserEntity {
     required int id,
     required String name,
     required String email,
-    DateTime? emailVerifiedAt,
+    required UserRole role,
+    String? displayRole,
+    String? avatar,
+    String? className,
+    String? classNumber,
+    String? subject,
     required DateTime createdAt,
-    required DateTime updatedAt,
   }) = _UserEntity;
 
   factory UserEntity.fromJson(Map<String, dynamic> json) =>

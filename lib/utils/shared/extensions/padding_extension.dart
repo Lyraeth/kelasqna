@@ -25,7 +25,7 @@ extension PaddingExtension on num {
   /// Creates an [EdgeInsets] object with the same padding value for the top and bottom sides.
   EdgeInsets get vertical => EdgeInsets.symmetric(vertical: toDouble());
 
-  EdgeInsets get onlyRigth => EdgeInsets.only(right: toDouble());
+  EdgeInsets get onlyRight => EdgeInsets.only(right: toDouble());
 
   EdgeInsets get onlyLeft => EdgeInsets.only(left: toDouble());
 

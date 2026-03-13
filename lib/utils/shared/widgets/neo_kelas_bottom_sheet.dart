@@ -50,7 +50,7 @@ class NeoKelasBottomSheet extends StatelessWidget {
             const SizedBox(height: 16),
 
             Text(
-              Utils.getTranslatedLabel(title),
+              title,
               style: Theme.of(
                 context,
               ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
@@ -60,7 +60,7 @@ class NeoKelasBottomSheet extends StatelessWidget {
             if (desc != null && desc!.isNotEmpty) ...[
               const SizedBox(height: 16),
               Text(
-                Utils.getTranslatedLabel(desc!),
+                (desc!),
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
@@ -73,7 +73,7 @@ class NeoKelasBottomSheet extends StatelessWidget {
             NeoKelasButton(
               padding: const EdgeInsets.symmetric(vertical: 8),
               onPressed: onPressed,
-              buttonColor: buttonColor ?? secondaryBlue,
+              backgroundColor: buttonColor ?? secondaryBlue,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: useIcon
@@ -81,14 +81,14 @@ class NeoKelasBottomSheet extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            Utils.getTranslatedLabel(buttonText),
+                            buttonText,
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                           Icon(icon),
                         ],
                       )
                     : Text(
-                        Utils.getTranslatedLabel(buttonText),
+                        buttonText,
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
               ),

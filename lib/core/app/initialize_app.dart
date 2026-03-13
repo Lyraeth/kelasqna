@@ -4,8 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:kelasqna/app_bloc_observer.dart';
-import 'package:kelasqna/core/storage/language_storage/language_storage_di.dart';
-import 'package:kelasqna/core/storage/prefs_storage/prefs_di.dart';
 import 'package:kelasqna/kelasqna.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -48,18 +46,22 @@ Future<void> initializeApp() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   /// Initialize Dependencies Injection.
-  initPrefsDI();
-  initLanguageStorageDI();
-  initThemeDI();
-  initAppDI();
-  initTokenDI();
-  initNetworkDI(
+  await initPrefsDI();
+  await initLanguageStorageDI();
+  await initThemeDI();
+  await initAppDI();
+  await initTokenDI();
+  await initNetworkDI(
     baseUrl: baseUrl,
     tokenProvider: () => sI<TokenProvider>().getToken(),
   );
-  initApiClientDI();
-  initSessionsDI();
-  initAuthDI();
+  await initApiClientDI();
+  await initUserDI();
+  await initSessionsDI();
+  await initAuthDI();
+  await initQuestionsDI();
+  await initCommentsDI();
+  await initProfileDI();
 
   // App Bloc Observer
   Bloc.observer = const AppBlocObserver();

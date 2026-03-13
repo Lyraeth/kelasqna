@@ -5,5 +5,5 @@ class MeUseCase {
 
   MeUseCase(this._sessionsRepository);
 
-  Future<Result<UserEntity>> call() async => _sessionsRepository.me();
+  Future<Result<MeResponse>> call() async => _sessionsRepository.me();
 }

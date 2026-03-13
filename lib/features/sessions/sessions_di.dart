@@ -1,6 +1,6 @@
 import 'package:kelasqna/kelasqna.dart';
 
-void initSessionsDI() {
+Future<void> initSessionsDI() async {
   sI.registerLazySingleton<SessionsRepository>(
     () => SessionsRepositoryImpl(
       sI<SessionsLocalDataSource>(),
@@ -26,14 +26,49 @@ void initSessionsDI() {
   sI.registerLazySingleton<GetAccessTokenUseCase>(
     () => GetAccessTokenUseCase(sI<SessionsRepository>()),
   );
-  sI.registerLazySingleton<SetAccessTokenUseCase>(
-    () => SetAccessTokenUseCase(sI<SessionsRepository>()),
+  sI.registerLazySingleton<SaveAccessTokenUseCase>(
+    () => SaveAccessTokenUseCase(sI<SessionsRepository>()),
   );
   sI.registerLazySingleton<ClearSessionUseCase>(
     () => ClearSessionUseCase(sI<SessionsRepository>()),
   );
+  sI.registerLazySingleton<GetLoggedUserDetailsUseCase>(
+    () => GetLoggedUserDetailsUseCase(sI<SessionsRepository>()),
+  );
+  sI.registerLazySingleton<SaveLoggedUserDetailsUseCase>(
+    () => SaveLoggedUserDetailsUseCase(sI<SessionsRepository>()),
+  );
+  sI.registerLazySingleton<IsFirstTimeUserOpenAppUseCase>(
+    () => IsFirstTimeUserOpenAppUseCase(sI<SessionsRepository>()),
+  );
+  sI.registerLazySingleton<SetFirstTimeUserOpenedAppUseCase>(
+    () => SetFirstTimeUserOpenedAppUseCase(sI<SessionsRepository>()),
+  );
+  sI.registerLazySingleton<FetchSessionsDeviceUseCase>(
+    () => FetchSessionsDeviceUseCase(sI<SessionsRepository>()),
+  );
+  sI.registerLazySingleton<DeleteSessionDeviceUseCase>(
+    () => DeleteSessionDeviceUseCase(sI<SessionsRepository>()),
+  );
 
-  sI.registerFactory<SessionsBloc>(
-    () => SessionsBloc(sI<SessionsRepository>()),
+  sI.registerLazySingleton<SessionsBloc>(
+    () => SessionsBloc(
+      sI<SaveAccessTokenUseCase>(),
+      sI<ClearSessionUseCase>(),
+      sI<MeUseCase>(),
+      sI<GetAccessTokenUseCase>(),
+      sI<GetLoggedUserDetailsUseCase>(),
+      sI<SaveLoggedUserDetailsUseCase>(),
+      sI<IsFirstTimeUserOpenAppUseCase>(),
+      sI<SetFirstTimeUserOpenedAppUseCase>(),
+    ),
+  );
+
+  sI.registerFactory<SessionsDeviceBloc>(
+    () => SessionsDeviceBloc(sI<FetchSessionsDeviceUseCase>()),
+  );
+
+  sI.registerFactory<SessionsRevokeDeviceBloc>(
+    () => SessionsRevokeDeviceBloc(sI<DeleteSessionDeviceUseCase>()),
   );
 }

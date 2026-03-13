@@ -6,4 +6,3 @@ export 'radius_extension.dart';
 export 'space_extension.dart';
 export 'string_extension.dart';
 export 'theme_extension.dart';
-export 'translate_extension.dart';

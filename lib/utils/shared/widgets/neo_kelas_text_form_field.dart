@@ -2,30 +2,56 @@ import 'package:flutter/material.dart';
 import 'package:kelasqna/kelasqna.dart';
 
 class NeoKelasTextFormField extends StatefulWidget {
-  final String textFieldName;
+  final String? textFieldName;
   final Color? textFieldBackgroundColor;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final EdgeInsetsGeometry? contentPadding;
-  final String? validatorString;
+  final String hintText;
   final bool? obscureText;
+  @Deprecated(
+    "validator and validatorString have been deprecated. "
+    "Validation and error messages are now fully handled by the errorMessage "
+    "returned from the backend, so local validators are no longer required.",
+  )
   final FormFieldValidator<String?>? validator;
+  @Deprecated(
+    "validator and validatorString have been deprecated. "
+    "Validation and error messages are now fully handled by the errorMessage "
+    "returned from the backend, so local validators are no longer required.",
+  )
+  final String? validatorString;
   final List<Widget>? trailing;
+  final double? height;
+  final int? maxLines;
+  final int? minLines;
+  final TextAlignVertical? textAlignVertical;
+  final bool? readOnly;
+  final Color? foregroundTextColor;
 
   const NeoKelasTextFormField({
     super.key,
-    required this.controller,
-    required this.textFieldName,
+    this.controller,
+    this.textFieldName,
     this.validatorString,
     this.textFieldBackgroundColor,
     this.contentPadding,
     this.obscureText,
     this.validator,
     this.trailing,
-  }) : assert(
-         (validator == null && validatorString != null) ||
-             (validator != null && validatorString == null),
-         'Cannot provide both a validator and a validatorString',
-       );
+    this.height,
+    this.maxLines,
+    this.minLines,
+    this.foregroundTextColor,
+    this.textAlignVertical,
+    required this.hintText,
+    this.readOnly,
+  });
+
+  // : assert(
+  //    (validator == null && validatorString != null) ||
+  //        (validator != null && validatorString == null),
+  //    'Cannot provide both a validator and a validatorString',
+  //  );
 
   @override
   State<NeoKelasTextFormField> createState() => _NeoKelasTextFormFieldState();
@@ -37,70 +63,91 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          Utils.getTranslatedLabel(widget.textFieldName),
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
+        if (widget.textFieldName != null) ...[
+          Text(
+            widget.textFieldName!,
+            style: context.text.titleMedium?.copyWith(
+              color: context.colors.onSurface,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-        ),
+        ],
 
-        SizedBox(height: 8),
+        8.h,
 
         NeoKelasContainer(
-          padding: const EdgeInsets.only(left: 4),
-          containerColor:
+          height: widget.height,
+          padding: 4.onlyLeft,
+          backgroundColor:
               widget.textFieldBackgroundColor ??
-              Theme.of(context).colorScheme.surface,
+              context.colors.surfaceContainer,
           child: widget.trailing != null
               ? Row(
                   children: [
                     Expanded(
                       child: TextFormField(
+                        textAlignVertical: widget.textAlignVertical,
+                        maxLines: widget.maxLines ?? 1,
+                        minLines: widget.minLines,
                         controller: widget.controller,
                         obscureText: widget.obscureText ?? false,
-                        decoration: InputDecoration(
-                          contentPadding:
-                              widget.contentPadding ?? const EdgeInsets.all(8),
-                          errorStyle: Theme.of(context).textTheme.labelMedium
-                              ?.copyWith(
-                                color: Theme.of(context).colorScheme.error,
-                              ),
+                        style: context.text.bodyMedium?.copyWith(
+                          color:
+                              widget.foregroundTextColor ??
+                              context.colors.onSurface,
                         ),
-                        validator:
-                            widget.validator ??
-                            (value) {
-                              if (value == null || value.isEmpty) {
-                                return Utils.getTranslatedLabel(
-                                  widget.validatorString!,
-                                );
-                              }
-                              return null;
-                            },
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          focusedErrorBorder: InputBorder.none,
+                          contentPadding: widget.contentPadding ?? 8.all,
+                          errorStyle: context.text.labelMedium?.copyWith(
+                            color: context.colors.error,
+                          ),
+                          hint: Text(widget.hintText),
+                          hintStyle: context.text.labelMedium?.copyWith(
+                            color:
+                                widget.foregroundTextColor ??
+                                context.colors.onSurfaceVariant,
+                          ),
+                        ),
+                        readOnly: widget.readOnly ?? false,
                       ),
                     ),
 
-                    if (widget.trailing != null) ...[...?widget.trailing],
+                    if (widget.trailing != null) ...[...?widget.trailing, 16.w],
                   ],
                 )
               : TextFormField(
                   controller: widget.controller,
                   obscureText: widget.obscureText ?? false,
-                  decoration: InputDecoration(
-                    contentPadding:
-                        widget.contentPadding ?? const EdgeInsets.all(8),
-                    errorStyle: Theme.of(context).textTheme.labelMedium
-                        ?.copyWith(color: Theme.of(context).colorScheme.error),
+                  textAlignVertical: widget.textAlignVertical,
+                  maxLines: widget.maxLines ?? 1,
+                  minLines: widget.minLines,
+                  style: context.text.bodyMedium?.copyWith(
+                    color:
+                        widget.foregroundTextColor ?? context.colors.onSurface,
                   ),
-                  validator:
-                      widget.validator ??
-                      (value) {
-                        if (value == null || value.isEmpty) {
-                          return Utils.getTranslatedLabel(
-                            widget.validatorString!,
-                          );
-                        }
-                        return null;
-                      },
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    focusedErrorBorder: InputBorder.none,
+                    contentPadding: widget.contentPadding ?? 8.all,
+                    errorStyle: context.text.labelMedium?.copyWith(
+                      color: context.colors.error,
+                    ),
+                    hint: Text(widget.hintText),
+                    hintStyle: context.text.labelMedium?.copyWith(
+                      color:
+                          widget.foregroundTextColor ??
+                          context.colors.onSurfaceVariant,
+                    ),
+                  ),
+                  readOnly: widget.readOnly ?? false,
                 ),
         ),
       ],

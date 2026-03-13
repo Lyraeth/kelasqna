@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:kelasqna/kelasqna.dart';
 
-void initNetworkDI({
+Future<void> initNetworkDI({
   required String baseUrl,
   Future<String?> Function()? tokenProvider,
-}) {
+}) async {
   final dio = DioFactory().buildDioClient(
     baseUrl: baseUrl,
     enablePrettyLogging: !kReleaseMode,
@@ -13,10 +13,27 @@ void initNetworkDI({
       InterceptorsWrapper(
         onRequest: (options, handler) async {
           final token = await tokenProvider?.call();
+          debugPrint("TOKEN USED: $token");
+
           if (token != null && token.isNotEmpty) {
+            options.headers['Accept'] = "application/json";
+            options.headers['Content-Type'] = "application/json";
             options.headers['Authorization'] = "Bearer $token";
           }
+
+          debugPrint("HEADERS NOW: ${options.headers}");
+
           handler.next(options);
+        },
+        onError: (error, handler) async {
+          if (error.response?.statusCode == 401) {
+            await sI<SessionsRepository>().clearSession();
+            sI<TokenProvider>().clearToken();
+
+            sI<SessionsBloc>().add(const SessionsEvent.loggedOut());
+          }
+
+          handler.next(error);
         },
       ),
     ],

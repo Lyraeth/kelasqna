@@ -1,5 +1,10 @@
 export 'auth/auth.dart';
+export 'comments/comments.dart';
+export 'dashboard/dashboard.dart';
 export 'home/home.dart';
+export 'on_boarding/on_boarding.dart';
+export 'profile/profile.dart';
+export 'questions/questions.dart';
 export 'sessions/sessions.dart';
 export 'splash/splash.dart';
 export 'user/user.dart';

@@ -1,13 +1,19 @@
+import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:hive/hive.dart';
 import 'package:kelasqna/kelasqna.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class SessionsLocalDataSource {
   Future<String?> getAccessToken();
 
-  Future<Unit> setAccessToken(String value);
+  Future<Unit> saveAccessToken(String value);
 
   Future<Unit> clearSession();
+
+  UserEntity? getLoggedUserDetails();
+
+  Future<Unit> saveLoggedUserDetails(UserEntity userEntity);
 
   Future<bool> isFirstTimeUserOpenApp();
 
@@ -22,8 +28,13 @@ class SessionsLocalDataSourceImpl implements SessionsLocalDataSource {
       await secureStorage.read(key: kAccessTokenKey);
 
   @override
-  Future<Unit> setAccessToken(String value) async {
-    await secureStorage.write(key: kAccessTokenKey, value: value);
+  Future<Unit> saveAccessToken(String value) async {
+    try {
+      await secureStorage.write(key: kAccessTokenKey, value: value);
+      debugPrint("Success to save accessToken");
+    } catch (e) {
+      debugPrint("Failed to save accessToken");
+    }
 
     return unit;
   }
@@ -31,6 +42,31 @@ class SessionsLocalDataSourceImpl implements SessionsLocalDataSource {
   @override
   Future<Unit> clearSession() async {
     await secureStorage.delete(key: kAccessTokenKey);
+    debugPrint("await secureStorage.delete(key: kAccessTokenKey) success");
+
+    await Hive.box(sessionsBoxKey).clear();
+    debugPrint("await Hive.box(sessionsBoxKey).clear() success");
+
+    await prefs.remove(kSessionIsFirstTimeUserOpenAppKey);
+    debugPrint("await prefs.remove(kSessionIsFirstTimeUserOpenAppKey) success");
+
+    return unit;
+  }
+
+  @override
+  UserEntity? getLoggedUserDetails() {
+    final raw = Hive.box(sessionsBoxKey).get(sessionsUserDetailsKey);
+
+    if (raw == null) return null;
+
+    return UserEntity.fromJson(Map<String, dynamic>.from(raw));
+  }
+
+  @override
+  Future<Unit> saveLoggedUserDetails(UserEntity userEntity) async {
+    await Hive.box(
+      sessionsBoxKey,
+    ).put(sessionsUserDetailsKey, userEntity.toJson());
 
     return unit;
   }

@@ -6,9 +6,13 @@ extension UserModelMapper on UserModel {
       id: id,
       name: name,
       email: email,
-      emailVerifiedAt: emailVerifiedAt,
+      avatar: avatar,
+      className: className,
+      classNumber: classNumber,
+      displayRole: displayRole,
+      subject: subject,
+      role: role,
       createdAt: createdAt,
-      updatedAt: updatedAt,
     );
   }
 }
@@ -19,9 +23,13 @@ extension UserEntityMapper on UserEntity {
       id: id,
       name: name,
       email: email,
-      emailVerifiedAt: emailVerifiedAt,
+      subject: subject,
+      displayRole: displayRole,
+      classNumber: classNumber,
+      className: className,
+      avatar: avatar,
+      role: role,
       createdAt: createdAt,
-      updatedAt: updatedAt,
     );
   }
 }

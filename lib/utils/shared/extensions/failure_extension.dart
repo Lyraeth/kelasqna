@@ -6,16 +6,16 @@ extension FailureX on Failure {
     final t = context.l10n;
 
     return map(
-      network: (_) => t.dioNetworkError,
-      server: (_) => t.dioServerError,
-      unauthorized: (_) => t.dioUnauthorizedError,
-      forbidden: (_) => t.dioForbiddenError,
-      badRequest: (_) => t.dioBadRequestError,
-      serialization: (_) => t.dioSerializationError,
-      cancelled: (_) => t.dioCancelledError,
-      rateLimited: (_) => t.dioRateLimitedError,
-      timeout: (_) => t.dioTimeoutError,
-      unexpected: (_) => t.dioUnexpectedError,
+      network: (f) => f.errorMessage ?? t.dioNetworkError,
+      server: (f) => f.errorMessage ?? t.dioServerError,
+      unauthorized: (f) => f.errorMessage ?? t.dioUnauthorizedError,
+      forbidden: (f) => f.errorMessage ?? t.dioForbiddenError,
+      badRequest: (f) => f.errorMessage ?? t.dioBadRequestError,
+      serialization: (f) => f.errorMessage ?? t.dioSerializationError,
+      cancelled: (f) => f.errorMessage ?? t.dioCancelledError,
+      rateLimited: (f) => f.errorMessage ?? t.dioRateLimitedError,
+      timeout: (f) => f.errorMessage ?? t.dioTimeoutError,
+      unexpected: (f) => f.errorMessage ?? t.dioUnexpectedError,
     );
   }
 }

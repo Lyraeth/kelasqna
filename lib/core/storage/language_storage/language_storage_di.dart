@@ -1,5 +1,6 @@
 import 'package:kelasqna/kelasqna.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void initLanguageStorageDI() {
-  sI.registerLazySingleton(() => LanguageStorage());
+Future<void> initLanguageStorageDI() async {
+  sI.registerLazySingleton(() => LanguageStorage(sI<SharedPreferences>()));
 }

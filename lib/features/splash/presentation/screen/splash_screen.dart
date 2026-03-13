@@ -28,47 +28,32 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SessionsBloc, SessionsState>(
-      listener: (context, state) {
-        state.whenOrNull(
-          firstTime: () {
-            context.router.replaceAll([const AuthRoute()]);
-          },
-          authenticated: (_, _) {
-            context.router.replaceAll([const HomeRoute()]);
-          },
-          unauthenticated: () {
-            context.router.replaceAll([const LoginRoute()]);
-          },
-        );
-      },
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Animate(
-                delay: 200.milliseconds,
-                effects: [
-                  ScaleEffect(delay: 200.milliseconds, duration: 1.seconds),
-                ],
-                child: Icon(Icons.school, size: 72),
-              ),
-              Animate(
-                delay: 200.milliseconds,
-                effects: [
-                  ScaleEffect(delay: 200.milliseconds, duration: 1.seconds),
-                ],
-                child: Text(
-                  "KelasQNA",
-                  style: context.text.headlineMedium?.copyWith(
-                    color: context.colors.onSurface,
-                    fontWeight: FontWeight.w700,
-                  ),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Animate(
+              delay: 200.milliseconds,
+              effects: [
+                ScaleEffect(delay: 200.milliseconds, duration: 1.seconds),
+              ],
+              child: Icon(Icons.school, size: 72),
+            ),
+            Animate(
+              delay: 200.milliseconds,
+              effects: [
+                ScaleEffect(delay: 200.milliseconds, duration: 1.seconds),
+              ],
+              child: Text(
+                "KelasQNA",
+                style: context.text.headlineMedium?.copyWith(
+                  color: context.colors.onSurface,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ].separatedBy(24.h),
-          ),
+            ),
+          ].separatedBy(24.h),
         ),
       ),
     );

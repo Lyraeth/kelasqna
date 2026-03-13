@@ -198,22 +198,21 @@ sealed class Failure with _$Failure {
     final data = e.response?.data;
 
     String? message;
-    String? detailedMessage;
     String? apiCode;
     Map<String, dynamic>? payload;
 
     if (data is Map<String, dynamic>) {
       payload = data;
       message = data['message'] as String?;
-      detailedMessage = data['detailed_message'] as String?;
       apiCode = _extractString(data, ['code', 'error_code', 'errorCode']);
     }
 
     switch (status) {
       case 400:
+      case 422:
         return Failure.badRequest(
           errorMessage: message,
-          detailedMessage: detailedMessage,
+
           fieldErrors: payload?['errors'] is Map<String, dynamic>
               ? payload!['errors']
               : null,
@@ -224,7 +223,7 @@ sealed class Failure with _$Failure {
       case 401:
         return Failure.unauthorized(
           errorMessage: message,
-          detailedMessage: detailedMessage,
+
           cause: e,
           stackTrace: st ?? e.stackTrace,
         );
@@ -232,7 +231,7 @@ sealed class Failure with _$Failure {
       case 403:
         return Failure.forbidden(
           errorMessage: message,
-          detailedMessage: detailedMessage,
+
           cause: e,
           stackTrace: st ?? e.stackTrace,
         );
@@ -240,7 +239,7 @@ sealed class Failure with _$Failure {
       case 409:
         return Failure.server(
           errorMessage: message,
-          detailedMessage: detailedMessage,
+
           statusCode: status,
           code: apiCode,
           data: payload,
@@ -252,7 +251,7 @@ sealed class Failure with _$Failure {
         if (status != null && status >= 500) {
           return Failure.server(
             errorMessage: message,
-            detailedMessage: detailedMessage,
+
             statusCode: status,
             code: apiCode,
             data: payload,
@@ -263,7 +262,7 @@ sealed class Failure with _$Failure {
 
         return Failure.unexpected(
           errorMessage: message,
-          detailedMessage: detailedMessage,
+
           cause: e,
           stackTrace: st ?? e.stackTrace,
         );

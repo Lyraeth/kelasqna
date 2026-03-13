@@ -1,5 +1,5 @@
 part of 'api_client.dart';
 
-void initApiClientDI() {
+Future<void> initApiClientDI() async {
   sI.registerLazySingleton<ApiClient>(() => ApiClient(sI<Dio>()));
 }

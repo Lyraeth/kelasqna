@@ -20,11 +20,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     _LoginRequested event,
     Emitter<AuthState> emit,
   ) async {
+    emit(const AuthState.loading());
+
+    final deviceName = await Utils.getDeviceName();
+
     final result = await _loginUseCase.call(
       LoginParams(
         email: event.loginRequest.email,
         password: event.loginRequest.password,
-        deviceName: event.loginRequest.deviceName,
+        deviceName: deviceName,
       ),
     );
 
@@ -44,5 +48,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     await _logoutUseCase.call();
+    emit(const AuthState.successLogout());
   }
 }

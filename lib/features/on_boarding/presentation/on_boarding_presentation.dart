@@ -1,0 +1,1 @@
+export 'screen/on_boarding_screen.dart';

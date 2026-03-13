@@ -54,6 +54,42 @@ class ApiClient {
       return Left(Failure.fromDio(e, st));
     }
   }
+
+  Future<Result<Map<String, dynamic>>> put<T>(
+    String apiUrl, {
+    required Map<String, dynamic> data,
+  }) async {
+    try {
+      final response = await _dio.put(apiUrl, data: data);
+
+      final result = response.data;
+
+      if (result is Map<String, dynamic>) return Right(result);
+
+      if (result is String) return ApiHelper.decodeJsonObject(result);
+      return Left(Failure.serialization(cause: result));
+    } catch (e, st) {
+      return Left(Failure.fromDio(e, st));
+    }
+  }
+
+  Future<Result<Map<String, dynamic>>> delete<T>(
+    String apiUrl, {
+    Map<String, dynamic>? body,
+  }) async {
+    try {
+      final response = await _dio.delete(apiUrl, data: body);
+
+      final result = response.data;
+
+      if (result is Map<String, dynamic>) return Right(result);
+
+      if (result is String) return ApiHelper.decodeJsonObject(result);
+      return Left(Failure.serialization(cause: result));
+    } catch (e, st) {
+      return Left(Failure.fromDio(e, st));
+    }
+  }
 }
 
 mixin ApiHelper {

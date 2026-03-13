@@ -1,52 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:kelasqna/kelasqna.dart';
 
-class NeoKelasContainer extends StatefulWidget {
-  final Offset offset;
-  final Color containerColor;
-  final Color? shadowsColor;
-  final Color? borderColor;
-  final Widget child;
-  final EdgeInsetsGeometry? padding;
-  final EdgeInsetsGeometry? margin;
-  final BorderRadiusGeometry? borderRadius;
-
+class NeoKelasContainer extends StatelessWidget {
   const NeoKelasContainer({
     super.key,
-    required this.containerColor,
+    this.backgroundColor,
     required this.child,
-    this.offset = const Offset(4, 4),
+    this.offset,
     this.shadowsColor,
-    this.borderColor = Colors.black,
+    this.borderColor,
     this.padding,
     this.margin,
-    this.borderRadius = const BorderRadiusGeometry.all(Radius.circular(8)),
+    this.borderRadius,
+    this.width,
+    this.height,
+    this.borderWidth,
+    this.shape,
   });
 
-  @override
-  State<NeoKelasContainer> createState() => _NeoKelasContainerState();
-}
+  /// Default [Offset(3, 3)].
+  final Offset? offset;
 
-class _NeoKelasContainerState extends State<NeoKelasContainer> {
+  /// Default [context.colors.surface].
+  final Color? backgroundColor;
+
+  /// Default [context.colors.shadow].
+  final Color? shadowsColor;
+
+  /// Default [context.colors.shadow].
+  final Color? borderColor;
+
+  /// Default 3.
+  final double? borderWidth;
+  final Widget child;
+
+  /// Default [8.all].
+  final EdgeInsetsGeometry? padding;
+
+  /// No default.
+  final EdgeInsetsGeometry? margin;
+
+  /// Default [8.all]
+  final BorderRadiusGeometry? borderRadius;
+
+  /// No default.
+  final double? width;
+
+  /// No default.
+  final double? height;
+
+  /// Default [BoxShape.rectangle]
+  final BoxShape? shape;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: widget.margin,
-      padding: widget.padding,
+      width: width,
+      height: height,
+      margin: margin,
+      padding: padding ?? 8.all,
       decoration: BoxDecoration(
-        borderRadius: widget.borderRadius,
-        border: Border.all(color: widget.borderColor ?? Colors.black, width: 3),
-        color: widget.containerColor,
+        borderRadius: (shape == BoxShape.circle) ? borderRadius : 8.circular,
+        border: Border.all(
+          color: borderColor ?? context.colors.shadow,
+          width: borderWidth ?? 3,
+        ),
+        color: backgroundColor ?? context.colors.surface,
         boxShadow: [
           BoxShadow(
-            color: widget.shadowsColor ?? Theme.of(context).colorScheme.shadow,
+            color: shadowsColor ?? context.colors.shadow,
             blurRadius: 0,
-            offset: widget.offset,
+            offset: offset ?? const Offset(3, 3),
             blurStyle: BlurStyle.solid,
           ),
         ],
+        shape: shape ?? BoxShape.rectangle,
       ),
       clipBehavior: Clip.antiAlias,
-      child: Center(child: widget.child),
+      child: child,
     );
   }
 }

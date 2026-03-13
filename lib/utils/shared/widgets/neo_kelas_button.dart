@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:kelasqna/kelasqna.dart';
 
 class NeoKelasButton extends StatefulWidget {
-  final GestureTapCallback? onPressed;
-  final Color buttonColor;
-  final Widget child;
-  final EdgeInsetsGeometry? padding;
-
   const NeoKelasButton({
     super.key,
     this.onPressed,
-    required this.buttonColor,
+    this.backgroundColor,
     required this.child,
     this.padding,
+    this.margin,
+    this.shape,
+    this.height,
+    this.width,
   });
+
+  final GestureTapCallback? onPressed;
+  final Color? backgroundColor;
+  final Widget child;
+  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
+  final BoxShape? shape;
+  final double? width;
+  final double? height;
 
   @override
   State<NeoKelasButton> createState() => _NeoKelasButtonState();
@@ -27,11 +36,10 @@ class _NeoKelasButtonState extends State<NeoKelasButton>
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 100))
-          ..addListener(() {
-            setState(() {});
-          });
+    _controller = AnimationController(vsync: this, duration: 100.milliseconds)
+      ..addListener(() {
+        setState(() {});
+      });
     _animation = Tween<Offset>(
       begin: const Offset(0, 0),
       end: Offset(4, 4),
@@ -46,7 +54,7 @@ class _NeoKelasButtonState extends State<NeoKelasButton>
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: widget.onPressed == null
           ? null
           : () {
@@ -61,8 +69,12 @@ class _NeoKelasButtonState extends State<NeoKelasButton>
           return Transform.translate(offset: _animation.value, child: child);
         },
         child: NeoKelasContainer(
-          padding: widget.padding,
-          containerColor: widget.buttonColor,
+          width: widget.width,
+          height: widget.height,
+          margin: widget.margin,
+          padding: widget.padding ?? 16.vertical,
+          shape: widget.shape,
+          backgroundColor: widget.backgroundColor,
           child: Center(child: widget.child),
         ),
       ),

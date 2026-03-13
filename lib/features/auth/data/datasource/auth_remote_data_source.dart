@@ -22,7 +22,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       final response = await _apiClient.post(loginUrl, data: body);
 
-      return response.fold(
+      return response.match(
         (failure) async => Left(failure),
         (jsonMap) async => ApiHelper.parseResponse(
           jsonMap,
@@ -39,49 +39,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       await _apiClient.post(logoutUrl, data: {});
 
-      await secureStorage.deleteAll();
-
       return unit;
     } catch (e) {
       return unit;
     }
   }
-
-  // @override
-  // Future<Result<RegisterResponse>> register(
-  //   RegisterRequest registerRequest,
-  // ) async {
-  //   final body = registerRequest.toJson();
-  //
-  //   try {
-  //     final response = await _apiClient.post(registerUrl, data: body);
-  //
-  //     return response.fold(
-  //       (failure) async => Left(failure),
-  //       (jsonMap) async => ApiHelper.parseResponse(
-  //         jsonMap,
-  //         (json) => RegisterResponse.fromJson(json),
-  //       ),
-  //     );
-  //   } catch (e, st) {
-  //     return Left(Failure.fromDio(e, st));
-  //   }
-  // }
-
-  // @override
-  // Future<Result<UserResponse>> fetchAndCacheMe() async {
-  //   try {
-  //     final response = await _apiClient.get(meUrl);
-  //
-  //     return response.fold(
-  //       (failure) async => Left(failure),
-  //       (jsonMap) async => ApiHelper.parseResponse(
-  //         jsonMap,
-  //         (json) => UserResponse.fromJson(json),
-  //       ),
-  //     );
-  //   } catch (e, st) {
-  //     return Left(Failure.fromDio(e, st));
-  //   }
-  // }
 }
