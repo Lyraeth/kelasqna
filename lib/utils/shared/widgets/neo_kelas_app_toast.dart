@@ -98,13 +98,6 @@ class _ToastWidgetState extends State<_ToastWidget>
     super.dispose();
   }
 
-  Color get _backgroundColor => switch (widget.type) {
-    ToastType.error => context.colors.errorContainer,
-    ToastType.success => Colors.greenAccent,
-    ToastType.warning => Colors.yellowAccent,
-    ToastType.info => context.colors.secondaryContainer,
-  };
-
   IconData get _icon => switch (widget.type) {
     ToastType.error => LucideIcons.ban,
     ToastType.success => LucideIcons.circleCheck,
@@ -112,18 +105,25 @@ class _ToastWidgetState extends State<_ToastWidget>
     ToastType.info => LucideIcons.info,
   };
 
+  Color get _backgroundColor => switch (widget.type) {
+    ToastType.error => context.colors.errorContainer,
+    ToastType.success => context.colors.tertiaryContainer,
+    ToastType.warning => context.colors.secondaryContainer,
+    ToastType.info => context.colors.primaryContainer,
+  };
+
   Color get _textColor => switch (widget.type) {
     ToastType.error => context.colors.onErrorContainer,
-    ToastType.success => context.colors.onSurface,
-    ToastType.warning => context.colors.onSurface,
-    ToastType.info => context.colors.onSecondaryContainer,
+    ToastType.success => context.colors.onTertiaryContainer,
+    ToastType.warning => context.colors.onSecondaryContainer,
+    ToastType.info => context.colors.onPrimaryContainer,
   };
 
   Color get _iconColor => switch (widget.type) {
     ToastType.error => context.colors.onErrorContainer,
-    ToastType.success => context.colors.onSurface,
-    ToastType.warning => context.colors.onSurface,
-    ToastType.info => context.colors.onSecondaryContainer,
+    ToastType.success => context.colors.onTertiaryContainer,
+    ToastType.warning => context.colors.onSecondaryContainer,
+    ToastType.info => context.colors.onPrimaryContainer,
   };
 
   @override

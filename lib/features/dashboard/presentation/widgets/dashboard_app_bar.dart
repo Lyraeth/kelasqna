@@ -54,6 +54,7 @@ class DashboardAppBar extends StatelessWidget {
                   context,
                   message: context.l10n.featureNotYetAvailable,
                   type: ToastType.info,
+                  forShowOnMenuScreen: true,
                 );
               },
               icon: Icon(
