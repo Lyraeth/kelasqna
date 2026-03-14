@@ -64,7 +64,8 @@ class EditCommentScreenState extends State<EditCommentScreen> {
             minLines: 4,
             textAlignVertical: TextAlignVertical.top,
           ),
-          16.h,
+
+          const Spacer(),
 
           BlocBuilder<EditQuestionBloc, EditQuestionState>(
             builder: (context, state) {

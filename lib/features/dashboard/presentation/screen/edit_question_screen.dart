@@ -72,7 +72,7 @@ class EditQuestionScreenState extends State<EditQuestionScreen> {
             textAlignVertical: TextAlignVertical.top,
           ),
 
-          16.h,
+          const Spacer(),
 
           BlocBuilder<EditQuestionBloc, EditQuestionState>(
             builder: (context, state) {
