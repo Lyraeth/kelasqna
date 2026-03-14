@@ -17,8 +17,8 @@ class QuestionsCreateTextField extends StatelessWidget {
       ),
       child: AbsorbPointer(
         child: NeoKelasTextFormField(
-          margin: forEmptyData ? 16.horizontal : null,
           textFieldBackgroundColor: context.colors.surface,
+          margin: forEmptyData ? 16.horizontal : null,
           hintText: context.l10n.writeQuestions,
           readOnly: true,
         ),

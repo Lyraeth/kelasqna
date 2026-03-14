@@ -95,9 +95,7 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                         controller: widget.controller,
                         obscureText: widget.obscureText ?? false,
                         style: context.text.bodyMedium?.copyWith(
-                          color:
-                              widget.foregroundTextColor ??
-                              context.colors.onSurface,
+                          color: context.colors.onSurface,
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -109,7 +107,7 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                           errorStyle: context.text.labelMedium?.copyWith(
                             color: context.colors.error,
                           ),
-                          hint: Text(widget.hintText),
+                          hintText: widget.hintText,
                           hintStyle: context.text.labelMedium?.copyWith(
                             color:
                                 widget.foregroundTextColor ??
@@ -130,8 +128,7 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                   maxLines: widget.maxLines ?? 1,
                   minLines: widget.minLines,
                   style: context.text.bodyMedium?.copyWith(
-                    color:
-                        widget.foregroundTextColor ?? context.colors.onSurface,
+                    color: context.colors.onSurface,
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -143,7 +140,7 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                     errorStyle: context.text.labelMedium?.copyWith(
                       color: context.colors.error,
                     ),
-                    hint: Text(widget.hintText),
+                    hintText: widget.hintText,
                     hintStyle: context.text.labelMedium?.copyWith(
                       color:
                           widget.foregroundTextColor ??
