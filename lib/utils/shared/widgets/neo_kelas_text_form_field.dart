@@ -27,9 +27,12 @@ class NeoKelasTextFormField extends StatefulWidget {
   final TextAlignVertical? textAlignVertical;
   final bool? readOnly;
   final Color? foregroundTextColor;
+  final EdgeInsetsGeometry? margin;
 
   const NeoKelasTextFormField({
     super.key,
+    required this.hintText,
+    this.margin,
     this.controller,
     this.textFieldName,
     this.validatorString,
@@ -43,7 +46,6 @@ class NeoKelasTextFormField extends StatefulWidget {
     this.minLines,
     this.foregroundTextColor,
     this.textAlignVertical,
-    required this.hintText,
     this.readOnly,
   });
 
@@ -78,6 +80,7 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
         NeoKelasContainer(
           height: widget.height,
           padding: 4.onlyLeft,
+          margin: widget.margin,
           backgroundColor:
               widget.textFieldBackgroundColor ??
               context.colors.surfaceContainer,
@@ -92,9 +95,7 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                         controller: widget.controller,
                         obscureText: widget.obscureText ?? false,
                         style: context.text.bodyMedium?.copyWith(
-                          color:
-                              widget.foregroundTextColor ??
-                              context.colors.onSurface,
+                          color: context.colors.onSurface,
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -106,7 +107,7 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                           errorStyle: context.text.labelMedium?.copyWith(
                             color: context.colors.error,
                           ),
-                          hint: Text(widget.hintText),
+                          hintText: widget.hintText,
                           hintStyle: context.text.labelMedium?.copyWith(
                             color:
                                 widget.foregroundTextColor ??
@@ -127,8 +128,7 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                   maxLines: widget.maxLines ?? 1,
                   minLines: widget.minLines,
                   style: context.text.bodyMedium?.copyWith(
-                    color:
-                        widget.foregroundTextColor ?? context.colors.onSurface,
+                    color: context.colors.onSurface,
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -140,7 +140,7 @@ class _NeoKelasTextFormFieldState extends State<NeoKelasTextFormField> {
                     errorStyle: context.text.labelMedium?.copyWith(
                       color: context.colors.error,
                     ),
-                    hint: Text(widget.hintText),
+                    hintText: widget.hintText,
                     hintStyle: context.text.labelMedium?.copyWith(
                       color:
                           widget.foregroundTextColor ??

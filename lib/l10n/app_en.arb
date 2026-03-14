@@ -102,5 +102,6 @@
   "endsOn": "Ends on",
   "deleteSession": "Delete session",
   "deleteSessionDesc": "Are you sure you want to delete the session on this device? You will be prompted to log in again on the selected device.",
-  "deleteSessionSuccess": "Session has successfully deleted!"
+  "deleteSessionSuccess": "Session has successfully deleted!",
+  "didPopDesc": "Press back again to exit"
 }

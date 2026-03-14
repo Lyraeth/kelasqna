@@ -151,9 +151,12 @@ class _QnaDetailScreenState extends State<QnaDetailScreen> {
                               },
                             );
                           },
-                          emptyComment: () => NeoKelasEmptyScreen(
-                            icon: LucideIcons.messageCircle,
-                            message: context.l10n.emptyComments,
+                          emptyComment: () => SizedBox(
+                            height: context.screenHeight * (0.5),
+                            child: NeoKelasEmptyScreen(
+                              icon: LucideIcons.messageCircle,
+                              message: context.l10n.emptyComments,
+                            ),
                           ),
                           loading: () => CommentListShimmer(),
                           orElse: () => const SizedBox.shrink(),

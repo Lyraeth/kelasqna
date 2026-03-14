@@ -13,13 +13,33 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _DashboardScreenState extends State<DashboardScreen>
+    with AutoRouteAwareStateMixin<DashboardScreen> {
   final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => _fetchQuestions());
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    _fetchQuestions();
+  }
 
   @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
+  }
+
+  void _fetchQuestions() {
+    context.read<QuestionsBloc>().add(
+      QuestionsEvent.started(forceRefresh: true),
+    );
   }
 
   void _scrollToTop() {
@@ -54,6 +74,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               },
               child: CustomScrollView(
                 controller: _scrollController,
+                physics: const AlwaysScrollableScrollPhysics(),
                 slivers: [
                   // App bar
                   DashboardAppBar(),
@@ -62,9 +83,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   state.maybeWhen(
                     loading: (_) => DashboardShimmer(),
                     emptyData: () => SliverFillRemaining(
-                      child: NeoKelasEmptyScreen(
-                        icon: LucideIcons.messageSquare,
-                        message: context.l10n.emptyQuestions,
+                      child: Column(
+                        children: [
+                          QuestionsCreateTextField(forEmptyData: true),
+                          Expanded(
+                            child: NeoKelasEmptyScreen(
+                              icon: LucideIcons.messageSquare,
+                              message: context.l10n.emptyQuestions,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     hasData: (listQuestions, _, _) => SliverPadding(
@@ -76,24 +104,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           if (index == 0) return DashboardFilterSortButton();
 
                           if (index == 1) {
-                            return GestureDetector(
-                              onTap: () => showCupertinoSheet(
-                                context: context,
-                                builder: (context) => Material(
-                                  child: SafeArea(
-                                    child: CreateQuestionScreen(),
-                                  ),
-                                ),
-                              ),
-                              child: AbsorbPointer(
-                                child: NeoKelasTextFormField(
-                                  textFieldBackgroundColor:
-                                      context.colors.surface,
-                                  hintText: context.l10n.writeQuestions,
-                                  readOnly: true,
-                                ),
-                              ),
-                            );
+                            return QuestionsCreateTextField();
                           }
 
                           if (index == listQuestions.length + 2) {

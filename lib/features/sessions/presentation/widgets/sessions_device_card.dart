@@ -31,6 +31,7 @@ class SessionsDeviceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NeoKelasContainer(
+      backgroundColor: context.colors.surface,
       padding: 16.all,
       child: Row(
         children: [

@@ -12,6 +12,7 @@ class NeoKelasAppToast {
     required String message,
     ToastType type = ToastType.error,
     Duration duration = const Duration(seconds: 3),
+    bool forShowOnMenuScreen = false,
   }) {
     _currentEntry?.remove();
 
@@ -27,6 +28,7 @@ class NeoKelasAppToast {
           _currentEntry = null;
         },
         duration: duration,
+        forShowOnMenuScreen: forShowOnMenuScreen,
       ),
     );
 
@@ -40,12 +42,14 @@ class _ToastWidget extends StatefulWidget {
   final ToastType type;
   final VoidCallback onDismiss;
   final Duration duration;
+  final bool forShowOnMenuScreen;
 
   const _ToastWidget({
     required this.message,
     required this.type,
     required this.onDismiss,
     required this.duration,
+    this.forShowOnMenuScreen = false,
   });
 
   @override
@@ -94,13 +98,6 @@ class _ToastWidgetState extends State<_ToastWidget>
     super.dispose();
   }
 
-  Color get _backgroundColor => switch (widget.type) {
-    ToastType.error => context.colors.errorContainer,
-    ToastType.success => Colors.greenAccent,
-    ToastType.warning => Colors.yellowAccent,
-    ToastType.info => context.colors.secondaryContainer,
-  };
-
   IconData get _icon => switch (widget.type) {
     ToastType.error => LucideIcons.ban,
     ToastType.success => LucideIcons.circleCheck,
@@ -108,24 +105,33 @@ class _ToastWidgetState extends State<_ToastWidget>
     ToastType.info => LucideIcons.info,
   };
 
+  Color get _backgroundColor => switch (widget.type) {
+    ToastType.error => context.colors.errorContainer,
+    ToastType.success => context.colors.tertiaryContainer,
+    ToastType.warning => context.colors.secondaryContainer,
+    ToastType.info => context.colors.primaryContainer,
+  };
+
   Color get _textColor => switch (widget.type) {
     ToastType.error => context.colors.onErrorContainer,
-    ToastType.success => context.colors.onSurface,
-    ToastType.warning => context.colors.onSurface,
-    ToastType.info => context.colors.onSecondaryContainer,
+    ToastType.success => context.colors.onTertiaryContainer,
+    ToastType.warning => context.colors.onSecondaryContainer,
+    ToastType.info => context.colors.onPrimaryContainer,
   };
 
   Color get _iconColor => switch (widget.type) {
     ToastType.error => context.colors.onErrorContainer,
-    ToastType.success => context.colors.onSurface,
-    ToastType.warning => context.colors.onSurface,
-    ToastType.info => context.colors.onSecondaryContainer,
+    ToastType.success => context.colors.onTertiaryContainer,
+    ToastType.warning => context.colors.onSecondaryContainer,
+    ToastType.info => context.colors.onPrimaryContainer,
   };
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: context.padding.bottom + 24,
+      bottom: widget.forShowOnMenuScreen
+          ? context.padding.bottom + 104
+          : context.padding.bottom + 24,
       left: 16,
       right: 16,
       child: SlideTransition(

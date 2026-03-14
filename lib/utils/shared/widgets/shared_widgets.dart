@@ -10,6 +10,7 @@ export 'neo_kelas_empty_screen.dart';
 export 'neo_kelas_engagement_button.dart';
 export 'neo_kelas_error_screen.dart';
 export 'neo_kelas_filter_button.dart';
+export 'neo_kelas_pop_scope_screen.dart';
 export 'neo_kelas_refresh_wrapper.dart';
 export 'neo_kelas_sort_button.dart';
 export 'neo_kelas_text_form_field.dart';

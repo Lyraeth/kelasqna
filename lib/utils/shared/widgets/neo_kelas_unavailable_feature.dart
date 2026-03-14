@@ -17,6 +17,7 @@ class NeoKelasUnavailableFeature extends StatelessWidget {
           context,
           message: context.l10n.featureNotYetAvailable,
           type: ToastType.info,
+          forShowOnMenuScreen: true,
         );
       },
       child: unavailableWidget,

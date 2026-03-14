@@ -58,6 +58,7 @@ class _SessionsDeviceScreenState extends State<SessionsDeviceScreen> {
           title: Text(
             context.l10n.activeSessions,
             style: context.text.titleMedium?.copyWith(
+              color: context.colors.onSurface,
               fontWeight: FontWeight.bold,
             ),
           ),
