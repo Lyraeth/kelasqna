@@ -13,7 +13,8 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _DashboardScreenState extends State<DashboardScreen>
+    with AutoRouteAwareStateMixin<DashboardScreen> {
   final _scrollController = ScrollController();
 
   @override
@@ -21,6 +22,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => _fetchQuestions());
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    _fetchQuestions();
   }
 
   @override

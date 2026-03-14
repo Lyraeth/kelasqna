@@ -50,12 +50,14 @@ class _NeoKelasPopScopeScreenState extends State<NeoKelasPopScopeScreen> {
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) return;
 
-        if (widget.autoTabsRouter.activeIndex != 0) {
+        if (widget.autoTabsRouter.activeIndex !=
+            widget.autoTabsRouter.homeIndex) {
           widget.autoTabsRouter.setActiveIndex(0);
           return;
         }
 
-        if (widget.autoTabsRouter.activeIndex == 0) {
+        if (widget.autoTabsRouter.activeIndex ==
+            widget.autoTabsRouter.homeIndex) {
           _onWillPop();
         }
       },

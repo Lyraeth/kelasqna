@@ -13,8 +13,18 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen>
-    with SingleTickerProviderStateMixin {
+    with
+        SingleTickerProviderStateMixin,
+        AutoRouteAwareStateMixin<ProfileScreen> {
   late TabController _tabController;
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    context.read<ProfileBookmarksBloc>().add(
+      const ProfileBookmarksEvent.started(forceRefresh: true),
+    );
+  }
 
   @override
   void initState() {
@@ -31,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     switch (_tabController.index) {
       case 0:
         context.read<ProfileBookmarksBloc>().add(
-          const ProfileBookmarksEvent.started(),
+          const ProfileBookmarksEvent.started(forceRefresh: true),
         );
       case 1:
         context.read<ProfileQuestionsBloc>().add(
@@ -77,6 +87,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             Padding(
               padding: 16.horizontal,
               child: NeoKelasContainer(
+                backgroundColor: context.colors.surface,
                 padding: 8.all,
                 child: TabBar(
                   controller: _tabController,

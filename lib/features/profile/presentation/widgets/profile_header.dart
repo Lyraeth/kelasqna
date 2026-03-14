@@ -17,6 +17,7 @@ class ProfileHeader extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
       child: NeoKelasContainer(
+        backgroundColor: context.colors.surface,
         padding: 16.all,
         child: Row(
           children: [
