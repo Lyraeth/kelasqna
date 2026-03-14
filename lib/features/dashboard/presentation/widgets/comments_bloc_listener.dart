@@ -34,6 +34,7 @@ class CommentsBlocListener extends StatelessWidget {
                   context,
                   message: context.l10n.createCommentSuccess,
                   type: ToastType.success,
+                  forShowOnMenuScreen: true,
                 );
               },
               failure: (failure) {
@@ -41,6 +42,7 @@ class CommentsBlocListener extends StatelessWidget {
                   context,
                   message: failure.message(context),
                   type: ToastType.error,
+                  forShowOnMenuScreen: true,
                 );
               },
             );
@@ -53,7 +55,8 @@ class CommentsBlocListener extends StatelessWidget {
                 NeoKelasAppToast.show(
                   context,
                   message: failure.message(context),
-                  type: .error,
+                  type: ToastType.error,
+                  forShowOnMenuScreen: true,
                 );
               },
               success: (commentsEntity) {
@@ -67,6 +70,7 @@ class CommentsBlocListener extends StatelessWidget {
                   context,
                   message: context.l10n.editCommentSuccess,
                   type: ToastType.success,
+                  forShowOnMenuScreen: true,
                 );
               },
             );
@@ -80,6 +84,7 @@ class CommentsBlocListener extends StatelessWidget {
                   context,
                   message: failure.message(context),
                   type: ToastType.error,
+                  forShowOnMenuScreen: true,
                 );
               },
               success: () {
@@ -87,6 +92,7 @@ class CommentsBlocListener extends StatelessWidget {
                   context,
                   message: context.l10n.deleteCommentSuccess,
                   type: ToastType.success,
+                  forShowOnMenuScreen: true,
                 );
               },
             );

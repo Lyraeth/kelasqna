@@ -32,8 +32,8 @@ class _NeoKelasPopScopeScreenState extends State<NeoKelasPopScopeScreen> {
     NeoKelasAppToast.show(
       context,
       message: widget.onPopText ?? context.l10n.didPopDesc,
-      forShowOnMenuScreen: true,
       type: ToastType.warning,
+      forShowOnMenuScreen: true,
     );
 
     Future.delayed(2.seconds, () {
