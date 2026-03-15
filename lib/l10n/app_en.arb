@@ -103,5 +103,20 @@
   "deleteSession": "Delete session",
   "deleteSessionDesc": "Are you sure you want to delete the session on this device? You will be prompted to log in again on the selected device.",
   "deleteSessionSuccess": "Session has successfully deleted!",
-  "didPopDesc": "Press back again to exit"
+  "didPopDesc": "Press back again to exit",
+  "settings": "Settings",
+  "language": "Language",
+  "languageSetting": "Language Setting",
+  "id": "Indonesia",
+  "en": "English",
+  "settingsChangeSuccess": "Settings has successfully change",
+  "theme": "Theme",
+  "themeSetting": "Theme Setting",
+  "darkMode": "Dark mode",
+  "lightMode": "Light mode",
+  "system": "System",
+  "appearance": "Appearance",
+  "changeName": "Change name",
+  "changePassword": "Change password",
+  "changeEmail": "Change email"
 }

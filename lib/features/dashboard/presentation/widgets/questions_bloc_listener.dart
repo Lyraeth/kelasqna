@@ -20,6 +20,7 @@ class QuestionsBlocListener extends StatelessWidget {
                   context,
                   message: failure.message(context),
                   type: ToastType.error,
+                  forShowOnMenuScreen: true,
                 );
               },
             );
@@ -39,6 +40,7 @@ class QuestionsBlocListener extends StatelessWidget {
                   context,
                   message: context.l10n.createQuestionSuccess,
                   type: ToastType.success,
+                  forShowOnMenuScreen: true,
                 );
               },
               failure: (failure) {
@@ -46,6 +48,7 @@ class QuestionsBlocListener extends StatelessWidget {
                   context,
                   message: failure.message(context),
                   type: ToastType.error,
+                  forShowOnMenuScreen: true,
                 );
               },
             );
@@ -65,6 +68,7 @@ class QuestionsBlocListener extends StatelessWidget {
                   context,
                   message: context.l10n.editQuestionSuccess,
                   type: ToastType.success,
+                  forShowOnMenuScreen: true,
                 );
               },
               failure: (failure) {
@@ -72,6 +76,7 @@ class QuestionsBlocListener extends StatelessWidget {
                   context,
                   message: failure.message(context),
                   type: ToastType.error,
+                  forShowOnMenuScreen: true,
                 );
               },
             );
@@ -89,6 +94,7 @@ class QuestionsBlocListener extends StatelessWidget {
                   context,
                   message: context.l10n.deleteQuestionSuccess,
                   type: ToastType.success,
+                  forShowOnMenuScreen: true,
                 );
               },
               failure: (failure) {
@@ -96,6 +102,7 @@ class QuestionsBlocListener extends StatelessWidget {
                   context,
                   message: failure.message(context),
                   type: ToastType.error,
+                  forShowOnMenuScreen: true,
                 );
               },
             );

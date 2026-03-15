@@ -47,4 +47,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
     emit(state.copyWith(themeMode: event.themeMode));
   }
+
+  String get languageCode => state.locale.languageCode;
+
+  ThemeMode get currentThemeMode => state.themeMode;
 }

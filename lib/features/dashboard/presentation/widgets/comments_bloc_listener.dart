@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kelasqna/kelasqna.dart';
@@ -34,6 +33,7 @@ class CommentsBlocListener extends StatelessWidget {
                   context,
                   message: context.l10n.createCommentSuccess,
                   type: ToastType.success,
+                  forShowOnMenuScreen: true,
                 );
               },
               failure: (failure) {
@@ -41,6 +41,7 @@ class CommentsBlocListener extends StatelessWidget {
                   context,
                   message: failure.message(context),
                   type: ToastType.error,
+                  forShowOnMenuScreen: true,
                 );
               },
             );
@@ -53,11 +54,12 @@ class CommentsBlocListener extends StatelessWidget {
                 NeoKelasAppToast.show(
                   context,
                   message: failure.message(context),
-                  type: .error,
+                  type: ToastType.error,
+                  forShowOnMenuScreen: true,
                 );
               },
               success: (commentsEntity) {
-                context.router.pop();
+                Navigator.of(context).pop();
 
                 context.read<QuestionBloc>().add(
                   QuestionEvent.fetchQuestion(questionId, forceRefresh: true),
@@ -67,6 +69,7 @@ class CommentsBlocListener extends StatelessWidget {
                   context,
                   message: context.l10n.editCommentSuccess,
                   type: ToastType.success,
+                  forShowOnMenuScreen: true,
                 );
               },
             );
@@ -80,6 +83,7 @@ class CommentsBlocListener extends StatelessWidget {
                   context,
                   message: failure.message(context),
                   type: ToastType.error,
+                  forShowOnMenuScreen: true,
                 );
               },
               success: () {
@@ -87,6 +91,7 @@ class CommentsBlocListener extends StatelessWidget {
                   context,
                   message: context.l10n.deleteCommentSuccess,
                   type: ToastType.success,
+                  forShowOnMenuScreen: true,
                 );
               },
             );

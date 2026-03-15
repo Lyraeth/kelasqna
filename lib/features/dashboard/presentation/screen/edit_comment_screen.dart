@@ -40,61 +40,64 @@ class EditCommentScreenState extends State<EditCommentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: 16.all,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            context.l10n.editComment,
-            style: context.text.titleLarge?.copyWith(
-              color: context.colors.onSurface,
-              fontWeight: FontWeight.bold,
+    return Scaffold(
+      body: Padding(
+        padding: 16.all,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              context.l10n.editComment,
+              style: context.text.titleLarge?.copyWith(
+                color: context.colors.onSurface,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
 
-          8.h,
+            8.h,
 
-          NeoKelasTextFormField(
-            controller: _contentController,
-            textFieldName: context.l10n.comments,
-            hintText: " ",
-            height: 104,
-            maxLines: 8,
-            minLines: 4,
-            textAlignVertical: TextAlignVertical.top,
-          ),
-          16.h,
+            NeoKelasTextFormField(
+              controller: _contentController,
+              textFieldName: context.l10n.comments,
+              hintText: " ",
+              height: 104,
+              maxLines: 8,
+              minLines: 4,
+              textAlignVertical: TextAlignVertical.top,
+            ),
 
-          BlocBuilder<EditQuestionBloc, EditQuestionState>(
-            builder: (context, state) {
-              final isLoading = state.maybeWhen(
-                loading: () => true,
-                orElse: () => false,
-              );
+            const Spacer(),
 
-              return NeoKelasButton(
-                backgroundColor: context.colors.primaryContainer,
-                onPressed: () {
-                  if (isLoading) return;
+            BlocBuilder<EditQuestionBloc, EditQuestionState>(
+              builder: (context, state) {
+                final isLoading = state.maybeWhen(
+                  loading: () => true,
+                  orElse: () => false,
+                );
 
-                  FocusScope.of(context).unfocus();
+                return NeoKelasButton(
+                  backgroundColor: context.colors.primaryContainer,
+                  onPressed: () {
+                    if (isLoading) return;
 
-                  _editQuestion();
-                },
-                child: isLoading
-                    ? CircularProgressIndicator()
-                    : Text(
-                        context.l10n.editComment,
-                        style: context.text.bodyMedium?.copyWith(
-                          color: context.colors.onPrimaryContainer,
-                          fontWeight: FontWeight.bold,
+                    FocusScope.of(context).unfocus();
+
+                    _editQuestion();
+                  },
+                  child: isLoading
+                      ? CircularProgressIndicator()
+                      : Text(
+                          context.l10n.editComment,
+                          style: context.text.bodyMedium?.copyWith(
+                            color: context.colors.onPrimaryContainer,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-              );
-            },
-          ),
-        ].separatedBy(16.h),
+                );
+              },
+            ),
+          ].separatedBy(16.h),
+        ),
       ),
     );
   }

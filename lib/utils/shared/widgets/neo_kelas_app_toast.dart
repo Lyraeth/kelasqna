@@ -7,6 +7,11 @@ enum ToastType { error, success, warning, info }
 class NeoKelasAppToast {
   static OverlayEntry? _currentEntry;
 
+  /// Displays a custom toast on the screen.
+  ///
+  /// [forShowOnMenuScreen] should be set to `true` if the toast is displayed on
+  /// a screen that has a Bottom Navigation Bar. This provides additional
+  /// bottom padding so the toast is not obscured by the navigation bar.
   static void show(
     BuildContext context, {
     required String message,
@@ -42,6 +47,9 @@ class _ToastWidget extends StatefulWidget {
   final ToastType type;
   final VoidCallback onDismiss;
   final Duration duration;
+
+  /// Whether the toast is displayed on a screen with a Bottom Navigation Bar.
+  /// If `true`, additional bottom padding is applied to avoid overlap.
   final bool forShowOnMenuScreen;
 
   const _ToastWidget({

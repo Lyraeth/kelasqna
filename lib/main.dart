@@ -1,4 +1,4 @@
-import 'package:kelasqna/core/app/initialize_app.dart';
+import 'package:kelasqna/kelasqna.dart';
 
 void main() async {
   await initializeApp();

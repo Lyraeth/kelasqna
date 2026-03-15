@@ -120,6 +120,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                               onTap: () {
                                 showCupertinoSheet(
                                   context: context,
+                                  useNestedNavigation: true,
                                   builder: (context) => Material(
                                     child: SafeArea(
                                       child: QnaDetailScreen(

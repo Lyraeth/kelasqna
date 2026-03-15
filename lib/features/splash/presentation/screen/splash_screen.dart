@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ScaleEffect(delay: 200.milliseconds, duration: 1.seconds),
               ],
               child: Text(
-                "KelasQNA",
+                context.l10n.kelasqna,
                 style: context.text.headlineMedium?.copyWith(
                   color: context.colors.onSurface,
                   fontWeight: FontWeight.bold,

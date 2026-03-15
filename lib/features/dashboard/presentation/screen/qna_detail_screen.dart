@@ -1,8 +1,10 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kelasqna/kelasqna.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+@RoutePage()
 class QnaDetailScreen extends StatefulWidget {
   const QnaDetailScreen({super.key, required this.questionEntity});
 
@@ -90,7 +92,7 @@ class _QnaDetailScreenState extends State<QnaDetailScreen> {
 
                     // Comment Section Header
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
+                      padding: 16.all,
                       child: Row(
                         children: [
                           Icon(
@@ -105,6 +107,7 @@ class _QnaDetailScreenState extends State<QnaDetailScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                          Expanded(child: Divider(thickness: 0.5)),
                         ].separatedBy(8.w),
                       ),
                     ),
@@ -243,7 +246,7 @@ class _CommentInputBarState extends State<_CommentInputBar> {
       ),
       padding: EdgeInsets.fromLTRB(
         16,
-        12,
+        24,
         16,
         bottomPadding > 0 ? bottomPadding + 8 : safeBottom + 12,
       ),
@@ -254,7 +257,8 @@ class _CommentInputBarState extends State<_CommentInputBar> {
             backgroundColor: context.colors.onSurface,
             child: Icon(LucideIcons.user, color: context.colors.surface),
           ),
-          10.w,
+
+          8.w,
 
           // Text field
           Expanded(
@@ -295,6 +299,7 @@ class _CommentInputBarState extends State<_CommentInputBar> {
               ),
             ),
           ),
+
           8.w,
 
           // Send button

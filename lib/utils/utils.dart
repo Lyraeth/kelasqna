@@ -17,6 +17,7 @@ export 'shared/types.dart';
 export 'shared/widgets/shared_widgets.dart';
 
 class Utils {
+  /// Retrieves the device name based on the current platform.
   static Future<String> getDeviceName() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     String deviceName = "Unknown";
@@ -49,5 +50,50 @@ class Utils {
     }
 
     return deviceName;
+  }
+
+  /// Masks the [email] by obscuring the beginning of the username
+  /// and showing only the last two characters before the domain.
+  ///
+  /// Example: `user52@gmail.com` becomes `*********52@gmail.com`.
+  static String formatEmail(String email) {
+    if (!email.contains('@')) return email;
+
+    final emailParts = email.trim().split('@');
+    final username = emailParts[0];
+    final domain = emailParts[1];
+
+    if (username.length <= 2) {
+      return '*********$username@$domain';
+    }
+
+    final lastTwo = username.substring(username.length - 2);
+    return '*********$lastTwo@$domain';
+  }
+
+  /// Generates initials from a given [name].
+  ///
+  /// It takes the first character of the first three words and converts them to uppercase.
+  /// If the name is empty, it returns '?'.
+  ///
+  /// Example:
+  /// - `John Doe` -> `JD`
+  /// - `John Fitzgerald Kennedy` -> `JFK`
+  /// - `Flutter` -> `F`
+  static String formatInitialName(String name) {
+    final parts = name.trim().split(' ');
+    if (parts.isEmpty) return '?';
+    if (parts.length == 1) return parts[0][0].toUpperCase();
+
+    // Note: This logic assumes there are at least 3 parts for the third index.
+    // If name has only 2 parts, it might throw a RangeError.
+    // Let's refine it slightly to be safer.
+    String initials = '';
+    for (var i = 0; i < parts.length && i < 3; i++) {
+      if (parts[i].isNotEmpty) {
+        initials += parts[i][0];
+      }
+    }
+    return initials.toUpperCase();
   }
 }
