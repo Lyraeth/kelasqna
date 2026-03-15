@@ -131,7 +131,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     return Tab(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [Icon(icon, size: 14), 5.w, Text(label)],
+        children: [Icon(icon, size: 12), 4.w, Text(label)],
       ),
     );
   }

@@ -41,8 +41,12 @@ class SettingsButton extends StatelessWidget {
       ),
       subtitle: (subtitle != null) ? Text(subtitle!) : null,
       trailing: (trailingIcon != null)
-          ? Icon(size: 20, trailingIcon)
-          : Icon(size: 20, LucideIcons.chevronRight),
+          ? Icon(size: 20, trailingIcon, color: context.colors.onSurface)
+          : Icon(
+              size: 20,
+              LucideIcons.chevronRight,
+              color: context.colors.onSurface,
+            ),
     );
   }
 }

@@ -40,62 +40,64 @@ class EditCommentScreenState extends State<EditCommentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: 16.all,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            context.l10n.editComment,
-            style: context.text.titleLarge?.copyWith(
-              color: context.colors.onSurface,
-              fontWeight: FontWeight.bold,
+    return Scaffold(
+      body: Padding(
+        padding: 16.all,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              context.l10n.editComment,
+              style: context.text.titleLarge?.copyWith(
+                color: context.colors.onSurface,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
 
-          8.h,
+            8.h,
 
-          NeoKelasTextFormField(
-            controller: _contentController,
-            textFieldName: context.l10n.comments,
-            hintText: " ",
-            height: 104,
-            maxLines: 8,
-            minLines: 4,
-            textAlignVertical: TextAlignVertical.top,
-          ),
+            NeoKelasTextFormField(
+              controller: _contentController,
+              textFieldName: context.l10n.comments,
+              hintText: " ",
+              height: 104,
+              maxLines: 8,
+              minLines: 4,
+              textAlignVertical: TextAlignVertical.top,
+            ),
 
-          const Spacer(),
+            const Spacer(),
 
-          BlocBuilder<EditQuestionBloc, EditQuestionState>(
-            builder: (context, state) {
-              final isLoading = state.maybeWhen(
-                loading: () => true,
-                orElse: () => false,
-              );
+            BlocBuilder<EditQuestionBloc, EditQuestionState>(
+              builder: (context, state) {
+                final isLoading = state.maybeWhen(
+                  loading: () => true,
+                  orElse: () => false,
+                );
 
-              return NeoKelasButton(
-                backgroundColor: context.colors.primaryContainer,
-                onPressed: () {
-                  if (isLoading) return;
+                return NeoKelasButton(
+                  backgroundColor: context.colors.primaryContainer,
+                  onPressed: () {
+                    if (isLoading) return;
 
-                  FocusScope.of(context).unfocus();
+                    FocusScope.of(context).unfocus();
 
-                  _editQuestion();
-                },
-                child: isLoading
-                    ? CircularProgressIndicator()
-                    : Text(
-                        context.l10n.editComment,
-                        style: context.text.bodyMedium?.copyWith(
-                          color: context.colors.onPrimaryContainer,
-                          fontWeight: FontWeight.bold,
+                    _editQuestion();
+                  },
+                  child: isLoading
+                      ? CircularProgressIndicator()
+                      : Text(
+                          context.l10n.editComment,
+                          style: context.text.bodyMedium?.copyWith(
+                            color: context.colors.onPrimaryContainer,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-              );
-            },
-          ),
-        ].separatedBy(16.h),
+                );
+              },
+            ),
+          ].separatedBy(16.h),
+        ),
       ),
     );
   }

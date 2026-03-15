@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kelasqna/kelasqna.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
@@ -47,10 +46,10 @@ class CommentDismissible extends StatelessWidget {
           );
           return confirmed;
         } else {
-          showCupertinoSheet(
-            context: context,
-            builder: (context) => Material(
-              child: SafeArea(
+          Navigator.of(context).push(
+            CupertinoPageRoute(
+              builder: (_) => BlocProvider<EditCommentBloc>.value(
+                value: context.read<EditCommentBloc>(),
                 child: EditCommentScreen(
                   commentEntity: commentEntity,
                   questionEntity: questionEntity,

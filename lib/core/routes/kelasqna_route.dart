@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:kelasqna/kelasqna.dart';
 
 part 'kelasqna_route.gr.dart';
@@ -26,6 +27,8 @@ class KelasQNARouter extends RootStackRouter {
       children: [
         AutoRoute(page: DashboardRoute.page),
         AutoRoute(page: ProfileRoute.page),
+        AutoRoute(page: SettingsRoute.page),
+        AutoRoute(page: QnaDetailRoute.page),
       ],
     ),
   ];

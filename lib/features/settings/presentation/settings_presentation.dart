@@ -1,4 +1,6 @@
+export 'screen/settings_language_screen.dart';
 export 'screen/settings_screen.dart';
+export 'screen/settings_theme_screen.dart';
 export 'widgets/settings_app_bar.dart';
 export 'widgets/settings_appearance_settings.dart';
 export 'widgets/settings_button.dart';

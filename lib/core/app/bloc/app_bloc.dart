@@ -50,5 +50,5 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   String get languageCode => state.locale.languageCode;
 
-  String get themeMode => state.themeMode.name;
+  ThemeMode get currentThemeMode => state.themeMode;
 }
