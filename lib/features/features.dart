@@ -6,5 +6,6 @@ export 'on_boarding/on_boarding.dart';
 export 'profile/profile.dart';
 export 'questions/questions.dart';
 export 'sessions/sessions.dart';
+export 'settings/settings.dart';
 export 'splash/splash.dart';
 export 'user/user.dart';

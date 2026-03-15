@@ -73,13 +73,6 @@ class _Avatar extends StatelessWidget {
 
   const _Avatar({this.avatar, required this.name});
 
-  String get _initials {
-    final parts = name.trim().split(' ');
-    if (parts.isEmpty) return '?';
-    if (parts.length == 1) return parts[0][0].toUpperCase();
-    return '${parts[0][0]}${parts[1][0]}${parts[2][0]}'.toUpperCase();
-  }
-
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
@@ -90,9 +83,10 @@ class _Avatar extends StatelessWidget {
           ? CachedNetworkImage(
               imageUrl: avatar!,
               fit: BoxFit.cover,
-              errorWidget: (_, _, _) => _InitialsAvatar(initials: _initials),
+              errorWidget: (_, _, _) =>
+                  _InitialsAvatar(initials: Utils.formatInitialName(name)),
             )
-          : _InitialsAvatar(initials: _initials),
+          : _InitialsAvatar(initials: Utils.formatInitialName(name)),
     );
   }
 }

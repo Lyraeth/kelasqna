@@ -5,9 +5,12 @@ class NeoKelasUnavailableFeature extends StatelessWidget {
   const NeoKelasUnavailableFeature({
     super.key,
     required this.unavailableWidget,
+    this.forShowOnMenuScreen = true,
   });
 
   final Widget unavailableWidget;
+
+  final bool forShowOnMenuScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class NeoKelasUnavailableFeature extends StatelessWidget {
           context,
           message: context.l10n.featureNotYetAvailable,
           type: ToastType.info,
-          forShowOnMenuScreen: true,
+          forShowOnMenuScreen: forShowOnMenuScreen,
         );
       },
       child: unavailableWidget,
