@@ -32,6 +32,7 @@ class SettingsScreen extends StatelessWidget {
             children: [
               SettingsProfileSettings(),
               SettingsAppearanceSettings(),
+              SettingsSessionsSettings(),
             ].separatedBy(24.h),
           ),
         ),

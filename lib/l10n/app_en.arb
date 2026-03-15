@@ -94,6 +94,7 @@
   "whoIsThis": "Who's this?",
   "noRoleDetected": "No role detected",
   "featureNotYetAvailable": "This feature is not available yet, stay tuned!",
+  "sessions": "Sessions",
   "activeSessions": "Active session",
   "emptySessionDevice": "No active session",
   "thisDevice": "This device",

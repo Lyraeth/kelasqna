@@ -90,6 +90,7 @@
   "whoIsThis": "Siapa ini?",
   "noRoleDetected": "Role tidak diketahui",
   "featureNotYetAvailable": "Fitur belum tersedia, nantikan ya!",
+  "sessions": "Sessions",
   "activeSessions": "Session aktif",
   "emptySessionDevice": "Tidak ada session yang aktif",
   "thisDevice": "Perangkat ini",
