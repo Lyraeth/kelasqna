@@ -32,4 +32,8 @@ class SessionsDeviceBloc
       ),
     );
   }
+
+  int? get totalSession => state.whenOrNull(
+    success: (listSessionDevice) => listSessionDevice.length,
+  );
 }
