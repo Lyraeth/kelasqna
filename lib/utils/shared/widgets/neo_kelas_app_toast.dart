@@ -18,10 +18,13 @@ class NeoKelasAppToast {
     ToastType type = ToastType.error,
     Duration duration = const Duration(seconds: 3),
     bool forShowOnMenuScreen = false,
+    IconData? customIcon,
+    OverlayState? overlayState,
   }) {
     _currentEntry?.remove();
+    _currentEntry = null;
 
-    final overlay = Overlay.of(context);
+    final overlay = overlayState ?? Overlay.of(context);
     late OverlayEntry entry;
 
     entry = OverlayEntry(
@@ -34,6 +37,7 @@ class NeoKelasAppToast {
         },
         duration: duration,
         forShowOnMenuScreen: forShowOnMenuScreen,
+        customIcon: customIcon,
       ),
     );
 
@@ -47,6 +51,7 @@ class _ToastWidget extends StatefulWidget {
   final ToastType type;
   final VoidCallback onDismiss;
   final Duration duration;
+  final IconData? customIcon;
 
   /// Whether the toast is displayed on a screen with a Bottom Navigation Bar.
   /// If `true`, additional bottom padding is applied to avoid overlap.
@@ -58,6 +63,7 @@ class _ToastWidget extends StatefulWidget {
     required this.onDismiss,
     required this.duration,
     this.forShowOnMenuScreen = false,
+    this.customIcon,
   });
 
   @override
@@ -106,12 +112,14 @@ class _ToastWidgetState extends State<_ToastWidget>
     super.dispose();
   }
 
-  IconData get _icon => switch (widget.type) {
-    ToastType.error => LucideIcons.ban,
-    ToastType.success => LucideIcons.circleCheck,
-    ToastType.warning => LucideIcons.circleAlert,
-    ToastType.info => LucideIcons.info,
-  };
+  IconData get _icon =>
+      widget.customIcon ??
+      switch (widget.type) {
+        ToastType.error => LucideIcons.ban,
+        ToastType.success => LucideIcons.circleCheck,
+        ToastType.warning => LucideIcons.circleAlert,
+        ToastType.info => LucideIcons.info,
+      };
 
   Color get _backgroundColor => switch (widget.type) {
     ToastType.error => context.colors.errorContainer,

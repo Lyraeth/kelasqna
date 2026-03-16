@@ -115,5 +115,7 @@
   "appearance": "Tampilan",
   "changeName": "Ganti nama",
   "changePassword": "Ganti password",
-  "changeEmail": "Ganti email"
+  "changeEmail": "Ganti email",
+  "connectivityConnected": "Nah, internet udah balik kok",
+  "connectivityDisconnected": "Waduh, internetnya kabur dulu"
 }

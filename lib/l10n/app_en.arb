@@ -119,5 +119,7 @@
   "appearance": "Appearance",
   "changeName": "Change name",
   "changePassword": "Change password",
-  "changeEmail": "Change email"
+  "changeEmail": "Change email",
+  "connectivityConnected": "You're back online!",
+  "connectivityDisconnected": "Oops, you're offline right now"
 }

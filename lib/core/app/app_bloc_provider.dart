@@ -12,6 +12,7 @@ class AppBlocProvider extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AppBloc>.value(value: sI<AppBloc>()),
+        BlocProvider<ConnectivityBloc>.value(value: sI<ConnectivityBloc>()),
         BlocProvider<SessionsBloc>.value(value: sI<SessionsBloc>()),
         BlocProvider<AuthBloc>.value(value: sI<AuthBloc>()),
         BlocProvider<RegisterBloc>.value(value: sI<RegisterBloc>()),

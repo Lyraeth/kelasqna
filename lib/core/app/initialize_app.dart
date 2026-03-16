@@ -56,6 +56,7 @@ Future<void> initializeApp() async {
     tokenProvider: () => sI<TokenProvider>().getToken(),
   );
   await initApiClientDI();
+  await initConnectivityDI();
   await initUserDI();
   await initSessionsDI();
   await initAuthDI();
