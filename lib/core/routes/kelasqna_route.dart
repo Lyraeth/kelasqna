@@ -29,6 +29,7 @@ class KelasQNARouter extends RootStackRouter {
         AutoRoute(page: ProfileRoute.page),
         AutoRoute(page: SettingsRoute.page),
         AutoRoute(page: QnaDetailRoute.page),
+        AutoRoute(page: NotificationsRoute.page),
       ],
     ),
   ];

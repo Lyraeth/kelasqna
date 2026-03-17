@@ -66,6 +66,7 @@
   "questions": "Questions",
   "bookmarks": "Bookmarks",
   "emptyQuestions": "No questions yet",
+  "questionNotFound": "Question not found",
   "addQuestion": "Add question",
   "createQuestion": "Create question",
   "titleQuestion": "Question title",
@@ -121,5 +122,8 @@
   "changePassword": "Change password",
   "changeEmail": "Change email",
   "connectivityConnected": "You're back online!",
-  "connectivityDisconnected": "Oops, you're offline right now"
+  "connectivityDisconnected": "Oops, you're offline right now",
+  "notification": "Notification",
+  "emptyNotification": "No notification yet",
+  "markAllAsRead": "Mark all as read"
 }

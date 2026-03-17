@@ -62,6 +62,7 @@
   "questions": "Pertanyaan",
   "bookmarks": "Tersemat",
   "emptyQuestions": "Belum ada pertanyaan",
+  "questionNotFound": "Pertanyaan tidak ditemukan",
   "addQuestion": "Tambah pertanyaan",
   "createQuestion": "Buat pertanyaan",
   "titleQuestion": "Judul pertanyaan",
@@ -117,5 +118,8 @@
   "changePassword": "Ganti password",
   "changeEmail": "Ganti email",
   "connectivityConnected": "Nah, internet udah balik kok",
-  "connectivityDisconnected": "Waduh, internetnya kabur dulu"
+  "connectivityDisconnected": "Waduh, internetnya kabur dulu",
+  "notification": "Notifikasi",
+  "emptyNotification": "Belum ada notifikasi",
+  "markAllAsRead": "Baca semua notifikasi"
 }
