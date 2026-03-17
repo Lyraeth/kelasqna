@@ -1,8 +1,21 @@
 plugins {
     id("com.android.application")
+    // START: FlutterFire Configuration
+    id("com.google.gms.google-services")
+    // END: FlutterFire Configuration
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+}
+
+dependencies {
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:34.10.0"))
+
+
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation("com.google.firebase:firebase-analytics")
 }
 
 android {
@@ -30,34 +43,33 @@ android {
         versionName = "0.1.0"
     }
 
+    flavorDimensions += "default"
+
+    productFlavors {
+        create("staging") {
+            dimension = "default"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "KelasQNA Beta"
+            )
+            applicationIdSuffix = ".staging"
+        }
+        create("production") {
+            dimension = "default"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "KelasQNA"
+            )
+            applicationIdSuffix = ".production"
+        }
+    }
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
-        }
-
-        flavorDimensions += "default"
-
-        productFlavors {
-            create("staging") {
-                dimension = "default"
-                resValue(
-                    type = "string",
-                    name = "app_name",
-                    value = "KelasQNA Beta"
-                )
-                applicationIdSuffix = ".staging"
-            }
-            create("production") {
-                dimension = "default"
-                resValue(
-                    type = "string",
-                    name = "app_name",
-                    value = "KelasQNA"
-                )
-                applicationIdSuffix = ".production"
-            }
         }
     }
 }
