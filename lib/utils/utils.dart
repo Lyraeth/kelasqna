@@ -6,13 +6,7 @@ import 'package:flutter/foundation.dart';
 export 'shared/constant.dart';
 export 'shared/enum.dart';
 export 'shared/extensions/extension.dart';
-export 'shared/models/author/author.dart';
-export 'shared/models/engagement_react/engagement_react.dart';
-export 'shared/models/engagement_total/engagement_total.dart';
-export 'shared/models/links/links.dart';
-export 'shared/models/meta/meta.dart';
-export 'shared/models/meta_profile/meta_profile.dart';
-export 'shared/models/pagination_result/pagination_result.dart';
+export 'shared/models/models.dart';
 export 'shared/types.dart';
 export 'shared/widgets/shared_widgets.dart';
 

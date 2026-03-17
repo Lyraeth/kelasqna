@@ -18,6 +18,6 @@ Future<void> initAuthDI() async {
   );
 
   sI.registerLazySingleton<AuthBloc>(
-    () => AuthBloc(sI<LoginUseCase>(), sI<LogoutUseCase>()),
+    () => AuthBloc(sI<LoginUseCase>(), sI<LogoutUseCase>(), sI<FCMService>()),
   );
 }

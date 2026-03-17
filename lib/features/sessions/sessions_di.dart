@@ -61,6 +61,7 @@ Future<void> initSessionsDI() async {
       sI<SaveLoggedUserDetailsUseCase>(),
       sI<IsFirstTimeUserOpenAppUseCase>(),
       sI<SetFirstTimeUserOpenedAppUseCase>(),
+      sI<FCMService>(),
     ),
   );
 

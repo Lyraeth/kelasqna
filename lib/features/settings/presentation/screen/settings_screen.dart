@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kelasqna/kelasqna.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 @RoutePage()
 class SettingsScreen extends StatelessWidget {
@@ -33,6 +34,25 @@ class SettingsScreen extends StatelessWidget {
               SettingsProfileSettings(),
               SettingsAppearanceSettings(),
               SettingsSessionsSettings(),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SettingsButtonTitle(title: context.l10n.sessions),
+                  NeoKelasContainer(
+                    padding: 8.vertical,
+                    child: SettingsButton(
+                      leadingIcon: LucideIcons.logOut,
+                      title: context.l10n.logout,
+                      onTap: () => context.read<AuthBloc>().add(
+                        const AuthEvent.logoutRequested(),
+                      ),
+                    ),
+                  ),
+                ].separatedBy(16.h),
+              ),
+
+              24.h,
             ].separatedBy(24.h),
           ),
         ),

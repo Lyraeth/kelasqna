@@ -71,10 +71,15 @@ Future<void> initializeApp() async {
   await initConnectivityDI();
   await initUserDI();
   await initSessionsDI();
+  await initNotificationsDI();
+  await initDeviceTokenDI();
+  await initFcmServiceDI();
   await initAuthDI();
   await initQuestionsDI();
   await initCommentsDI();
   await initProfileDI();
+
+  await sI<FCMService>().initialize();
 
   // App Bloc Observer
   Bloc.observer = const AppBlocObserver();

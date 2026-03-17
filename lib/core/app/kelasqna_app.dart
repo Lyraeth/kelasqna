@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:kelasqna/core/app/app_bloc_provider.dart';
 import 'package:kelasqna/kelasqna.dart';
 import 'package:kelasqna/l10n/app_localizations.dart';
 

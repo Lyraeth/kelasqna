@@ -16,6 +16,7 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
   final SaveLoggedUserDetailsUseCase _saveLoggedUserDetailsUseCase;
   final IsFirstTimeUserOpenAppUseCase _isFirstTimeUserOpenAppUseCase;
   final SetFirstTimeUserOpenedAppUseCase _setFirstTimeUserOpenedAppUseCase;
+  final FCMService _fcmService;
 
   SessionsBloc(
     this._saveAccessTokenUseCase,
@@ -26,6 +27,7 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
     this._saveLoggedUserDetailsUseCase,
     this._isFirstTimeUserOpenAppUseCase,
     this._setFirstTimeUserOpenedAppUseCase,
+    this._fcmService,
   ) : super(const SessionsState.initial()) {
     on<_Started>(_onStarted);
     on<_LoggedIn>(_onLoggedIn);
@@ -93,6 +95,7 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
       debugPrint(
         "await _saveLoggedUserDetailsUseCase.call(meResponse) updated",
       );
+
       emit(
         SessionsState.authenticated(
           user: meResponse.user.toEntity(),
@@ -126,6 +129,9 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
 
     if (meResponse != null) {
       await _saveLoggedUserDetailsUseCase.call(meResponse.user.toEntity());
+
+      await _fcmService.registerToken();
+
       emit(
         SessionsState.authenticated(
           user: meResponse.user.toEntity(),
