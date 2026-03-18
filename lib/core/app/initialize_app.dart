@@ -64,7 +64,7 @@ Future<void> initializeApp() async {
   await initAppDI();
   await initTokenDI();
   await initNetworkDI(
-    baseUrl: baseUrl,
+    baseUrl: selectedBaseUrl,
     tokenProvider: () => sI<TokenProvider>().getToken(),
   );
   await initApiClientDI();
