@@ -1,5 +1,7 @@
 part of 'api_client.dart';
 
+const _flavor = String.fromEnvironment('FLAVOR', defaultValue: 'staging');
+
 String normalize(String base) =>
     base.endsWith('/') ? base.substring(0, base.length - 1) : base;
 
@@ -11,8 +13,11 @@ final String baseLocalUrl =
     dotenv.env['DATABASE_URL_LOCAL'] ??
     (throw Exception("DATABASE_URL_LOCAL not found in .env"));
 
-// Change baseUrl to baseLocalUrl when debugging.
-final String databaseUrl = "${normalize(baseLocalUrl)}/api";
+final String selectedBaseUrl = _flavor == 'production' ? baseUrl : baseLocalUrl;
+
+/// No need to change this manually
+/// [selectedBaseUrl] will automatically change based on flavor.
+final String databaseUrl = "${normalize(selectedBaseUrl)}/api";
 
 final String loginUrl = "$databaseUrl/login";
 
