@@ -33,7 +33,7 @@ class SessionsRemoteDataSourceImpl implements SessionsRemoteDataSource {
     try {
       final response = await _apiClient.delete(
         sessionsUrl,
-        body: {"token_id": sessionId},
+        data: {"token_id": sessionId},
       );
 
       return response.match((failure) => Left(failure), (r) => Right(unit));

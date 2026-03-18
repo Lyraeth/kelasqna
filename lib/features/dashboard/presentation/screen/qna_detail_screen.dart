@@ -6,9 +6,14 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 @RoutePage()
 class QnaDetailScreen extends StatefulWidget {
-  const QnaDetailScreen({super.key, required this.questionEntity});
+  const QnaDetailScreen({
+    super.key,
+    required this.questionEntity,
+    this.shouldFetch = true,
+  });
 
   final QuestionEntity questionEntity;
+  final bool shouldFetch;
 
   @override
   State<QnaDetailScreen> createState() => _QnaDetailScreenState();
@@ -21,7 +26,7 @@ class _QnaDetailScreenState extends State<QnaDetailScreen> {
 
   @override
   void initState() {
-    _fetchQuestion();
+    if (widget.shouldFetch) _fetchQuestion();
     _commentFocusNode.addListener(() {
       setState(() => _isFocused = _commentFocusNode.hasFocus);
     });

@@ -9,8 +9,9 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUseCase _loginUseCase;
   final LogoutUseCase _logoutUseCase;
+  final FCMService _fcmService;
 
-  AuthBloc(this._loginUseCase, this._logoutUseCase)
+  AuthBloc(this._loginUseCase, this._logoutUseCase, this._fcmService)
     : super(const AuthState.initial()) {
     on<_LoginRequested>(_onLoginRequested);
     on<_LogoutRequested>(_onLogoutRequested);
@@ -47,6 +48,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     _LogoutRequested event,
     Emitter<AuthState> emit,
   ) async {
+    await _fcmService.unregisterToken();
+
     await _logoutUseCase.call();
     emit(const AuthState.successLogout());
   }

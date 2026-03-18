@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:kelasqna/core/app/app_bloc_provider.dart';
 import 'package:kelasqna/kelasqna.dart';
 import 'package:kelasqna/l10n/app_localizations.dart';
 
@@ -29,20 +28,23 @@ class KelasQNAApp extends StatelessWidget {
                 },
               );
             },
-            child: MaterialApp.router(
-              routerConfig: _appRouter.config(),
-              debugShowCheckedModeBanner: false,
-              theme: KelasQNATheme.lightMode(),
-              darkTheme: KelasQNATheme.darkMode(),
-              themeMode: state.themeMode,
-              locale: state.locale,
-              localizationsDelegates: [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: AppLocalizations.supportedLocales,
+            child: AppConnectivityBlocListener(
+              appRouter: _appRouter,
+              child: MaterialApp.router(
+                routerConfig: _appRouter.config(),
+                debugShowCheckedModeBanner: false,
+                theme: KelasQNATheme.lightMode(),
+                darkTheme: KelasQNATheme.darkMode(),
+                themeMode: state.themeMode,
+                locale: state.locale,
+                localizationsDelegates: [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: AppLocalizations.supportedLocales,
+              ),
             ),
           );
         },

@@ -75,10 +75,10 @@ class ApiClient {
 
   Future<Result<Map<String, dynamic>>> delete<T>(
     String apiUrl, {
-    Map<String, dynamic>? body,
+    Map<String, dynamic>? data,
   }) async {
     try {
-      final response = await _dio.delete(apiUrl, data: body);
+      final response = await _dio.delete(apiUrl, data: data);
 
       final result = response.data;
 

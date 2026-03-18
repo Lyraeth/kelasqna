@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kelasqna/kelasqna.dart';
@@ -42,28 +43,18 @@ class DashboardAppBar extends StatelessWidget {
         ].separatedBy(4.h),
       ),
       actions: [
-        NeoKelasUnavailableFeature(
-          unavailableWidget: NeoKelasContainer(
-            width: 40,
-            height: 40,
-            margin: 16.onlyRight,
-            padding: EdgeInsets.zero,
-            child: IconButton(
-              onPressed: () {
-                NeoKelasAppToast.show(
-                  context,
-                  message: context.l10n.featureNotYetAvailable,
-                  type: ToastType.info,
-                  forShowOnMenuScreen: true,
-                );
-              },
-              icon: Icon(
-                LucideIcons.bell,
-                color: context.colors.onSurface,
-                size: 20,
-              ),
-            ),
+        NeoKelasButton(
+          width: 40,
+          height: 40,
+          padding: EdgeInsets.zero,
+          margin: 16.onlyRight,
+          onPressed: () => showCupertinoSheet(
+            context: context,
+            useNestedNavigation: true,
+            builder: (context) =>
+                Material(child: SafeArea(child: NotificationsScreen())),
           ),
+          child: Icon(LucideIcons.bell),
         ),
       ],
     );
