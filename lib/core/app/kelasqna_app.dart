@@ -11,43 +11,62 @@ class KelasQNAApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBlocProvider(
-      child: BlocBuilder<AppBloc, AppState>(
-        builder: (context, state) {
-          return BlocListener<SessionsBloc, SessionsState>(
-            listener: (context, state) {
-              state.whenOrNull(
-                firstTime: () {
-                  _appRouter.replaceAll([const AuthRoute()]);
-                },
-                unauthenticated: () {
-                  _appRouter.replaceAll([const LoginRoute()]);
-                },
-                authenticated: (_, _, _) {
-                  _appRouter.replaceAll([const HomeRoute()]);
-                },
-              );
-            },
-            child: AppConnectivityBlocListener(
-              appRouter: _appRouter,
-              child: MaterialApp.router(
-                routerConfig: _appRouter.config(),
-                debugShowCheckedModeBanner: false,
-                theme: KelasQNATheme.lightMode(),
-                darkTheme: KelasQNATheme.darkMode(),
-                themeMode: state.themeMode,
-                locale: state.locale,
-                localizationsDelegates: [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: AppLocalizations.supportedLocales,
+    return AppLockBlocProvider(
+      child: AppBlocProvider(
+        child: BlocBuilder<AppBloc, AppState>(
+          builder: (context, state) {
+            return BlocListener<SessionsBloc, SessionsState>(
+              listener: (context, state) {
+                state.whenOrNull(
+                  firstTime: () {
+                    _appRouter.replaceAll([const AuthRoute()]);
+                  },
+                  unauthenticated: () {
+                    sI<AppLockCubit>().unlock();
+
+                    _appRouter.replaceAll([const LoginRoute()]);
+                  },
+                  authenticated: (_, _, _) {
+                    _appRouter.replaceAll([const HomeRoute()]);
+                  },
+                );
+              },
+              child: AppConnectivityBlocListener(
+                appRouter: _appRouter,
+                child: BlocBuilder<AppLockCubit, AppLockState>(
+                  builder: (context, lockState) {
+                    return MaterialApp.router(
+                      routerConfig: _appRouter.config(),
+                      debugShowCheckedModeBanner: false,
+                      theme: KelasQNATheme.lightMode(),
+                      darkTheme: KelasQNATheme.darkMode(),
+                      themeMode: state.themeMode,
+                      locale: state.locale,
+                      localizationsDelegates: [
+                        AppLocalizations.delegate,
+                        GlobalMaterialLocalizations.delegate,
+                        GlobalWidgetsLocalizations.delegate,
+                        GlobalCupertinoLocalizations.delegate,
+                      ],
+                      supportedLocales: AppLocalizations.supportedLocales,
+                      builder: (context, child) {
+                        debugPrint("lockState = $lockState");
+                        final isLocked = lockState.maybeWhen(
+                          locked: () => true,
+                          orElse: () => false,
+                        );
+
+                        if (isLocked) return const AppLockScreen();
+
+                        return child ?? const SizedBox.shrink();
+                      },
+                    );
+                  },
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

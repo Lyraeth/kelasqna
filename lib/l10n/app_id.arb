@@ -121,5 +121,8 @@
   "connectivityDisconnected": "Waduh, internetnya kabur dulu",
   "notification": "Notifikasi",
   "emptyNotification": "Belum ada notifikasi",
-  "markAllAsRead": "Baca semua notifikasi"
+  "markAllAsRead": "Baca semua notifikasi",
+  "lockedKelasQNA": "KelasQNA Terkunci",
+  "authenticateToUnlock": "Verifikasi untuk membuka",
+  "unlockWithBiometric": "Buka dengan biometric"
 }
