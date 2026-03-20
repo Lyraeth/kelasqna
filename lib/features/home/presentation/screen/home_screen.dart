@@ -4,8 +4,23 @@ import 'package:kelasqna/kelasqna.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 @RoutePage()
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    /// Request Notification Permission.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      sI<FCMService>().initialize();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
