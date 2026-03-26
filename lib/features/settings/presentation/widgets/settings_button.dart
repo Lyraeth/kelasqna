@@ -7,7 +7,7 @@ class SettingsButton extends StatelessWidget {
     super.key,
     this.leadingIcon,
     required this.title,
-    this.trailingIcon,
+    this.trailing,
     this.subtitle,
     required this.onTap,
   });
@@ -15,7 +15,7 @@ class SettingsButton extends StatelessWidget {
   final IconData? leadingIcon;
   final String title;
   final String? subtitle;
-  final IconData? trailingIcon;
+  final Widget? trailing;
   final GestureTapCallback onTap;
 
   @override
@@ -40,8 +40,8 @@ class SettingsButton extends StatelessWidget {
         ),
       ),
       subtitle: (subtitle != null) ? Text(subtitle!) : null,
-      trailing: (trailingIcon != null)
-          ? Icon(size: 20, trailingIcon, color: context.colors.onSurface)
+      trailing: (trailing != null)
+          ? trailing
           : Icon(
               size: 20,
               LucideIcons.chevronRight,

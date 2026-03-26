@@ -1,3 +1,4 @@
+export 'screen/settings_app_lock_screen.dart';
 export 'screen/settings_language_screen.dart';
 export 'screen/settings_screen.dart';
 export 'screen/settings_theme_screen.dart';

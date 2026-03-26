@@ -18,4 +18,5 @@ Future<void> initHiveOpenBox() async {
   await Hive.openBox(themeBoxKey);
   await Hive.openBox(authBoxKey);
   await Hive.openBox(sessionsBoxKey);
+  await Hive.openBox(settingsBoxKey);
 }

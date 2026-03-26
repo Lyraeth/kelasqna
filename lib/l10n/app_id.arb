@@ -124,5 +124,17 @@
   "markAllAsRead": "Baca semua notifikasi",
   "lockedKelasQNA": "KelasQNA Terkunci",
   "authenticateToUnlock": "Verifikasi untuk membuka",
-  "unlockWithBiometric": "Buka dengan biometric"
+  "unlockWithBiometric": "Buka dengan biometric",
+  "appLockScreen": "Kunci layar aplikasi",
+  "active": "Aktif",
+  "disable": "Tidak aktif",
+  "lockAfter": "Kunci setelah",
+  "minutesOption": "{minutes} menit",
+  "@minutesOption": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  }
 }

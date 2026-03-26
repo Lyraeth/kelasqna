@@ -128,5 +128,17 @@
   "markAllAsRead": "Mark all as read",
   "lockedKelasQNA": "KelasQNA is locked",
   "authenticateToUnlock": "Authenticate to unlock",
-  "unlockWithBiometric": "Unlock with biometric"
+  "unlockWithBiometric": "Unlock with biometric",
+  "appLockScreen": "App lock screen",
+  "active": "Active",
+  "disable": "Disable",
+  "lockAfter": "Lock after",
+  "minutesOption": "{minutes} minutes",
+  "@minutesOption": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  }
 }
