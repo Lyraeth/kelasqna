@@ -72,7 +72,9 @@ class _LanguageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return SettingsButton(
       title: label,
-      trailingIcon: (isSelected) ? LucideIcons.circleCheck : LucideIcons.circle,
+      trailing: (isSelected)
+          ? Icon(LucideIcons.circleCheck, size: 20)
+          : Icon(LucideIcons.circle, size: 20),
       onTap: onTap,
     );
   }

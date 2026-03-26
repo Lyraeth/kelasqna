@@ -2,13 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:kelasqna/app_bloc_observer.dart';
 import 'package:kelasqna/flavors/production/firebase_options_production.dart';
 import 'package:kelasqna/flavors/staging/firebase_options_staging.dart';
 import 'package:kelasqna/kelasqna.dart';
-import 'package:path_provider/path_provider.dart';
 
 const _flavor = String.fromEnvironment('FLAVOR', defaultValue: 'staging');
 
@@ -25,13 +24,6 @@ Future<void> initializeApp() async {
     options: _flavor == 'production'
         ? ProductionFirebaseOptions.currentPlatform
         : StagingFirebaseOptions.currentPlatform,
-  );
-
-  /// Initialize storage for HydratedBloc.
-  HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: kIsWeb
-        ? HydratedStorageDirectory.web
-        : HydratedStorageDirectory((await getTemporaryDirectory()).path),
   );
 
   /// Register the licences for the Google Fonts used in the application.
@@ -78,8 +70,7 @@ Future<void> initializeApp() async {
   await initQuestionsDI();
   await initCommentsDI();
   await initProfileDI();
-
-  await sI<FCMService>().initialize();
+  await initAppLockDI();
 
   // App Bloc Observer
   Bloc.observer = const AppBlocObserver();

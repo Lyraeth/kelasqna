@@ -125,5 +125,20 @@
   "connectivityDisconnected": "Oops, you're offline right now",
   "notification": "Notification",
   "emptyNotification": "No notification yet",
-  "markAllAsRead": "Mark all as read"
+  "markAllAsRead": "Mark all as read",
+  "lockedKelasQNA": "KelasQNA is locked",
+  "authenticateToUnlock": "Authenticate to unlock",
+  "unlockWithBiometric": "Unlock with biometric",
+  "appLockScreen": "App lock screen",
+  "active": "Active",
+  "disable": "Disable",
+  "lockAfter": "Lock after",
+  "minutesOption": "{minutes} minutes",
+  "@minutesOption": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  }
 }

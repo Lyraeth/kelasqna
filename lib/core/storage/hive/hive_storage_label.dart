@@ -19,3 +19,10 @@ const String onBoardingFirstTimeKey = "onBoardingBox.onBoardingFirstTime";
 const String sessionsBoxKey = "sessionsBox";
 
 const String sessionsUserDetailsKey = "sessionsBox.sessionsUserDetails";
+
+const String settingsBoxKey = "settingsBox";
+
+const String settingsAppLockIsEnableKey = "settingsBox.settingsAppLockIsEnable";
+
+const String settingsAppLockLockAfterMinutesKey =
+    "settingsBox.settingsAppLockLockAfterMinutes";
